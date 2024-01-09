@@ -19,7 +19,8 @@ const gameActions: DexTrackerActionFactory<DexTrackerGameActions> = (setState, g
     },
     setCurrentGame(gameId) {
       setState({
-        currentGameId: gameId,
+        currentGameId: gameId === '' ? undefined : gameId,
+        currentDexId: undefined,
       })
     },
   }

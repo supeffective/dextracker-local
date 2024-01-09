@@ -21,7 +21,7 @@ function AppMainText() {
         <a href="https://supereffective.gg" target="_blank" rel="noreferrer">
           SuperEffective.gg
         </a>
-        . Supporting all Pokédexes, all forms and shiny variants.
+        .
       </article>
     </main>
   )

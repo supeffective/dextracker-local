@@ -31,7 +31,7 @@ const dexActions: DexTrackerActionFactory<DexTrackerDexActions> = (setState, get
     },
     setCurrentDex(dexId) {
       setState({
-        currentDexId: dexId,
+        currentDexId: dexId === '' ? undefined : dexId,
       })
     },
     updateDexPokemon(dexId, nid, data) {

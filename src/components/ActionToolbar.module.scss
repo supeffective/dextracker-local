@@ -13,5 +13,12 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  flex: 1;
+}
+
+.cover {
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--blue-9);
+  border-radius: var(--radius-2);
+  box-shadow: var(--shadow-1);
 }
