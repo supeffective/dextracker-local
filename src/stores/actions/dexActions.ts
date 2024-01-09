@@ -51,6 +51,7 @@ const dexActions: DexTrackerActionFactory<DexTrackerDexActions> = (setState, get
           },
         },
       }
+      console.log(newDexes)
       setState({
         dexes: newDexes,
       })

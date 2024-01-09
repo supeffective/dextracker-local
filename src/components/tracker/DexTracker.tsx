@@ -1,4 +1,4 @@
-import { FemaleIcon, MaleIcon, PokeballOutlineIcon, ShinyIcon } from '@/lib/icons'
+import { PokeballOutlineIcon, ShinyIcon } from '@/lib/icons'
 import { cn } from '@/lib/utils'
 import { useCurrentPokedexData } from '@/stores/cdn'
 import {
@@ -8,6 +8,7 @@ import {
   expandPokedexEntries,
   searchPokemonWith,
 } from '@/stores/dataset'
+import { PokedexEntryState, PokedexState } from '@/stores/state/types'
 import useDexTrackerStore, { useCurrentGameAndDex } from '@/stores/useDexTrackerStore'
 import { ComponentPropsWithoutRef } from 'react'
 import PokemonImg from '../PokemonImg'
@@ -21,6 +22,18 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
   const store = useDexTrackerStore((store) => store)
   const { currentGame, currentDex } = useCurrentGameAndDex()
   const dexQuery = useCurrentPokedexData()
+
+  const toggleCaught = (pkm: PokedexEntryState) => {
+    store.updateDexPokemon(currentDex.id, pkm.nid, {
+      caught: !pkm.caught,
+    })
+  }
+
+  const toggleShiny = (pkm: PokedexEntryState) => {
+    store.updateDexPokemon(currentDex.id, pkm.nid, {
+      shiny: !pkm.shiny,
+    })
+  }
 
   const isLoading = dexQuery.isLoading
   const isError = dexQuery.isError
@@ -85,10 +98,10 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
     )
   }
 
-  // const userDexData: PokedexState = store.dexes[dexData.id] ?? {
-  //   id: dexData.id,
-  //   pokemon: {},
-  // }
+  const userDexData: PokedexState = store.dexes[dexData.id] ?? {
+    id: dexData.id,
+    pokemon: {},
+  }
 
   const entries = expandPokedexEntries(dexData.entries)
   if (!dexSearchIndexMap.has(dexData.id)) {
@@ -123,7 +136,14 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
         {filteredEntries.map((entry) => {
           const zeroPadDexNum = entry.dexNum?.toString().padStart(4, '0')
 
-          // const pkmState = userDexData.pokemon[entry.id] ?? {}
+          const pkmState = {
+            ...userDexData.pokemon[entry.nid],
+            nid: entry.nid,
+          }
+
+          if (pkmState.nid === undefined) {
+            throw new Error(`Missing nid for ${entry.id}`)
+          }
 
           return (
             <div key={entry.id} className={styles.entry} title={entry.search}>
@@ -135,18 +155,28 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
               </div>
               <div className={styles.entryName}>{entry.name ?? `"${entry.id}"`}</div>
               <div className={styles.entryActions}>
-                <div>
+                <button
+                  tabIndex={0}
+                  type="button"
+                  data-active={pkmState.caught ?? 0}
+                  onClick={() => toggleCaught(pkmState)}
+                >
                   <PokeballOutlineIcon />
-                </div>
-                <div>
+                </button>
+                <button
+                  tabIndex={0}
+                  type="button"
+                  data-active={pkmState.shiny ?? 0}
+                  onClick={() => toggleShiny(pkmState)}
+                >
                   <ShinyIcon />
-                </div>
-                <div>
+                </button>
+                {/* <button tabIndex={0} type="button" data-active={pkmState.genders.includes('m')}>
                   <MaleIcon className={styles.small} />
-                </div>
-                <div>
+                </button>
+                <button tabIndex={0} type="button" data-active={pkmState.genders.includes('f')}>
                   <FemaleIcon className={styles.small} />
-                </div>
+                </button> */}
               </div>
             </div>
           )
