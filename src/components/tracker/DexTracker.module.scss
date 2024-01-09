@@ -142,9 +142,11 @@
   }
 }
 
-.markedIcon {}
+.markedIcon {
+}
 
-.intermediateIcon {}
+.intermediateIcon {
+}
 
 .entryActions {
   button {
@@ -156,8 +158,8 @@
     border: 2px solid transparent;
     aspect-ratio: 1;
 
-    &[data-active="1"],
-    &[data-active="true"] {
+    &[data-active='1'],
+    &[data-active='true'] {
       background: var(--yellow-2);
       border: 2px solid var(--yellow-6);
       // box-shadow: 2px 2px 0 var(--yellow-5);
