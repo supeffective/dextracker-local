@@ -35,21 +35,6 @@ const generalActions: DexTrackerActionFactory<DexTrackerGeneralActions> = (setSt
         title,
       })
     },
-    setShinyMode(value) {
-      setState({
-        shinyMode: value,
-      })
-    },
-    setSearchQuery(query) {
-      setState({
-        searchQuery: query ?? undefined,
-      })
-    },
-    clearSearchQuery() {
-      setState({
-        searchQuery: undefined,
-      })
-    },
   }
 }
 
