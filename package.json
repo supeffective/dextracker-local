@@ -12,7 +12,7 @@
     "format": "bun lint:fix",
     "lint": "bun lint-prettier && bun lint-biome",
     "lint-biome": "biome lint . --max-diagnostics 50",
-    "lint-biome-ci": "biome ci . --max-diagnostics 50",
+    "lint-biome-ci": "biome lint . --max-diagnostics 50",
     "lint-prettier": "prettier --check \"src/**/*.{md,json,css,scss}\"",
     "lint:ci": "bun lint-prettier && bun lint-biome-ci",
     "lint:fix": "bun lint:fix-prettier && bun lint:fix-package-json && bun lint:fix-biome",
