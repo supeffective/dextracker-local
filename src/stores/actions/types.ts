@@ -4,6 +4,7 @@ export type DexTrackerGeneralActions = {
   resetData: () => void
   loadFromJSON: (json: string) => void
   setTitle: (title: string) => void
+  setShinyMode: (value: boolean) => void
 }
 
 export type DexTrackerTrainerActions = {

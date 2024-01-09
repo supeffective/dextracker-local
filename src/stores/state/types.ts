@@ -37,6 +37,7 @@ export type Pokebox = {
 export type DexTrackerState = {
   title?: string
   trainer?: TrainerInfo
+  shinyMode?: boolean
   gameIds: Array<string>
   currentGameId?: string
   dexes: Record<string, Pokedex>

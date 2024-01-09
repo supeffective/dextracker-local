@@ -34,6 +34,11 @@ const generalActions: DexTrackerActionFactory<DexTrackerGeneralActions> = (setSt
         title,
       })
     },
+    setShinyMode(value) {
+      setState({
+        shinyMode: value,
+      })
+    },
   }
 }
 

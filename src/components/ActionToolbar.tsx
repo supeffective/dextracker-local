@@ -2,6 +2,7 @@ import useDexTrackerStore from '@/stores/useDexTrackerStore'
 import styles from './ActionToolbar.module.scss'
 import GameSelectField from './GameSelectField'
 import PokedexSelectField from './PokedexSelectField'
+import ToggleBtn from './primitives/ToggleBtn'
 
 export default function ActionToolbar() {
   const state = useDexTrackerStore((state) => state)
@@ -25,6 +26,14 @@ export default function ActionToolbar() {
           state.setCurrentDex(e.target.value)
         }}
       />
+      <ToggleBtn
+        value={state.shinyMode}
+        onToggle={(active) => {
+          state.setShinyMode(active)
+        }}
+      >
+        Shiny
+      </ToggleBtn>
     </div>
   )
 }
