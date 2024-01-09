@@ -1,0 +1,7 @@
+# Ignore:
+.vscode
+.github
+public
+build
+dist
+node_modules

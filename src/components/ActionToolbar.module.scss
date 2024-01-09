@@ -1,0 +1,17 @@
+.toolbar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--blue-1);
+  border-bottom: 1px solid var(--blue-3);
+  box-shadow: var(--shadow-1);
+  gap: 1rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}

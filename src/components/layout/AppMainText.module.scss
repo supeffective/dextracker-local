@@ -1,0 +1,32 @@
+.info {
+  margin: 1rem;
+  font-size: 1.1rem;
+  background: var(--blue-1);
+  border-radius: 0.5rem;
+
+  article {
+    padding: 1.6rem;
+  }
+}
+
+.dismissTrigger {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  opacity: 0.7;
+  background: none;
+  border: none;
+
+  img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  &:hover {
+    opacity: 1;
+    background: none;
+  }
+}

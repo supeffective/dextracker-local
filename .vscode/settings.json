@@ -1,0 +1,60 @@
+{
+  "cssVariables.lookupFiles": [
+    "src/**/*.css",
+    "src/**/*.scss",
+    "node_modules/open-props/open-props.min.css"
+  ],
+  "editor.indentSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.addMissingImports": "explicit",
+    "source.organizeImports": "explicit",
+    "source.organizeImports.biome": "explicit",
+    "quickfix.biome": "explicit"
+  },
+  "files.insertFinalNewline": true,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonl]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[sass]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "editor.formatOnSave": true,
+  "json.format.enable": false,
+  "typescript.format.enable": false,
+  "javascript.format.enable": false,
+  "html-css-class-completion.includeGlobPattern": "src/**/*.{css,scss}",
+  "html-css-class-completion.excludeGlobPattern": "*/dist/**/*",
+  "html-css-class-completion.enableScssFindUsage": true,
+  "html-css-class-completion.enableEmmetSupport": false,
+  "vite.buildCommand": "bun run build",
+  "vite.devCommand": "bun dev",
+  "vite.vitepress": false,
+  "vite.port": 4000
+}

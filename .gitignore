@@ -1,0 +1,28 @@
+# Logs
+logs
+*.log
+*.log*
+
+# Dependencies and artifacts
+node_modules
+build
+coverage
+dist
+dist-ssr
+.env
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Other
+*-legacy

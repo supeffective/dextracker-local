@@ -1,0 +1,14 @@
+name: "Check code quality"
+description: "Checks code quality: formatters, linters, build, test, etc."
+
+permissions:
+  pull-requests: write # needed for Biome to write diagnostic comments to PRs
+
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      run: |
+        bun lint:ci
+        bun run build
+        bun test

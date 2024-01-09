@@ -1,0 +1,29 @@
+name: Quality Checks
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  pull-requests: write # needed for Biome to write diagnostic comments to PRs
+
+concurrency:
+  group: checkCodeQuality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checkCodeQuality:
+    name: "Quality Checks"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: "Setup project"
+        uses: ./.github/actions/setup-project
+
+      - name: "Check code quality"
+        uses: ./.github/actions/check-quality
