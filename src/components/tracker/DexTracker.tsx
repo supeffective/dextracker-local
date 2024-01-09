@@ -66,15 +66,20 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
     return (
       <div className={cn(classes, styles.empty)} {...props}>
         <div className={styles.resultPanel}>
-          No dex entries found for this dex. Please{' '}
-          <a
-            href={`https://github.com/supeffective/dataset/blob/main/data/pokedexes/${dexData.region}/${dexData.id}.json`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            edit it in the dataset repository
-          </a>
-          .
+          <p>
+            <b>No dex entries found for this dex.</b>
+            <br />
+            <br />
+            You can support this project by contributing to{' '}
+            <a
+              href={`https://github.com/supeffective/dataset/blob/main/data/pokedexes/${dexData.region}/${dexData.id}.json`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              the dataset repository
+            </a>
+            {''}, adding the missing data.
+          </p>
         </div>
       </div>
     )

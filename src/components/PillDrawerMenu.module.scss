@@ -52,8 +52,7 @@
 }
 
 .inner {
-  --inner-width: 200px;
-  --max-inner-width: 48vw;
+  --max-inner-width: 88vw;
   border-radius: var(--radius-3);
   padding: var(--size-4);
   background: var(--yellow-5);
@@ -64,12 +63,17 @@
   margin-top: -0.25rem;
   max-width: var(--max-inner-width);
   min-width: 120px;
-  // min-height: var(--inner-width);
-  max-height: 75vh;
+  max-height: 90vh;
   transition-property: opacity, transform;
   transition-duration: 0.25s;
   transition-timing-function: ease-in-out;
   z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.5rem;
+  text-align: left;
 }
 
 .placeLeft {

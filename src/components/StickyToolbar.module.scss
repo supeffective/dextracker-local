@@ -55,3 +55,42 @@
     }
   }
 }
+
+.labelledSelect {
+  label {
+    width: 50px;
+  }
+}
+
+.flexLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .toggle {
+    background-color: var(--yellow-1);
+    border: 2px solid var(--yellow-11);
+    color: var(--yellow-11);
+    box-shadow: none;
+
+    svg {
+      fill: var(--yellow-11);
+    }
+  }
+
+  .toggle.toggleActive {
+    background: var(--yellow-6);
+    border: 2px solid var(--yellow-11);
+    color: var(--yellow-11);
+    box-shadow: inset 2px 2px 2px var(--yellow-9);
+
+    svg {
+      fill: var(--yellow-11);
+    }
+  }
+}
+
+.flexLabel span:first-of-type {
+  flex: 1;
+  white-space: nowrap;
+}
