@@ -17,11 +17,14 @@ function AppMainText() {
         <button className={styles.dismissTrigger} title="Close" type="button" onClick={handleDismissArticle}>
           <Close2Icon />
         </button>
-        Online Pokédex Tracker webapp, developed by the creators of{' '}
-        <a href="https://supereffective.gg" target="_blank" rel="noreferrer">
-          SuperEffective.gg
-        </a>
-        .
+        Online Pokédex Tracker that saves your progress locally, without the need for an account.
+        <p>
+          Developed by the creators of{' '}
+          <a href="https://supereffective.gg" target="_blank" rel="noreferrer">
+            SuperEffective.gg
+          </a>
+          , a cloud-based version with a Living Dex Box Organizer and many other tools.
+        </p>
       </article>
     </main>
   )

@@ -23,3 +23,10 @@ body,
   gap: 0.5rem;
   background: var(--blue-0);
 }
+
+body,
+html,
+#root,
+#app {
+  overflow-x: clip; // Like overflow-x: hidden, but works well with position: sticky
+}

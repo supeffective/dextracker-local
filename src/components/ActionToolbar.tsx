@@ -23,26 +23,24 @@ export default function ActionToolbar() {
 
   return (
     <div className={styles.toolbar}>
-      {state.currentGameId && (
-        <GameImg className={cn(styles.item, styles.cover)} width={60} height={60} gameId={state.currentGameId} />
-      )}
-      <GameSelectField
-        className={styles.item}
-        label="Game: "
-        value={state.currentGameId}
-        onChange={(e) => {
-          state.setCurrentGame(e.target.value)
-        }}
-      />
-      <PokedexSelectField
-        className={styles.item}
-        label="Dex: "
-        gameId={state.currentGameId}
-        value={state.currentDexId}
-        onChange={(e) => {
-          state.setCurrentDex(e.target.value)
-        }}
-      />
+      <GameImg className={cn(styles.item, styles.cover)} width={60} height={60} gameId={state.currentGameId} />
+      <div className={styles.item}>
+        <GameSelectField
+          label="Game: "
+          value={state.currentGameId}
+          onChange={(e) => {
+            state.setCurrentGame(e.target.value)
+          }}
+        />
+        <PokedexSelectField
+          label="Dex: "
+          gameId={state.currentGameId}
+          value={state.currentDexId}
+          onChange={(e) => {
+            state.setCurrentDex(e.target.value)
+          }}
+        />
+      </div>
       <div className={styles.item}>
         <ToggleBtn
           value={state.filter?.shinyMode}
@@ -52,8 +50,6 @@ export default function ActionToolbar() {
         >
           <SvgSparklesIcon />
         </ToggleBtn>
-      </div>
-      <div className={styles.item}>
         <ToggleBtn
           value={state.filter?.onlyMissing}
           onToggle={(active) => {

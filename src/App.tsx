@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import ActionToolbar from './components/ActionToolbar'
+import StickyToolbar from './components/StickyToolbar'
 import AppFooter from './components/layout/AppFooter'
 import AppHeader from './components/layout/AppHeader'
 import AppMainText from './components/layout/AppMainText'
@@ -13,7 +13,8 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <div>
           <AppHeader />
-          <ActionToolbar />
+          {/* <ActionToolbar /> */}
+          <StickyToolbar />
           <AppMainText />
           <DexTracker />
         </div>

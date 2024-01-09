@@ -1,0 +1,108 @@
+.outer {
+  position: relative;
+  display: block;
+}
+
+.trigger {
+  --webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  z-index: 1;
+
+  border-radius: var(--radius-3);
+  padding: var(--size-2);
+  background: var(--yellow-5);
+  border: 2px solid var(--yellow-7);
+  box-shadow:
+    4px 4px 0 var(--yellow-7),
+    inset 4px 4px 0 transparent;
+  font-size: 24px;
+  transition: box-shadow 0.15s ease-in-out;
+  color: var(--yellow-11);
+
+  &:hover {
+    background: var(--yellow-5);
+    border: 2px solid var(--yellow-7);
+    box-shadow:
+      4px 4px 0 var(--yellow-7),
+      inset 4px 4px 0 transparent;
+  }
+
+  img,
+  svg {
+    display: block;
+    width: 48px;
+    height: 48px;
+  }
+
+  svg {
+    padding: 6px;
+  }
+}
+
+.open .trigger,
+.trigger:active {
+  background: var(--yellow-4);
+  border: 2px solid var(--yellow-6);
+  box-shadow:
+    4px 4px 0 transparent,
+    inset 4px 4px 0 var(--yellow-6);
+  // transform: translate(3px, 3px);
+}
+
+.inner {
+  --inner-width: 200px;
+  --max-inner-width: 48vw;
+  border-radius: var(--radius-3);
+  padding: var(--size-4);
+  background: var(--yellow-5);
+  border: 2px solid var(--yellow-7);
+  box-shadow: 4px 4px 0 var(--yellow-7);
+  position: absolute;
+  top: 100%;
+  margin-top: -0.25rem;
+  max-width: var(--max-inner-width);
+  min-width: 120px;
+  // min-height: var(--inner-width);
+  max-height: 75vh;
+  transition-property: opacity, transform;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-in-out;
+  z-index: 2;
+}
+
+.placeLeft {
+  .inner {
+    left: 0;
+    border-top-left-radius: 0;
+    transform: translateX(calc(var(--max-inner-width) * -1.5));
+  }
+
+  .trigger {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+  }
+}
+
+.placeRight {
+  .inner {
+    right: 0;
+    border-top-right-radius: 0;
+    transform: translateX(calc(var(--max-inner-width) * 1.5));
+  }
+
+  .trigger {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+  }
+}
+
+.open {
+  .inner {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

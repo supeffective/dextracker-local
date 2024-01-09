@@ -51,9 +51,9 @@ export type DexTrackerState = {
   trainer?: TrainerInfoState
   filter?: DexTrackerFilter
   gameIds: Array<string>
-  currentGameId?: string
   dexes: Record<string, PokedexState>
-  currentDexId?: string
+  currentGameId: string
+  currentDexId: string
   sharedBox?: PokeboxState
   lastModified?: number
 }

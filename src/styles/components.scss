@@ -1,3 +1,9 @@
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
 .dialog {
   position: fixed;
   z-index: 99999;
@@ -44,4 +50,10 @@
     padding: 1rem;
     margin: 0;
   }
+}
+
+.avatar-raised {
+  border: 1px solid var(--yellow-8);
+  border-radius: var(--radius-2);
+  box-shadow: var(--shadow-1);
 }

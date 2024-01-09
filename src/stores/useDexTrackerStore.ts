@@ -1,3 +1,4 @@
+import { Game, PokedexIndexItem, pokedexesIndexMap, pokemonGamesMap } from '@supeffective/dataset'
 import createPersistentStore from '../lib/createPersistentStore'
 import dexActions from './actions/dexActions'
 import filterActions from './actions/filterActions'
@@ -28,3 +29,24 @@ const useDexTrackerStore = createPersistentStore<DexTrackerStore>((rawSet, get) 
 })
 
 export default useDexTrackerStore
+
+export function useCurrentGameAndDex(): {
+  currentGame: Game
+  currentDex: PokedexIndexItem
+} {
+  const [currentGameId, currentDexId] = useDexTrackerStore((state) => [state.currentGameId, state.currentDexId])
+  const currentGame = pokemonGamesMap.get(currentGameId)
+  if (!currentGame) {
+    throw new Error(`Game ${currentGameId} not found in the index!`)
+  }
+
+  const currentDex = pokedexesIndexMap.get(currentDexId)
+  if (!currentDex) {
+    throw new Error(`Dex ${currentDexId} not found in the index!`)
+  }
+
+  return {
+    currentGame,
+    currentDex,
+  }
+}

@@ -8,7 +8,7 @@ import {
   expandPokedexEntries,
   searchPokemonWith,
 } from '@/stores/dataset'
-import useDexTrackerStore from '@/stores/useDexTrackerStore'
+import useDexTrackerStore, { useCurrentGameAndDex } from '@/stores/useDexTrackerStore'
 import { ComponentPropsWithoutRef } from 'react'
 import PokemonImg from '../PokemonImg'
 import styles from './DexTracker.module.scss'
@@ -19,6 +19,7 @@ const dexSearchIndexMap = new Map<string, PokemonSearchIndex<ExpandedPokedexEntr
 
 export default function DexTracker({ className, ...props }: DexTrackerProps) {
   const store = useDexTrackerStore((store) => store)
+  const { currentGame, currentDex } = useCurrentGameAndDex()
   const dexQuery = useCurrentPokedexData()
 
   const isLoading = dexQuery.isLoading
@@ -38,7 +39,7 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
   if (isLoading) {
     return (
       <div className={classes} {...props}>
-        Loading...
+        <div className={styles.resultPanel}>Loading...</div>
       </div>
     )
   }
@@ -46,7 +47,7 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
   if (isError) {
     return (
       <div className={classes} {...props}>
-        Error!
+        <div className={styles.resultPanel}>Error loading data from the dataset API...</div>
       </div>
     )
   }
@@ -54,7 +55,7 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
   if (!dexQuery.data) {
     return (
       <div className={cn(classes, styles.empty)} {...props}>
-        No Dex data is set!
+        <div className={styles.resultPanel}>No Pokédex is loaded...</div>
       </div>
     )
   }
@@ -64,15 +65,17 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
   if (dexData.entries.length === 0) {
     return (
       <div className={cn(classes, styles.empty)} {...props}>
-        No dex entries found for this dex. Please{' '}
-        <a
-          href={`https://github.com/supeffective/dataset/blob/main/data/pokedexes/${dexData.region}/${dexData.id}.json`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          edit it in the dataset repository
-        </a>
-        .
+        <div className={styles.resultPanel}>
+          No dex entries found for this dex. Please{' '}
+          <a
+            href={`https://github.com/supeffective/dataset/blob/main/data/pokedexes/${dexData.region}/${dexData.id}.json`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            edit it in the dataset repository
+          </a>
+          .
+        </div>
       </div>
     )
   }
@@ -84,45 +87,66 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
 
   const entries = expandPokedexEntries(dexData.entries)
   if (!dexSearchIndexMap.has(dexData.id)) {
-    dexSearchIndexMap.set(dexData.id, createPokemonSearchIndex(entries))
+    dexSearchIndexMap.set(dexData.id, createPokemonSearchIndex<ExpandedPokedexEntry>(entries, ['dexNum']))
   }
 
   const searchIndex = dexSearchIndexMap.get(dexData.id) as PokemonSearchIndex<ExpandedPokedexEntry>
-  const filteredEntries = store.filter?.searchQuery ? searchPokemonWith(searchIndex, store.filter.searchQuery) : entries
+  const filteredEntries = store.filter?.searchQuery
+    ? searchPokemonWith(searchIndex, store.filter.searchQuery)
+    : searchIndex
 
-  const numEntriesDigits = entries.length.toString().length
-
+  if (filteredEntries.length === 0) {
+    return (
+      <div className={cn(classes, styles.empty)} {...props}>
+        <div className={styles.resultPanel}>No results found</div>
+      </div>
+    )
+  }
   return (
     <div className={classes} {...props}>
-      {filteredEntries.map((entry) => {
-        const zeroPadDexNum = entry.dexNum?.toString().padStart(numEntriesDigits, '0')
+      <div className={styles.dexTitle}>
+        <h3>Pokémon {currentGame.name}</h3>
+        <h4>{currentDex.name}</h4>
+      </div>
+      {store.filter?.searchQuery && (
+        <div className={styles.resultPanel}>
+          {filteredEntries.length} / {entries.length} Pokémon
+        </div>
+      )}
+      {!store.filter?.searchQuery && <div className={styles.resultPanel}>{entries.length} Pokémon</div>}
+      <div className={styles.entries}>
+        {filteredEntries.map((entry) => {
+          const zeroPadDexNum = entry.dexNum?.toString().padStart(4, '0')
 
-        // const pkmState = userDexData.pokemon[entry.id] ?? {}
+          // const pkmState = userDexData.pokemon[entry.id] ?? {}
 
-        return (
-          <div key={entry.id} className={styles.entry}>
-            <div className={styles.entryInfo}>
-              <div className={styles.entryHeader}>{`#${zeroPadDexNum ?? '--'}`}</div>
-              <PokemonImg className={styles.sprite} pokeNid={entry.nid} shiny={store.filter?.shinyMode === true} />
+          return (
+            <div key={entry.id} className={styles.entry} title={entry.search}>
+              <div className={styles.entryInfo}>
+                <div className={styles.entryHeader}>{`#${zeroPadDexNum ?? '--'}`}</div>
+                <div className={styles.sprite}>
+                  <PokemonImg pokeNid={entry.nid} shiny={store.filter?.shinyMode === true} />
+                </div>
+              </div>
               <div className={styles.entryName}>{entry.name ?? `"${entry.id}"`}</div>
+              <div className={styles.entryActions}>
+                <div>
+                  <PokeballOutlineIcon />
+                </div>
+                <div>
+                  <ShinyIcon />
+                </div>
+                <div>
+                  <MaleIcon className={styles.small} />
+                </div>
+                <div>
+                  <FemaleIcon className={styles.small} />
+                </div>
+              </div>
             </div>
-            <div className={styles.entryActions}>
-              <div>
-                <PokeballOutlineIcon />
-              </div>
-              <div>
-                <ShinyIcon />
-              </div>
-              <div>
-                <MaleIcon className={styles.small} />
-              </div>
-              <div>
-                <FemaleIcon className={styles.small} />
-              </div>
-            </div>
-          </div>
-        )
-      })}
+          )
+        })}
+      </div>
     </div>
   )
 }

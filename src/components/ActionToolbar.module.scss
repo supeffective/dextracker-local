@@ -1,7 +1,7 @@
 .toolbar {
-  position: sticky;
-  top: 0;
-  z-index: 1;
+  // position: sticky;
+  // top: 0;
+  // z-index: 1;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -34,10 +34,10 @@
   box-shadow: var(--shadow-1);
 }
 
-@media (max-width: 768px) {
-  .toolbar {
-    flex-direction: column;
-    align-items: start;
-    gap: 0.5rem;
-  }
-}
+// @media (max-width: 768px) {
+//   .toolbar {
+//     flex-direction: column;
+//     align-items: start;
+//     gap: 0.5rem;
+//   }
+// }

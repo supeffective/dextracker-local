@@ -14,7 +14,7 @@ button {
   justify-content: center;
   gap: 0.5rem;
 
-  &:disabled {
+  &:where(:disabled) {
     opacity: 0.5;
     cursor: not-allowed;
     pointer-events: none;
@@ -24,19 +24,13 @@ button {
   svg {
     width: 1rem;
     height: 1rem;
-    opacity: 0.7;
   }
 
-  &:hover {
+  &:where(:hover) {
     background: var(--color-panel-hard);
-
-    img,
-    svg {
-      opacity: 0.9;
-    }
   }
 
-  &:active {
+  &:where(:active) {
     background: var(--color-panel);
   }
 }

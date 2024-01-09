@@ -1,4 +1,5 @@
 import { pokemonGamesMap } from '@supeffective/dataset'
+import { DEFAULT_DEX_ID, DEFAULT_GAME_ID } from './generalActions'
 import { DexTrackerActionFactory, DexTrackerGameActions } from './types'
 
 const gameActions: DexTrackerActionFactory<DexTrackerGameActions> = (setState, getState) => {
@@ -21,8 +22,8 @@ const gameActions: DexTrackerActionFactory<DexTrackerGameActions> = (setState, g
     setCurrentGame(gameId) {
       if (!gameId || gameId === '') {
         setState({
-          currentGameId: undefined,
-          currentDexId: undefined,
+          currentGameId: DEFAULT_GAME_ID,
+          currentDexId: DEFAULT_DEX_ID,
         })
         return
       }

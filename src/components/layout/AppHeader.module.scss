@@ -31,10 +31,13 @@
   }
 
   h1 {
-    font-size: 18px;
+    font-size: 1.2rem;
     font-weight: 700;
     margin: 0;
     padding: 0;
+    letter-spacing: -0.5px;
+    color: var(--blue-9);
+    // font-family: 'Comic Neue', "Comic Sans MS", "Comic Sans", sans-serif;
   }
 }
 
@@ -79,7 +82,7 @@
     }
 
     h1 {
-      font-size: 16px;
+      font-size: 1rem;
     }
   }
 }

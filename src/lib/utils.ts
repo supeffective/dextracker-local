@@ -1,7 +1,32 @@
 import clsx, { ClassValue } from 'clsx'
 
 export function cn(...args: ClassValue[]): string {
-  return clsx(...args)
+  return clsx(...cnSanitizedArgs(args))
+}
+
+function cnSanitizedArgs(...args: ClassValue[]): ClassValue[] {
+  const sanitizedArgs: ClassValue[] = []
+
+  for (let i = 0; i < args.length; i++) {
+    const arg = args[i]
+    if (!arg || arg === 'undefined') {
+      continue
+    }
+
+    if (Array.isArray(arg)) {
+      sanitizedArgs.push(cnSanitizedArgs(...arg))
+      continue
+    }
+
+    if (typeof arg === 'object') {
+      sanitizedArgs.push(Object.fromEntries(Object.entries(arg).filter(([key]) => key !== 'undefined')))
+      continue
+    }
+
+    sanitizedArgs.push(arg)
+  }
+
+  return sanitizedArgs.flatMap((arg) => (Array.isArray(arg) ? arg : [arg]))
 }
 
 export function base64Encode(str: string): string {

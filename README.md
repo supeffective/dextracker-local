@@ -16,6 +16,8 @@ Brought to you by the [SuperEffective](https://supereffective.gg/) team.
 - [ ] Search for Pokémon by name, type, color, dex number, etc.
 - [ ] View Pokémon basic details such as location, stats, types, and abilities
 - [ ] Direct links to well-known Pokémon resource websites
+- [ ] The main page lists the current progress of all your stored dexes
+- [ ] JSON imports/exports for your data, to keep it safe wherever you want
 - [ ] Random Shiny Hunting challenge: from all games that you own, this widget will challengee you to hunt a shiny
       Pokémon that you don't own yet.
 - [ ] Trade Box: A simple box with 30 slots to store Pokémon (incl. form. gender and shinyness). It is shareable via a
