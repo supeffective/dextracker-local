@@ -117,9 +117,19 @@ figcaption {
   padding: 0;
 }
 
-img {
+img,
+svg {
   max-width: 100%;
   height: auto;
+}
+
+svg {
+  stroke: currentColor;
+}
+
+svg:where([data-filled]) {
+  fill: currentColor;
+  stroke: none;
 }
 
 dialog {
@@ -146,6 +156,7 @@ dialog[open] {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after,
@@ -158,6 +169,7 @@ dialog[open] {
 }
 
 @media (prefers-reduced-transparency: reduce) {
+
   *,
   *::before,
   *::after {

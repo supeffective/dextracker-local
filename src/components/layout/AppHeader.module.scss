@@ -6,6 +6,7 @@
   border-bottom: 1px solid var(--color-border);
   background: var(--blue-3);
   border-top: 5px solid var(--blue-7);
+  color: var(--blue-10);
 }
 
 .title {
@@ -15,6 +16,7 @@
   gap: 1em;
   color: inherit;
   text-decoration: none;
+  color: var(--blue-12);
 
   &:hover {
     color: inherit;
@@ -39,7 +41,7 @@
 .links {
   display: flex;
   align-items: center;
-  gap: 1em;
+  gap: 0.8em;
 
   a {
     color: inherit;
@@ -50,15 +52,16 @@
     gap: 0.3em;
 
     &:hover {
-      color: inherit;
+      color: var(--blue-12);
       text-decoration: underline;
       text-decoration: underline dotted;
     }
   }
 
-  img {
-    width: 24px;
-    height: 24px;
+  img,
+  svg {
+    width: 20px;
+    height: 20px;
     display: block;
   }
 }

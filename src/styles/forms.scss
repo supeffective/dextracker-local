@@ -20,7 +20,8 @@ button {
     pointer-events: none;
   }
 
-  img {
+  img,
+  svg {
     width: 1rem;
     height: 1rem;
     opacity: 0.7;
@@ -29,7 +30,8 @@ button {
   &:hover {
     background: var(--color-panel-hard);
 
-    img {
+    img,
+    svg {
       opacity: 0.9;
     }
   }
@@ -64,7 +66,8 @@ button {
     padding: 0 0.25rem;
   }
 
-  button img {
+  button img,
+  button svg {
     width: 1.2rem;
     height: 1.2rem;
   }

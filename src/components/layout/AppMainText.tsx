@@ -1,4 +1,4 @@
-import closeIcon from '@/assets/close-2-icon.svg'
+import { Close2Icon } from '@/lib/icons'
 import { useState } from 'react'
 import styles from './AppMainText.module.scss'
 
@@ -15,7 +15,7 @@ function AppMainText() {
     <main className={styles.info} {...mainProps}>
       <article>
         <button className={styles.dismissTrigger} title="Close" type="button" onClick={handleDismissArticle}>
-          <img src={closeIcon} alt="Close" />
+          <Close2Icon />
         </button>
         Online Pokédex Tracker webapp, developed by the creators of{' '}
         <a href="https://supereffective.gg" target="_blank" rel="noreferrer">

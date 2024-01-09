@@ -1,4 +1,4 @@
-import linkIcon from '@/assets/link-icon.svg'
+import { LinkIcon } from '@/lib/icons'
 import { cn } from '@/lib/utils'
 import { useRef } from 'react'
 
@@ -31,7 +31,7 @@ export function ShowShareableUrlrigger() {
         </section>
       </dialog>
       <button type="button" title="Get Shareable URL" onClick={handleOpenDialog}>
-        <img src={linkIcon} alt="Permalink" />
+        <LinkIcon />
         <span className="sm-hidden">Share</span>
       </button>
     </>
