@@ -1,4 +1,4 @@
-import closeIcon from '@/assets/close-2.svg'
+import closeIcon from '@/assets/close-2-icon.svg'
 import { useState } from 'react'
 import styles from './AppMainText.module.scss'
 

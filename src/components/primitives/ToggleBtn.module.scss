@@ -1,11 +1,11 @@
 .btn {
   display: block;
-  transition: box-shadow 0.15s ease-in-out, background-color 0.15s ease-in-out;
-
+  transition:
+    box-shadow 0.15s ease-in-out,
+    background-color 0.15s ease-in-out;
 
   &.active {
     background-color: var(--gray-5);
     box-shadow: var(--inner-shadow-1);
   }
-
 }

@@ -7,7 +7,7 @@
     "build": "tsc && vite build",
     "build:production": "vite build --base=/pokedex-tracker/ && rm -rf _site && mkdir -p _site && mv ./dist/* ./_site",
     "codegen": "bun codegen:svg",
-    "codegen:svg": "svgr --no-prettier --out-dir='src/icons' --typescript --ext=tsx ./src/assets",
+    "codegen:svg": "svgr --no-prettier --out-dir='src/icons/generated' --typescript --ext=tsx ./src/assets",
     "dev": "vite --port=4930 --host",
     "format": "bun lint:fix",
     "lint": "bun lint-prettier && bun lint-biome",

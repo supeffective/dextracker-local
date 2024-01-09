@@ -1,4 +1,4 @@
-import linkIcon from '@/assets/link.svg'
+import linkIcon from '@/assets/link-icon.svg'
 import { cn } from '@/lib/utils'
 import { useRef } from 'react'
 

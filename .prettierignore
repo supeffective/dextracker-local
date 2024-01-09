@@ -5,3 +5,4 @@ public
 build
 dist
 node_modules
+src/icons/generated
