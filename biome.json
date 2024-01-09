@@ -1,10 +1,10 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.5.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.4.1/schema.json",
   "organizeImports": {
     "enabled": true
   },
   "files": {
-    "ignore": ["public/**/*", "build/**/*", "dist/**/*", "*.svg", "src/icons/generated/**/*"],
+    "ignore": ["./public/**/*", "./build/**/*", "./dist/**/*", "src/lib/icons/**/*", "*.svg"],
     "ignoreUnknown": true
   },
   "vcs": {
@@ -66,11 +66,6 @@
     }
   },
   "json": {
-    "formatter": {
-      "enabled": false
-    }
-  },
-  "css": {
     "formatter": {
       "enabled": false
     }
