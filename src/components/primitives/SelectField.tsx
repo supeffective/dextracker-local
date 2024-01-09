@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 import { ComponentPropsWithoutRef } from 'react'
 import styles from './SelectField.module.scss'
 
-type SelectFieldOption = { value: string; label?: string }
+export type SelectFieldOption = { value: string; label?: string }
 
 type SelectFieldProps = {
   label?: React.ReactNode
@@ -32,9 +32,9 @@ export default function SelectField({ className, options, value, ...props }: Sel
   const selectedOption = options?.find((option) => option.value === strValue)
 
   return (
-    <div className={styles.box} title={selectedOption?.label}>
+    <div className={cn(styles.box, className)} title={selectedOption?.label}>
       {labelElement}
-      <select className={cn(styles.field, className)} value={strValue} {...props}>
+      <select className={styles.field} value={strValue} {...props}>
         {optionsToRender}
       </select>
     </div>

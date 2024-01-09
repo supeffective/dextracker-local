@@ -7,7 +7,7 @@
     "build": "tsc && vite build",
     "build:production": "vite build --base=/pokedex-tracker/ && rm -rf _site && mkdir -p _site && mv ./dist/* ./_site",
     "codegen": "bun codegen:svg",
-    "codegen:svg": "svgr --no-prettier --out-dir='src/lib/icons' --typescript --ext=tsx ./src/assets/icons",
+    "codegen:svg": "svgr --no-prettier --out-dir='src/lib/icons' --typescript --icon=24 --ext=tsx ./src/assets/icons",
     "dev": "vite --port=4930 --host",
     "format": "bun lint:fix",
     "lint": "bun lint-prettier && bun lint-biome",
@@ -19,7 +19,8 @@
     "lint:fix-biome": "biome check --max-diagnostics 50 --apply .",
     "lint:fix-package-json": "sort-package-json",
     "lint:fix-prettier": "prettier --write \"src/**/*.{md,json,css,scss}\"",
-    "make:component": "bun src/dev/make-component.ts",
+    "make:component": "bun src/scripts/make-component.ts",
+    "make:data": "bun src/scripts/make-data.ts",
     "precommit": "CI=true bun test && CI=true bun lint",
     "preview": "vite preview",
     "start": "vite preview",
@@ -27,7 +28,7 @@
     "test:coverage": "bun test --coverage && open coverage/index.html"
   },
   "dependencies": {
-    "@supeffective/dataset": "^1.1.0",
+    "@supeffective/dataset": "^1.3.1",
     "@tanstack/react-query": "^5.17.9",
     "clsx": "^2.1.0",
     "open-props": "^1.6.16",

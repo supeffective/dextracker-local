@@ -7,5 +7,5 @@ type GameImgProps = {
 
 export default function GameImg({ gameId, ...props }: GameImgProps) {
   const url = `${data.cdn_assets_url}/images/games/tiles/${gameId}.jpg`
-  return <img src={url} width={64} height={64} {...props} alt={props.alt ?? `Game: ${gameId}`} />
+  return <img loading="lazy" src={url} width={64} height={64} {...props} alt={props.alt ?? `Game: ${gameId}`} />
 }

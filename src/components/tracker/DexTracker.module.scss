@@ -1,0 +1,79 @@
+.tracker {
+  display: grid;
+  margin: 1rem 0;
+  padding: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  text-align: center;
+  gap: 1rem;
+}
+
+.loading,
+.error,
+.empty {
+  grid-template-columns: 1fr;
+}
+
+.entry {
+  color: var(--blue-10);
+  font-size: 0.8rem;
+  line-height: 1.2;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  gap: 0.25rem;
+  background-color: var(--blue-2);
+  padding: var(--size-2);
+  border-radius: var(--radius-2);
+  // align-items: flex-start;
+  // justify-content: flex-start;
+  // justify-items: flex-start;
+}
+
+.entryInfo {
+  width: 100%;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: flex-start;
+  justify-items: flex-start;
+}
+
+.entryActions {
+  font-size: 0.8rem;
+  line-height: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    max-width: none;
+    fill: var(--blue-7);
+  }
+
+  svg.small {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.entryHeader {
+  // font-weight: bold;
+  font-size: 1rem;
+}
+
+.entryName {
+  padding: 0.25rem;
+}
+
+.sprite {
+  padding: 2px;
+  border-radius: 3px;
+  background-color: var(--blue-1);
+  width: 100%;
+}

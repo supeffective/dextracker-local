@@ -2,8 +2,8 @@ import data from '@/data'
 import { DiscordIcon, GithubIcon, PatreonIcon } from '@/lib/icons/brands'
 import { cn } from '@/lib/utils'
 import { ComponentPropsWithoutRef } from 'react'
-import styles from './AppHeader.module.scss'
 import appLogo from '/logo.png'
+import styles from './AppHeader.module.scss'
 
 type AppHeaderProps = {
   children?: never

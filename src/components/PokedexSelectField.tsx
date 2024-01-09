@@ -1,9 +1,8 @@
-import { useGamesData, usePokedexesIndexData } from '@/stores/cdn'
+import { gamesWithPokedexes } from '@/stores/dataset'
+import { pokedexesIndexMap } from '@supeffective/dataset'
 import SelectField, {
-  OPTIONS_DATA_NOT_LOADED,
-  OPTIONS_ERROR,
-  OPTIONS_LOADING,
   OPTIONS_NO_DATA,
+  SelectFieldOption,
   SelectFieldPropsWithoutOptions,
 } from './primitives/SelectField'
 
@@ -12,33 +11,20 @@ type PokedexSelectFieldProps = SelectFieldPropsWithoutOptions & {
 }
 
 export default function PokedexSelectField({ gameId, ...props }: PokedexSelectFieldProps) {
-  const gamesQuery = useGamesData()
-  const dexesQuery = usePokedexesIndexData()
-
   if (!gameId) {
-    return null
+    return <SelectField {...props} options={[{ value: '', label: '---' }]} disabled />
   }
 
-  if (gamesQuery.isLoading || dexesQuery.isLoading) {
-    return <SelectField {...props} options={OPTIONS_LOADING} disabled />
-  }
-
-  if (gamesQuery.isError || dexesQuery.isError) {
-    console.error(gamesQuery.error, dexesQuery.error)
-    return <SelectField {...props} options={OPTIONS_ERROR} disabled />
-  }
-
-  if (!dexesQuery.data || !gamesQuery.data) {
-    return <SelectField {...props} options={OPTIONS_DATA_NOT_LOADED} disabled />
-  }
-
-  const gameDexIds = gamesQuery.data.find((dex) => dex.id === gameId)?.pokedexes ?? []
-  const options = dexesQuery.data
-    .filter((dex) => gameDexIds.includes(dex.id))
-    .map((dex) => ({
-      value: dex.id,
-      label: dex.name,
-    }))
+  const gameDexIds = gamesWithPokedexes.find((game) => game.id === gameId)?.pokedexes ?? []
+  const options = gameDexIds
+    .map((dexId) => {
+      const dex = pokedexesIndexMap.get(dexId)
+      if (!dex) {
+        return
+      }
+      return { value: dex.id, label: dex.name }
+    })
+    .filter(Boolean) as SelectFieldOption[]
 
   if (options.length === 0) {
     return <SelectField {...props} options={OPTIONS_NO_DATA} disabled />

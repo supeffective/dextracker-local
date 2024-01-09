@@ -1,3 +1,4 @@
+import { pokemonGamesMap } from '@supeffective/dataset'
 import { DexTrackerActionFactory, DexTrackerGameActions } from './types'
 
 const gameActions: DexTrackerActionFactory<DexTrackerGameActions> = (setState, getState) => {
@@ -18,9 +19,22 @@ const gameActions: DexTrackerActionFactory<DexTrackerGameActions> = (setState, g
       })
     },
     setCurrentGame(gameId) {
+      if (!gameId || gameId === '') {
+        setState({
+          currentGameId: undefined,
+          currentDexId: undefined,
+        })
+        return
+      }
+
+      const game = pokemonGamesMap.get(gameId)
+      if (!game) {
+        throw new Error(`Game '${gameId}' does not exist`)
+      }
+
       setState({
-        currentGameId: gameId === '' ? undefined : gameId,
-        currentDexId: undefined,
+        currentGameId: gameId,
+        currentDexId: game.pokedexes[0],
       })
     },
   }

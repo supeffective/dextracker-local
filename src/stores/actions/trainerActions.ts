@@ -1,10 +1,10 @@
-import { TrainerInfo } from '../state/types'
+import { TrainerInfoState } from '../state/types'
 import { DexTrackerActionFactory, DexTrackerTrainerActions } from './types'
 
 const trainerActions: DexTrackerActionFactory<DexTrackerTrainerActions> = (setState, getState) => {
   return {
     updateTrainer(trainer) {
-      const newTrainerInfo: TrainerInfo = {
+      const newTrainerInfo: TrainerInfoState = {
         nickname: 'Trainer',
         ...getState().trainer,
         ...trainer,

@@ -1,9 +1,11 @@
 import createPersistentStore from '../lib/createPersistentStore'
 import dexActions from './actions/dexActions'
+import filterActions from './actions/filterActions'
 import gameActions from './actions/gameActions'
 import generalActions, { createDefaultState } from './actions/generalActions'
 import sharedBoxActions from './actions/sharedBoxActions'
 import trainerActions from './actions/trainerActions'
+
 import { DexTrackerState } from './state/types'
 import { DexTrackerStore } from './types'
 
@@ -21,6 +23,7 @@ const useDexTrackerStore = createPersistentStore<DexTrackerStore>((rawSet, get) 
     ...gameActions(updateState, get),
     ...dexActions(updateState, get),
     ...sharedBoxActions(updateState, get),
+    ...filterActions(updateState, get),
   }
 })
 

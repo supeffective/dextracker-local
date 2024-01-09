@@ -5,10 +5,11 @@ export function createDefaultState(): DexTrackerState {
   const defaultState: DexTrackerState = {
     title: 'Dex Tracker',
     trainer: undefined,
+    filter: undefined,
     gameIds: [],
     dexes: {},
-    currentDexId: undefined,
-    currentGameId: undefined,
+    currentGameId: 'sv-s',
+    currentDexId: 'paldea',
     sharedBox: undefined,
     lastModified: undefined,
   }
@@ -37,6 +38,16 @@ const generalActions: DexTrackerActionFactory<DexTrackerGeneralActions> = (setSt
     setShinyMode(value) {
       setState({
         shinyMode: value,
+      })
+    },
+    setSearchQuery(query) {
+      setState({
+        searchQuery: query ?? undefined,
+      })
+    },
+    clearSearchQuery() {
+      setState({
+        searchQuery: undefined,
       })
     },
   }
