@@ -103,7 +103,7 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
               searchState.setHideCaught(active)
             }}
           >
-            {[<PokeballIcon className={cn(styles.disabledBall)} />, <PokeballIcon />]}
+            {[<PokeballIcon key="ball1" className={cn(styles.disabledBall)} />, <PokeballIcon key="ball2" />]}
           </ToggleBtn>
         </label>
         <label className={styles.flexLabel}>
