@@ -1,6 +1,6 @@
 import { PokeballOutlineIcon, ShinyIcon } from '@/lib/icons'
 import { cn } from '@/lib/utils'
-import { useCurrentPokedexData } from '@/stores/cdn'
+import { getDexSourceCodeUrl, useCurrentPokedexData } from '@/stores/cdn'
 import {
   ExpandedPokedexEntry,
   PokemonSearchIndex,
@@ -84,11 +84,7 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
             <br />
             <br />
             You can support this project by contributing to{' '}
-            <a
-              href={`https://github.com/supeffective/dataset/blob/main/data/pokedexes/${dexData.region}/${dexData.id}.json`}
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href={getDexSourceCodeUrl(dexData.region, dexData.id)} target="_blank" rel="noreferrer">
               the dataset repository
             </a>
             {''}, adding the missing data.

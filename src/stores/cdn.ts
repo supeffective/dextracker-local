@@ -47,3 +47,10 @@ export function useCurrentPokedexData() {
 
   return usePokedexData(currentDex?.id, currentDex?.region)
 }
+
+export function getDexSourceCodeUrl(dexRegion: string | undefined | null, dexId: string) {
+  if (!dexRegion) {
+    return `https://github.com/supeffective/dataset/blob/main/data/pokedexes/${dexId}.json`
+  }
+  return `https://github.com/supeffective/dataset/blob/main/data/pokedexes/${dexRegion}/${dexId}.json`
+}

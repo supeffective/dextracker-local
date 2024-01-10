@@ -1,6 +1,9 @@
+import data from '@/data'
 import { ShinyIcon } from '@/lib/icons'
 import { FileDownloadIcon, SettingsIcon, UploadIcon } from '@/lib/icons/actions'
+import { GithubIcon } from '@/lib/icons/brands'
 import { cn } from '@/lib/utils'
+import { getDexSourceCodeUrl } from '@/stores/cdn'
 import useDexTrackerStore, { useCurrentGameAndDex } from '@/stores/useDexTrackerStore'
 import { ComponentPropsWithoutRef } from 'react'
 import DrawerMenu from './DrawerMenu'
@@ -15,7 +18,7 @@ import { DownloadTextButton } from './text-download'
 type StickyToolbarProps = {} & ComponentPropsWithoutRef<'div'>
 
 export default function StickyToolbar({ className, ...props }: StickyToolbarProps) {
-  const { currentGame } = useCurrentGameAndDex()
+  const { currentGame, currentDex } = useCurrentGameAndDex()
   const state = useDexTrackerStore((state) => state)
 
   let debounceSearchTimeout: NodeJS.Timeout | null = null
@@ -63,6 +66,12 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
             state.setCurrentDex(e.target.value)
           }}
         />
+        <div className={styles.flexLinks}>
+          <a href={getDexSourceCodeUrl(currentDex.region, currentDex.id)} target="_blank" rel="noreferrer">
+            <GithubIcon />
+            <span>Edit source code</span>
+          </a>
+        </div>
       </DrawerMenu>
       <div className={styles.searchBoxWrapper}>
         <div className={styles.searchBox}>
@@ -110,6 +119,10 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
         >
           <UploadIcon data-nofill />
         </FileUploadBtn>
+        <div className={styles.appVersion}>
+          <b>Super Pokédex Tracker </b>
+          <span>v{data.version}</span>
+        </div>
       </DrawerMenu>
     </div>
   )

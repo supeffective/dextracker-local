@@ -104,3 +104,54 @@
   flex: 1;
   white-space: nowrap;
 }
+
+.appVersion {
+  font-size: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--yellow-7);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-style: italic;
+
+  b,
+  i {
+    display: block;
+    line-height: 1;
+  }
+}
+
+.flexLinks {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--yellow-7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 0.5rem;
+  text-align: center;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--yellow-11);
+    text-decoration: none;
+    transition: color 0.15s ease-in-out;
+
+    &:hover {
+      color: var(--yellow-9);
+    }
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 const data = {
+  version: '1.0.0-beta.2',
   // Text:
   title: 'Super Pokédex Tracker',
   WEBAPP_NAME: 'Super Pokédex Tracker',
