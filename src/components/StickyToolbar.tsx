@@ -1,14 +1,16 @@
 import { ShinyIcon } from '@/lib/icons'
-import { SettingsIcon } from '@/lib/icons/actions'
+import { FileDownloadIcon, SettingsIcon, UploadIcon } from '@/lib/icons/actions'
 import { cn } from '@/lib/utils'
 import useDexTrackerStore, { useCurrentGameAndDex } from '@/stores/useDexTrackerStore'
 import { ComponentPropsWithoutRef } from 'react'
+import DrawerMenu from './DrawerMenu'
 import GameIndicator from './GameIndicator'
 import GameSelectField from './GameSelectField'
-import PillDrawerMenu from './PillDrawerMenu'
 import PokedexSelectField from './PokedexSelectField'
 import styles from './StickyToolbar.module.scss'
+import FileUploadBtn from './primitives/FileUploadBtn'
 import ToggleBtn from './primitives/ToggleBtn'
+import { DownloadTextButton } from './text-download'
 
 type StickyToolbarProps = {} & ComponentPropsWithoutRef<'div'>
 
@@ -29,9 +31,21 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
   const gameIcon = <GameIndicator className={cn('avatar-raised')} gameId={currentGame.id} />
   const settingsIcon = <SettingsIcon />
 
+  const jsonState = JSON.stringify(state, null, 2)
+
+  const handleJsonUpload = (data: string) => {
+    try {
+      state.loadFromJSON(data)
+    } catch (error) {
+      alert(`${error}`)
+    }
+    alert('Data imported successfully.')
+    window.location.reload()
+  }
+
   return (
     <div className={cn(styles.toolbar, className)} {...props}>
-      <PillDrawerMenu placement="left" icon={gameIcon}>
+      <DrawerMenu placement="left" icon={gameIcon}>
         <GameSelectField
           className={styles.labelledSelect}
           label="Game: "
@@ -49,8 +63,8 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
             state.setCurrentDex(e.target.value)
           }}
         />
-      </PillDrawerMenu>
-      <div className={styles.inner}>
+      </DrawerMenu>
+      <div className={styles.searchBoxWrapper}>
         <div className={styles.searchBox}>
           <input
             // biome-ignore lint/a11y/noAutofocus: <explanation>
@@ -62,7 +76,7 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
           />
         </div>
       </div>
-      <PillDrawerMenu placement="right" icon={settingsIcon}>
+      <DrawerMenu placement="right" icon={settingsIcon}>
         <label className={styles.flexLabel}>
           <span>Shiny sprites</span>
           <ToggleBtn
@@ -75,7 +89,28 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
             <ShinyIcon />
           </ToggleBtn>
         </label>
-      </PillDrawerMenu>
+        <label className={styles.flexLabel}>
+          <span>Download data</span>
+          <DownloadTextButton
+            filename="super-pokedex-tracker-data.json"
+            content={jsonState}
+            contentType="application/json"
+            variant="yellow"
+          >
+            <FileDownloadIcon data-nofill />
+          </DownloadTextButton>
+        </label>
+        <FileUploadBtn
+          title="Upload data"
+          className={styles.flexLabel}
+          variant="yellow"
+          label={<span>Upload data</span>}
+          accepts=".json"
+          onUpload={handleJsonUpload}
+        >
+          <UploadIcon data-nofill />
+        </FileUploadBtn>
+      </DrawerMenu>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { DexTrackerState } from '../state/types'
+import { DexTrackerState, dexTrackerStateSchema } from '../state/types'
 import { DexTrackerActionFactory, DexTrackerGeneralActions } from './types'
 
 export const DEFAULT_GAME_ID = 'sv-s'
@@ -26,7 +26,16 @@ const generalActions: DexTrackerActionFactory<DexTrackerGeneralActions> = (setSt
     },
     loadFromJSON(json) {
       const currentState = getState()
-      const data = JSON.parse(json)
+      let data = {}
+
+      try {
+        const parsed = JSON.parse(json)
+        data = dexTrackerStateSchema.parse(parsed)
+      } catch (error) {
+        console.error(error)
+        throw new Error('Invalid JSON file provided')
+      }
+
       setState({
         ...currentState,
         ...data,

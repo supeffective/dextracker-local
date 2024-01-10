@@ -42,16 +42,17 @@ const dexActions: DexTrackerActionFactory<DexTrackerDexActions> = (setState, get
         ...currentDexes,
         [dexId]: {
           ...currentDex,
+          id: dexId,
           pokemon: {
             ...currentPokemonTable,
             [nid]: {
               ...currentPokemonTable[nid],
               ...data,
+              nid,
             },
           },
         },
       }
-      console.log(newDexes)
       setState({
         dexes: newDexes,
       })

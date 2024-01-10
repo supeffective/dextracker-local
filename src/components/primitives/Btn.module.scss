@@ -1,0 +1,49 @@
+.btn {
+  appearance: none;
+  width: auto;
+  height: auto;
+  display: block;
+  padding: 0.1rem 0.25rem;
+  line-height: 0.2;
+  transition:
+    box-shadow 0.15s ease-in-out,
+    background-color 0.15s ease-in-out;
+
+  &:active {
+    background-color: var(--yellow-4);
+    box-shadow: var(--inner-shadow-1);
+    // color: #fff;
+  }
+
+  img,
+  svg {
+    overflow: visible;
+    width: 20px;
+    height: 20px;
+    min-width: 24px;
+    opacity: 1;
+  }
+}
+
+.btn.variant-yellow {
+  background-color: var(--yellow-1);
+  border: 2px solid var(--yellow-11);
+  color: var(--yellow-11);
+  box-shadow: none;
+
+  svg {
+    fill: var(--yellow-11);
+  }
+
+  svg[data-nofill] {
+    stroke: var(--yellow-11);
+    fill: none;
+  }
+
+  &:active {
+    background: var(--yellow-6);
+    border: 2px solid var(--yellow-11);
+    color: var(--yellow-11);
+    box-shadow: inset 2px 2px 2px var(--yellow-9);
+  }
+}

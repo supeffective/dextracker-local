@@ -1,14 +1,14 @@
 import { MenuIcon } from '@/lib/icons/actions'
 import { cn } from '@/lib/utils'
 import { ComponentPropsWithoutRef, useState } from 'react'
-import styles from './PillDrawerMenu.module.scss'
+import styles from './DrawerMenu.module.scss'
 
-type PillDrawerMenuProps = {
+type DrawerMenuProps = {
   icon?: React.ReactNode
   placement?: 'left' | 'right'
 } & ComponentPropsWithoutRef<'div'>
 
-export default function PillDrawerMenu({ className, children, icon, placement, ...props }: PillDrawerMenuProps) {
+export default function DrawerMenu({ className, children, icon, placement, ...props }: DrawerMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (

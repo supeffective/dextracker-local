@@ -146,16 +146,17 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
           }
 
           return (
-            <div key={entry.id} className={styles.entry} title={entry.search}>
+            <div key={entry.id} className={styles.entry}>
               <div className={styles.entryInfo}>
                 <div className={styles.entryHeader}>{`#${zeroPadDexNum ?? '--'}`}</div>
                 <div className={styles.sprite}>
-                  <PokemonImg pokeNid={entry.nid} shiny={store.filter?.shinyMode === true} />
+                  <PokemonImg pokeNid={entry.nid} shiny={pkmState.shiny || store.filter?.shinyMode} />
                 </div>
               </div>
               <div className={styles.entryName}>{entry.name ?? `"${entry.id}"`}</div>
               <div className={styles.entryActions}>
                 <button
+                  title="Registered"
                   tabIndex={0}
                   type="button"
                   data-active={pkmState.caught ?? 0}
@@ -164,6 +165,7 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
                   <PokeballOutlineIcon />
                 </button>
                 <button
+                  title="Shiny registered"
                   tabIndex={0}
                   type="button"
                   data-active={pkmState.shiny ?? 0}

@@ -12,7 +12,7 @@
   // -webkit-backdrop-filter: blur(0.25rem);
 }
 
-.inner {
+.searchBoxWrapper {
   flex: 1;
   display: flex;
   align-items: center;
@@ -60,12 +60,22 @@
   label {
     width: 50px;
   }
+
+  select {
+    width: 150px;
+  }
 }
 
 .flexLabel {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+
+  > span {
+    display: inline-flex;
+    width: 100px;
+    font-size: 0.875rem;
+  }
 
   .toggle {
     background-color: var(--yellow-1);
