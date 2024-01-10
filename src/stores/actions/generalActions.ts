@@ -7,7 +7,6 @@ export function createDefaultState(): DexTrackerState {
   const defaultState: DexTrackerState = {
     title: 'Dex Tracker',
     trainer: undefined,
-    filter: undefined,
     gameIds: [],
     dexes: {},
     currentGameId: DEFAULT_GAME_ID,

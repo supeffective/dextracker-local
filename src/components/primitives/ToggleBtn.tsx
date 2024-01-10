@@ -1,34 +1,35 @@
 import { cn } from '@/lib/utils'
-import { ComponentPropsWithoutRef, useState } from 'react'
+import { ComponentPropsWithoutRef } from 'react'
 import styles from './ToggleBtn.module.scss'
 
 type ToggleBtnProps = {
   value?: boolean
-  activeChildren?: React.ReactNode
+  inverted?: boolean
   onToggle?: (active: boolean) => void
-} & Omit<ComponentPropsWithoutRef<'button'>, 'type' | 'value' | 'onClick'>
+  children: React.ReactElement | [React.ReactElement, React.ReactElement]
+} & Omit<ComponentPropsWithoutRef<'button'>, 'type' | 'value' | 'onClick' | 'children'>
 
-export default function ToggleBtn({
-  className,
-  value: initialActive,
-  children,
-  activeChildren,
-  ...props
-}: ToggleBtnProps) {
-  const [active, setActive] = useState(initialActive)
+export default function ToggleBtn({ className, value, inverted, children, ...props }: ToggleBtnProps) {
+  // const [active, setActive] = useState(initialActive)
+
+  const stylesValue = inverted ? !value : value
+  if (props.name) {
+    console.log('ToggleBtn', { value, stylesValue }, props.name)
+  }
+
+  const childToRender = Array.isArray(children) ? children[stylesValue ? 1 : 0] : children
 
   return (
     <button
       type="button"
-      value={active ? '1' : '0'}
-      className={cn(styles.btn, { [styles.active]: active }, className)}
+      value={value ? '1' : '0'}
+      className={cn(styles.btn, { [styles.active]: stylesValue }, className)}
       {...props}
       onClick={() => {
-        setActive(!active)
-        props.onToggle?.(!active)
+        props.onToggle?.(!value)
       }}
     >
-      {activeChildren && active ? activeChildren : children}
+      {childToRender}
     </button>
   )
 }

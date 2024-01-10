@@ -1,7 +1,7 @@
 import { DexTrackerState } from '../state/types'
 import { DexTrackerActionFactory, DexTrackerDexActions } from './types'
 
-const dexActions: DexTrackerActionFactory<DexTrackerDexActions> = (setState, getState) => {
+const dexActions: DexTrackerActionFactory<DexTrackerDexActions> = (setState, getState): DexTrackerDexActions => {
   return {
     updateDex(dexId, dex) {
       const currentDexes = getState().dexes

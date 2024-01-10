@@ -77,6 +77,19 @@
   align-items: start;
   gap: 1rem;
   text-align: left;
+
+  hr {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: none;
+    line-height: 1;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    height: 2px;
+    width: 100%;
+    border-top: 1px solid var(--yellow-7);
+  }
 }
 
 .placeLeft {

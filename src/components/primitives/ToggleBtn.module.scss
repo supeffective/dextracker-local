@@ -9,11 +9,10 @@
     box-shadow 0.15s ease-in-out,
     background-color 0.15s ease-in-out;
 
-  &.active {
-    background-color: var(--yellow-4);
-    box-shadow: var(--inner-shadow-1);
-    // color: #fff;
-  }
+  background-color: var(--yellow-1);
+  border: 2px solid var(--yellow-11);
+  color: var(--yellow-11);
+  box-shadow: none;
 
   img,
   svg {
@@ -22,5 +21,48 @@
     height: 20px;
     min-width: 24px;
     opacity: 1;
+    fill: var(--yellow-11);
   }
+
+  svg[data-nofill] {
+    stroke: var(--yellow-11);
+    fill: none;
+  }
+
+  &.active {
+    background-color: var(--yellow-4);
+    box-shadow: var(--inner-shadow-1);
+
+    // color: #fff;
+    // svg {
+    //   fill: var(--yellow-11);
+    // }
+
+    // svg[data-nofill] {
+    //   stroke: var(--yellow-11);
+    //   fill: none;
+    // }
+  }
+
+  // &.active.inverted {
+  //   background-color: var(--yellow-4);
+  //   box-shadow: var(--inner-shadow-1);
+  //   // color: #fff;
+  // }
 }
+
+// .toggle.toggleActive {
+//   background: var(--yellow-6);
+//   border: 2px solid var(--yellow-11);
+//   color: var(--yellow-11);
+//   box-shadow: inset 2px 2px 2px var(--yellow-9);
+
+//   svg {
+//     fill: var(--yellow-11);
+//   }
+
+//   svg[data-nofill] {
+//     stroke: var(--yellow-11);
+//     fill: none;
+//   }
+// }

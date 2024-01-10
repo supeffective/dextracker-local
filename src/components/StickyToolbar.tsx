@@ -1,25 +1,30 @@
 import data from '@/data'
-import { ShinyIcon } from '@/lib/icons'
 import { FileDownloadIcon, SettingsIcon, UploadIcon } from '@/lib/icons/actions'
 import { GithubIcon } from '@/lib/icons/brands'
+import { PokeballIcon, ShinyIcon } from '@/lib/icons/gamegui'
+import { ForkIcon } from '@/lib/icons/sections'
 import { cn } from '@/lib/utils'
 import { getDexSourceCodeUrl } from '@/stores/cdn'
+import { PokedexSearchStateFilter } from '@/stores/state/types'
 import useDexTrackerStore, { useCurrentGameAndDex } from '@/stores/useDexTrackerStore'
+import usePokedexSearchStore from '@/stores/usePokedexSearchStore'
 import { ComponentPropsWithoutRef } from 'react'
-import DrawerMenu from './DrawerMenu'
 import GameIndicator from './GameIndicator'
 import GameSelectField from './GameSelectField'
 import PokedexSelectField from './PokedexSelectField'
 import styles from './StickyToolbar.module.scss'
+import DrawerMenu from './primitives/DrawerMenu'
 import FileUploadBtn from './primitives/FileUploadBtn'
 import ToggleBtn from './primitives/ToggleBtn'
-import { DownloadTextButton } from './text-download'
+import { DownloadTextButton } from './primitives/text-download'
 
 type StickyToolbarProps = {} & ComponentPropsWithoutRef<'div'>
 
 export default function StickyToolbar({ className, ...props }: StickyToolbarProps) {
   const { currentGame, currentDex } = useCurrentGameAndDex()
-  const state = useDexTrackerStore((state) => state)
+  const state = useDexTrackerStore((store) => store)
+  const searchState = usePokedexSearchStore((store) => store)
+  const filters: PokedexSearchStateFilter = searchState.filters ?? {}
 
   let debounceSearchTimeout: NodeJS.Timeout | null = null
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +32,7 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
       clearTimeout(debounceSearchTimeout)
     }
     debounceSearchTimeout = setTimeout(() => {
-      state.setSearchQuery(e.target.value)
+      searchState.setSearchQuery(e.target.value)
     }, 300)
   }
 
@@ -66,6 +71,7 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
             state.setCurrentDex(e.target.value)
           }}
         />
+        <hr />
         <div className={styles.flexLinks}>
           <a href={getDexSourceCodeUrl(currentDex.region, currentDex.id)} target="_blank" rel="noreferrer">
             <GithubIcon />
@@ -80,24 +86,54 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
             autoFocus
             type="search"
             placeholder="Search Pokémon..."
-            defaultValue={state.filter?.searchQuery}
+            defaultValue={filters.searchQuery}
             onChange={handleSearchChange}
           />
         </div>
       </div>
       <DrawerMenu placement="right" icon={settingsIcon}>
         <label className={styles.flexLabel}>
+          <span>Toggle Caught</span>
+          <ToggleBtn
+            name="toggle-caught"
+            className={cn(styles.toggle)}
+            value={filters.hideCaught}
+            inverted
+            onToggle={(active) => {
+              searchState.setHideCaught(active)
+            }}
+          >
+            {[<PokeballIcon className={cn(styles.disabledBall)} />, <PokeballIcon />]}
+          </ToggleBtn>
+        </label>
+        <label className={styles.flexLabel}>
           <span>Shiny sprites</span>
           <ToggleBtn
-            className={cn(styles.toggle, { [styles.toggleActive]: state.filter?.shinyMode })}
-            value={state.filter?.shinyMode}
+            name="toggle-shiny"
+            className={cn(styles.toggle)}
+            value={filters.shinyMode}
             onToggle={(active) => {
-              state.setShinyMode(active)
+              searchState.setShinyMode(active)
             }}
           >
             <ShinyIcon />
           </ToggleBtn>
         </label>
+        <label className={styles.flexLabel}>
+          <span>Toggle forms</span>
+          <ToggleBtn
+            name="toggle-forms"
+            className={cn(styles.toggle)}
+            value={filters.hideForms}
+            inverted
+            onToggle={(active) => {
+              searchState.setHideForms(active)
+            }}
+          >
+            <ForkIcon data-nofill style={{ transform: 'rotate(-180deg)' }} />
+          </ToggleBtn>
+        </label>
+        <hr />
         <label className={styles.flexLabel}>
           <span>Download data</span>
           <DownloadTextButton
@@ -119,6 +155,7 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
         >
           <UploadIcon data-nofill />
         </FileUploadBtn>
+        <hr />
         <div className={styles.appVersion}>
           <b>Super Pokédex Tracker </b>
           <span>v{data.version}</span>

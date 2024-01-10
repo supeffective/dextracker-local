@@ -1,4 +1,5 @@
 import { PokedexEntry, PokemonIndexItem, pokemonGames, pokemonIndex, pokemonIndexMap } from '@supeffective/dataset'
+import { PokedexEntryState, PokedexState } from './state/types'
 
 export const gamesWithPokedexes = pokemonGames
   .filter((game) => game.type === 'game')
@@ -7,9 +8,15 @@ export const gamesWithPokedexes = pokemonGames
 export type PokemonSearchResult<T extends PokemonIndexItem> = T & { search: string }
 export type PokemonSearchIndex<T extends PokemonIndexItem> = Array<PokemonSearchResult<T>>
 
-export type ExpandedPokedexEntry = PokedexEntry & PokemonIndexItem
+export type ExpandedPokedexEntry = PokedexEntry &
+  PokemonIndexItem & {
+    state?: PokedexEntryState
+  }
 
-export function expandPokedexEntries(pokedex: PokedexEntry[]): ExpandedPokedexEntry[] {
+export type PokedexSearchIndexItem = PokemonSearchResult<ExpandedPokedexEntry>
+export type PokedexSearchIndex = PokemonSearchIndex<ExpandedPokedexEntry>
+
+export function expandPokedexEntries(pokedex: PokedexEntry[], pokedexState: PokedexState): ExpandedPokedexEntry[] {
   return pokedex.map((entry, _) => {
     const pokemon = pokemonIndexMap.get(entry.id)
     if (!pokemon) {
@@ -17,9 +24,9 @@ export function expandPokedexEntries(pokedex: PokedexEntry[]): ExpandedPokedexEn
     }
     // const dexNum = entry.dexNum ?? index + 1
     return {
-      ...pokemon,
       ...entry,
-      // dexNum,
+      ...pokemon,
+      state: pokedexState.pokemon[pokemon.nid],
     }
   })
 }

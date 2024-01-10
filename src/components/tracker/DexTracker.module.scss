@@ -12,91 +12,6 @@
   gap: 1rem;
 }
 
-.entry {
-  color: var(--blue-10);
-  font-size: 0.8rem;
-  line-height: 1.2;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  // grid-template-rows: 1fr 1fr;
-  gap: 0.75rem;
-  background-color: var(--blue-2);
-  padding: var(--size-2);
-  border-radius: var(--radius-2);
-  border: 2px solid var(--blue-5);
-  // align-items: flex-start;
-  // justify-content: flex-start;
-  // justify-items: flex-start;
-}
-
-.entryInfo {
-  width: 100%;
-  font-size: 0.8rem;
-  line-height: 1.2;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.25rem;
-  align-items: center;
-  justify-content: flex-start;
-  justify-items: flex-start;
-}
-
-.entryActions {
-  font-size: 0.8rem;
-  line-height: 1.2;
-  display: flex;
-  flex-direction: row;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
-
-  svg {
-    width: 1.2rem;
-    height: 1.2rem;
-    max-width: none;
-    fill: var(--blue-7);
-  }
-
-  svg.small {
-    width: 1rem;
-    height: 1rem;
-  }
-}
-
-.entryHeader {
-  // font-weight: bold;
-  font-size: 1rem;
-}
-
-.entryName {
-  font-size: 0.9rem;
-  padding: 0.15rem 0.5rem;
-  // color: var(--blue-0);
-  // background: var(--blue-7);
-  // border-radius: var(--radius-6);
-  // border-bottom: 1px solid var(--blue-5);
-  flex: 1;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
-}
-
-.sprite {
-  padding: 2px;
-  border-radius: 3px;
-  background-color: var(--blue-1);
-
-  img {
-    width: 100%;
-    content-visibility: auto;
-    filter: drop-shadow(3px 3px 0px var(--blue-10));
-  }
-}
-
 .resultPanel {
   text-align: center;
   display: flex;
@@ -139,35 +54,5 @@
   .resultPanel {
     border: 2px dashed var(--blue-2);
     background: none;
-  }
-}
-
-.markedIcon {
-}
-
-.intermediateIcon {
-}
-
-.entryActions {
-  button {
-    appearance: none;
-    background: none;
-    border: none;
-    box-shadow: none;
-    border-radius: 50px;
-    border: 2px solid transparent;
-    aspect-ratio: 1;
-
-    &[data-active='1'],
-    &[data-active='true'] {
-      background: var(--yellow-2);
-      border: 2px solid var(--yellow-6);
-      // box-shadow: 2px 2px 0 var(--yellow-5);
-      color: var(--yellow-11);
-
-      svg {
-        fill: var(--yellow-11);
-      }
-    }
   }
 }

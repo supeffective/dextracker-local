@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { PokedexSearchIndex } from '../dataset'
 
 export type PokeGender = 'm' | 'f' | 'n'
 export type PokeTradingStatus = 'wanted' | 'offered' | 'traded'
@@ -15,10 +16,10 @@ export type DexId = {
 
 export type PokedexEntryState = {
   nid: string
-  seen: boolean
-  caught: boolean
-  shiny: boolean
-  genders: Array<PokeGender>
+  seen?: boolean
+  caught?: boolean
+  shiny?: boolean
+  genders?: Array<PokeGender>
 }
 
 export type PokedexState = {
@@ -41,17 +42,9 @@ export type PokeboxState = {
   pokemon: Array<PokeboxEntryState>
 }
 
-export type DexTrackerFilter = {
-  shinyMode?: boolean
-  searchQuery?: string
-  onlyMissing?: boolean
-  // withVariants?: boolean
-}
-
 export type DexTrackerState = {
   title?: string
   trainer?: TrainerInfoState
-  filter?: DexTrackerFilter
   gameIds: Array<string>
   dexes: Record<string, PokedexState>
   currentGameId: string
@@ -63,12 +56,6 @@ export type DexTrackerState = {
 const trainerInfoStateSchema = z.object({
   avatar: z.string().optional(),
   nickname: z.string(),
-})
-
-const filterSchema = z.object({
-  shinyMode: z.boolean().optional(),
-  searchQuery: z.string().optional(),
-  onlyMissing: z.boolean().optional(),
 })
 
 const stringArrSchema = z.array(z.string())
@@ -93,7 +80,6 @@ const boxEntrySchema = z.object({
 export const dexTrackerStateSchema = z.object({
   title: z.string().optional(),
   trainer: trainerInfoStateSchema.optional(),
-  filter: filterSchema.optional(),
   gameIds: stringArrSchema,
   dexes: z.record(
     z.object({
@@ -112,3 +98,22 @@ export const dexTrackerStateSchema = z.object({
     .optional(),
   lastModified: z.number().optional(),
 })
+
+// -----------------------------------------------
+// SEARCH STORE:
+
+export type PokedexSearchStateFilter = {
+  shinyMode?: boolean
+  searchQuery?: string
+  hideForms?: boolean
+  hideCosmeticForms?: boolean
+  hideCaught?: boolean
+  // withVariants?: boolean
+}
+
+export type PokedexSearchState = {
+  dexId: string
+  filters?: PokedexSearchStateFilter
+  results: PokedexSearchIndex
+  lastModified?: number
+}

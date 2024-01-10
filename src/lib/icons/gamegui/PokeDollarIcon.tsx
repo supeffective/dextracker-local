@@ -1,0 +1,4 @@
+import * as React from "react";
+import type { SVGProps } from "react";
+const SvgPokeDollarIcon = (props: SVGProps<SVGSVGElement>) => <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 1200 1200" {...props}><path d="M79.4 1079.671v-140.79h124.419V821.009H79.4v-140.79h124.419V.001h581.174q139.973 0 237.79 79.809t97.818 201.773-97.818 201.773-237.79 79.809H362.62v117.054h541.882v140.79H362.62v117.872h541.882v140.79H362.62v120.328H203.822v-120.328H79.403zm283.22-657.299h422.373q33.561 0 73.671-13.915 28.649-10.641 57.3-33.561 45.02-40.929 45.02-93.315 0-54.025-45.02-94.133-28.649-22.92-57.3-33.561-37.654-13.097-73.671-13.097H362.62z" /></svg>;
+export default SvgPokeDollarIcon;

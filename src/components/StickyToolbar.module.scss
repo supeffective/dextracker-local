@@ -73,30 +73,8 @@
 
   > span {
     display: inline-flex;
-    width: 100px;
+    width: 120px;
     font-size: 0.875rem;
-  }
-
-  .toggle {
-    background-color: var(--yellow-1);
-    border: 2px solid var(--yellow-11);
-    color: var(--yellow-11);
-    box-shadow: none;
-
-    svg {
-      fill: var(--yellow-11);
-    }
-  }
-
-  .toggle.toggleActive {
-    background: var(--yellow-6);
-    border: 2px solid var(--yellow-11);
-    color: var(--yellow-11);
-    box-shadow: inset 2px 2px 2px var(--yellow-9);
-
-    svg {
-      fill: var(--yellow-11);
-    }
   }
 }
 
@@ -107,9 +85,6 @@
 
 .appVersion {
   font-size: 0.75rem;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--yellow-7);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -125,9 +100,6 @@
 }
 
 .flexLinks {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--yellow-7);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -153,5 +125,13 @@
       width: 1rem;
       height: 1rem;
     }
+  }
+}
+
+.disabledBall {
+  fill: var(--yellow-11);
+
+  path:nth-of-type(2) {
+    fill: var(--yellow-0) !important;
   }
 }

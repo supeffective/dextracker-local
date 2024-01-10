@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react'
-import Btn from './primitives/Btn'
+import Btn from './Btn'
 
 export function triggerTextDownload(content: string, filename: string, contentType = 'text/plain') {
   const element = document.createElement('a')

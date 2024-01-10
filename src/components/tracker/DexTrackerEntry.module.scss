@@ -1,0 +1,126 @@
+.entry {
+  color: var(--blue-10);
+  font-size: 0.8rem;
+  line-height: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background-color: var(--blue-2);
+  padding: var(--size-2);
+  border-radius: var(--radius-2);
+  border: 2px solid var(--blue-5);
+}
+
+.entryInfo {
+  width: 100%;
+  font-size: 0.8rem;
+  line-height: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.25rem;
+  align-items: center;
+  justify-content: flex-start;
+  justify-items: flex-start;
+}
+
+.entryActions {
+  font-size: 0.8rem;
+  line-height: 1.2;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    max-width: none;
+    fill: var(--blue-7);
+  }
+
+  svg.small {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.entryHeader {
+  font-size: 1rem;
+}
+
+.entryName {
+  font-size: 0.9rem;
+  padding: 0.15rem 0.5rem;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.sprite {
+  padding: 2px;
+  border-radius: 3px;
+  background-color: var(--blue-1);
+
+  img {
+    width: 100%;
+    content-visibility: auto;
+    filter: drop-shadow(3px 3px 0px var(--blue-10));
+  }
+}
+
+.entryActions {
+  button {
+    appearance: none;
+    background: none;
+    border: none;
+    box-shadow: none;
+    border-radius: 50px;
+    border: 2px solid transparent;
+    aspect-ratio: 1;
+    padding: 1px;
+
+    // &[data-active='1'],
+    // &[data-active='true'] {
+    //   // background: var(--blue-3);
+    //   // border: 2px solid var(--yellow-6);
+    //   // box-shadow: 2px 2px 0 var(--yellow-5);
+    //   color: var(--yellow-11);
+
+    //   svg {
+    //     fill: var(--yellow-11);
+    //   }
+    // }
+  }
+
+  button.ballButton[data-active='true'] {
+    // border: 1px solid var(--red-8);
+    // color: var(--red-11);
+
+    svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--gray-12);
+      stroke: var(--gray-0);
+    }
+  }
+
+  button.shinyButton[data-active='true'] {
+    background: var(--blue-10);
+    // padding: 0;
+    background: var(--yellow-3);
+    border: 2px solid var(--yellow-6);
+    // box-shadow: 2px 2px 0 var(--yellow-5);
+
+    svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--yellow-11);
+    }
+  }
+}

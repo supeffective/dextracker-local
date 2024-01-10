@@ -13,13 +13,6 @@ export type DexTrackerGeneralActions = {
   setTitle: (title: string) => void
 }
 
-export type DexTrackerFilterActions = {
-  setShinyMode: (value: boolean) => void
-  setSearchQuery: (query: string | null) => void
-  clearSearchQuery: () => void
-  setOnlyMissing: (value: boolean) => void
-}
-
 export type DexTrackerTrainerActions = {
   updateTrainer: (trainer: Partial<TrainerInfoState>) => void
 }
@@ -47,9 +40,21 @@ export type DexTrackerActions = DexTrackerGeneralActions &
   DexTrackerTrainerActions &
   DexTrackerGameActions &
   DexTrackerDexActions &
-  DexTrackerSharedBoxActions &
-  DexTrackerFilterActions
+  DexTrackerSharedBoxActions
 
 export type DexTrackerStateGetter = () => DexTrackerState
 export type DexTrackerStateSetter = (state: Partial<DexTrackerState>) => void
 export type DexTrackerActionFactory<T> = (set: DexTrackerStateSetter, get: DexTrackerStateGetter) => T
+
+// -----------------------------------------------
+// SEARCH STORE:
+
+export type PokedexSearchActions = {
+  // applyFilters(dex: Pokedex, dexState: PokedexState, filter: DexTrackerFilter): PokedexSearchIndex
+  setShinyMode: (value: boolean) => void
+  setHideForms: (value: boolean) => void
+  setHideCosmeticForms: (value: boolean) => void
+  setHideCaught: (value: boolean) => void
+  setSearchQuery: (query: string | null) => void
+  clearSearchQuery: () => void
+}

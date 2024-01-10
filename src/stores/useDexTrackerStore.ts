@@ -1,7 +1,6 @@
 import { Game, PokedexIndexItem, pokedexesIndexMap, pokemonGamesMap } from '@supeffective/dataset'
 import createPersistentStore from '../lib/createPersistentStore'
 import dexActions from './actions/dexActions'
-import filterActions from './actions/filterActions'
 import gameActions from './actions/gameActions'
 import generalActions, { createDefaultState } from './actions/generalActions'
 import sharedBoxActions from './actions/sharedBoxActions'
@@ -10,9 +9,11 @@ import trainerActions from './actions/trainerActions'
 import { DexTrackerState } from './state/types'
 import { DexTrackerStore } from './types'
 
+const STORE_ID = 'pokedex-tracker-store'
+
 const defaultState = createDefaultState()
 
-const useDexTrackerStore = createPersistentStore<DexTrackerStore>((rawSet, get) => {
+const useDexTrackerStore = createPersistentStore<DexTrackerStore>(STORE_ID, (rawSet, get) => {
   const updateState = (state: Partial<DexTrackerState>) => {
     rawSet({ lastModified: Date.now(), ...state })
   }
@@ -24,7 +25,6 @@ const useDexTrackerStore = createPersistentStore<DexTrackerStore>((rawSet, get) 
     ...gameActions(updateState, get),
     ...dexActions(updateState, get),
     ...sharedBoxActions(updateState, get),
-    ...filterActions(updateState, get),
   }
 })
 

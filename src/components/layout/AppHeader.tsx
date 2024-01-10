@@ -1,5 +1,6 @@
 import data from '@/data'
-import { DiscordIcon, GithubIcon, PatreonIcon } from '@/lib/icons/brands'
+import { HeartHandshakeIcon } from '@/lib/icons/actions'
+import { DiscordIcon, GithubIcon } from '@/lib/icons/brands'
 import { cn } from '@/lib/utils'
 import { ComponentPropsWithoutRef } from 'react'
 import appLogo from '/logo.png'
@@ -17,13 +18,13 @@ export default function AppHeader({ className, ...props }: AppHeaderProps) {
         <h1>Super Pokédex Tracker</h1>
       </a>
       <div className={styles.links}>
-        <a href={data.patreon_url} target="_blank" rel="noreferrer" title="Patreon">
-          <PatreonIcon data-filled />
+        <a href={data.patreon_url} target="_blank" rel="noreferrer" title="Support this project on Patreon">
+          <HeartHandshakeIcon style={{ strokeWidth: '3px' }} />
         </a>
-        <a href={data.discord_url} target="_blank" rel="noreferrer" title="Discord">
+        <a href={data.discord_url} target="_blank" rel="noreferrer" title="Discord Server">
           <DiscordIcon data-filled />
         </a>
-        <a href={data.github_url} target="_blank" rel="noreferrer" title="GitHub">
+        <a href={data.github_url} target="_blank" rel="noreferrer" title="GitHub Repository">
           <GithubIcon data-filled />
         </a>
       </div>
