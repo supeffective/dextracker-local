@@ -13,7 +13,6 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <div>
           <AppHeader />
-          {/* <ActionToolbar /> */}
           <StickyToolbar />
           <AppMainText />
           <DexTracker />

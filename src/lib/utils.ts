@@ -122,3 +122,11 @@ export function unindentLines(str: string): string {
 export function deepClone<T>(value: T): T {
   return JSON.parse(JSON.stringify(value))
 }
+
+export function isClientSide(): boolean {
+  return typeof window !== 'undefined' && typeof document !== 'undefined'
+}
+
+export function isServerSide(): boolean {
+  return !isClientSide()
+}

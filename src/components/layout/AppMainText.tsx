@@ -1,18 +1,28 @@
+import { readClientCookie, setClientCookie } from '@/lib/cookies'
 import { Close2Icon } from '@/lib/icons'
 import { useState } from 'react'
 import styles from './AppMainText.module.scss'
 
+const dismissCookieName = '_home_main_dismissed_0'
+const dismissCookieValue = 'yes'
+const dismissCookieMaxAge = process.env.NODE_ENV === 'development' ? 60 : 60 * 60 * 24 * 3 // 3 days (prod) or 1 minute (dev)
+
 function AppMainText() {
-  const [showArticle, setShowArticle] = useState(true)
+  const currentCookieValue = readClientCookie(dismissCookieName)
+  console.log('currentCookieValue', currentCookieValue)
+  const [showArticle, setShowArticle] = useState(currentCookieValue !== dismissCookieValue)
+
   const handleDismissArticle = () => {
     setShowArticle(false)
+    setClientCookie(dismissCookieName, dismissCookieValue, dismissCookieMaxAge)
   }
-  const mainProps: React.HTMLAttributes<HTMLElement> = {}
+
   if (!showArticle) {
-    mainProps.hidden = true
+    return null
   }
+
   return (
-    <main className={styles.info} {...mainProps}>
+    <main className={styles.info}>
       <article>
         <button className={styles.dismissTrigger} title="Close" type="button" onClick={handleDismissArticle}>
           <Close2Icon />
