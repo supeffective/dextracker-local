@@ -32,7 +32,6 @@
     "@supeffective/dataset": "^2.1.3",
     "@tanstack/react-query": "^5.17.9",
     "clsx": "^2.1.0",
-    "framer-motion": "^10.18.0",
     "open-props": "^1.6.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

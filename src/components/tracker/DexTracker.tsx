@@ -119,16 +119,11 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
         <h3>Pokémon {currentGame.name}</h3>
         <h4>{currentDex.name}</h4>
       </div>
-      {isFiltered && (
-        <div className={styles.resultPanel}>
-          {dexResults.length} / {fullDexEntries.length} Pokémon ({speciesCount} species, {formCount} forms)
-        </div>
-      )}
-      {!isFiltered && (
-        <div className={styles.resultPanel}>
-          {fullDexEntries.length} Pokémon ({speciesCount} species, {formCount} forms)
-        </div>
-      )}
+      <div className={styles.resultPanel}>
+        Listing {!isFiltered && ' all '} {dexResults.length} Pokémon ({speciesCount} species
+        {formCount > 0 && `, ${formCount} forms`})
+        {isFiltered && <>, filtered out of {fullDexEntries.length} Pokémon & forms.</>}
+      </div>
       <div className={styles.entries}>
         {dexResults.map((entry) => (
           <DexTrackerEntry key={entry.id} dexId={dexId} data={entry} />

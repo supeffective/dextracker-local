@@ -124,3 +124,26 @@
     }
   }
 }
+
+.animSlideDownFade {
+  animation:
+    var(--animation-fade-out) forwards,
+    var(--animation-slide-out-down);
+  animation-timing-function: var(--ease-elastic-in-out-3);
+  animation-duration: 1s;
+}
+
+.animJumpyWalk {
+  box-shadow: 0 0 32px 1px var(--blue-8);
+  z-index: 2;
+  animation:
+    var(--animation-scale-up),
+    var(--animation-pulse),
+    // var(--animation-blink),
+    // var(--animation-ping),
+    // var(--animation-shake-x),
+    // var(--animation-slide-out-up),
+    // var(--animation-scale-up),
+;
+  animation-duration: 500ms;
+}
