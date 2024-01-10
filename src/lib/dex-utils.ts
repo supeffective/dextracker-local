@@ -36,7 +36,7 @@ export function applyDexFilters(pokemon: PokedexSearchIndex, filter?: PokedexSea
   }
 
   if (filter.hideCaught) {
-    const prev = results.length
+    // const prev = results.length
     results = results.filter((pokemon) => {
       const state = pokemon.state
       if (!state) {
@@ -44,7 +44,7 @@ export function applyDexFilters(pokemon: PokedexSearchIndex, filter?: PokedexSea
       }
       return !state.caught
     })
-    console.log('filter.hideCaught', filter.hideCaught, prev, results.length) //, results)
+    // console.log('filter.hideCaught', filter.hideCaught, prev, results.length) //, results)
   }
 
   // if (filter.shinyMode) {

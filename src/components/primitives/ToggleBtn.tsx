@@ -13,10 +13,6 @@ export default function ToggleBtn({ className, value, inverted, children, ...pro
   // const [active, setActive] = useState(initialActive)
 
   const stylesValue = inverted ? !value : value
-  if (props.name) {
-    console.log('ToggleBtn', { value, stylesValue }, props.name)
-  }
-
   const childToRender = Array.isArray(children) ? children[stylesValue ? 1 : 0] : children
 
   return (

@@ -9,7 +9,6 @@ const dismissCookieMaxAge = process.env.NODE_ENV === 'development' ? 60 : 60 * 6
 
 function AppMainText() {
   const currentCookieValue = readClientCookie(dismissCookieName)
-  console.log('currentCookieValue', currentCookieValue)
   const [showArticle, setShowArticle] = useState(currentCookieValue !== dismissCookieValue)
 
   const handleDismissArticle = () => {

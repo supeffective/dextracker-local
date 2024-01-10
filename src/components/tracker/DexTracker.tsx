@@ -19,7 +19,6 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
   const [currentDexState, setCurrentDexState] = useState<PokedexState | null>(null)
 
   useEffect(() => {
-    console.log('rendering - something changed')
     if (fullDexFetch.isSuccess && fullDexFetch.data) {
       const fullDexData = fullDexFetch.data
       const dexState: PokedexState = allDexesState[fullDexData.id] ?? {

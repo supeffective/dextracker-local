@@ -21,10 +21,6 @@ export function DexTrackerEntry({ dexId, data }: { dexId: string; data: PokedexS
     nid: data.nid,
   }
 
-  if (pkmState.caught) {
-    // console.log('caught', pkmState.nid)
-  }
-
   if (pkmState.nid === undefined) {
     throw new Error(`Missing nid for ${data.id}`)
   }
