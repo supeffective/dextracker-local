@@ -2,13 +2,16 @@ import { isClientSide } from './utils'
 
 export function parseClientCookies(): Map<string, string> {
   const cookieMap = new Map<string, string>()
-  if (!isClientSide()) {
+  if (!isClientSide() || !document.cookie) {
     return cookieMap
   }
   const cookies = document.cookie.split(';')
   for (const cookie of cookies) {
+    if (typeof cookie !== 'string') {
+      continue
+    }
     const [name, value] = cookie.split('=')
-    cookieMap.set(name.trim(), value.trim())
+    cookieMap.set(String(name).trim(), String(value).trim())
   }
   return cookieMap
 }
