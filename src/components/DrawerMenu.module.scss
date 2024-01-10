@@ -16,7 +16,8 @@
   border: 2px solid var(--yellow-7);
   box-shadow:
     4px 4px 0 var(--yellow-7),
-    inset 4px 4px 0 transparent;
+    -5px 4px 0 var(--yellow-7),
+    inset 3px 3px 0 transparent;
   font-size: 24px;
   transition: box-shadow 0.15s ease-in-out;
   color: var(--yellow-11);
@@ -26,7 +27,8 @@
     border: 2px solid var(--yellow-7);
     box-shadow:
       4px 4px 0 var(--yellow-7),
-      inset 4px 4px 0 transparent;
+      -5px 4px 0 var(--yellow-7),
+      inset 3px 3px 0 transparent;
   }
 
   img,
@@ -47,7 +49,8 @@
   border: 2px solid var(--yellow-6);
   box-shadow:
     4px 4px 0 transparent,
-    inset 4px 4px 0 var(--yellow-6);
+    -5px 4px 0 transparent,
+    inset 3px 3px 0 var(--yellow-6);
   // transform: translate(3px, 3px);
 }
 
