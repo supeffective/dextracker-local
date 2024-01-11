@@ -6,9 +6,19 @@ import styles from './DrawerMenu.module.scss'
 type DrawerMenuProps = {
   icon?: React.ReactNode
   placement?: 'left' | 'right'
+  buttonName?: string
+  buttonTitle?: string
 } & ComponentPropsWithoutRef<'div'>
 
-export default function DrawerMenu({ className, children, icon, placement, ...props }: DrawerMenuProps) {
+export default function DrawerMenu({
+  className,
+  children,
+  buttonName,
+  buttonTitle,
+  icon,
+  placement,
+  ...props
+}: DrawerMenuProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -23,6 +33,8 @@ export default function DrawerMenu({ className, children, icon, placement, ...pr
       <button
         className={styles.trigger}
         type="button"
+        name={buttonName}
+        title={buttonTitle}
         onClick={() => {
           setIsOpen(!isOpen)
         }}

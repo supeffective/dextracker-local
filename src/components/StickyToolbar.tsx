@@ -53,10 +53,11 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
 
   return (
     <div className={cn(styles.toolbar, className)} {...props}>
-      <DrawerMenu placement="left" icon={gameIcon}>
+      <DrawerMenu placement="left" icon={gameIcon} buttonName="switch-pokedex" buttonTitle="Switch Pokédex">
         <GameSelectField
           className={styles.labelledSelect}
           label="Game: "
+          name="game-select"
           value={state.currentGameId}
           onChange={(e) => {
             state.setCurrentGame(e.target.value)
@@ -65,6 +66,7 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
         <PokedexSelectField
           className={styles.labelledSelect}
           label="Dex: "
+          name="dex-select"
           gameId={state.currentGameId}
           value={state.currentDexId}
           onChange={(e) => {
@@ -85,17 +87,19 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
             // biome-ignore lint/a11y/noAutofocus: <explanation>
             autoFocus
             type="search"
+            name="pokemon-search"
             placeholder="Search Pokémon..."
             defaultValue={filters.searchQuery}
             onChange={handleSearchChange}
           />
         </div>
       </div>
-      <DrawerMenu placement="right" icon={settingsIcon}>
+      <DrawerMenu placement="right" icon={settingsIcon} buttonName="settings" buttonTitle="Settings">
         <label className={styles.flexLabel}>
           <span>Toggle Caught</span>
           <ToggleBtn
             name="toggle-caught"
+            title="Toggle Caught"
             className={cn(styles.toggle, { [styles.disabledBall]: filters.hideCaught })}
             value={filters.hideCaught}
             inverted
@@ -110,6 +114,7 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
           <span>Shiny sprites</span>
           <ToggleBtn
             name="toggle-shiny"
+            title="Toggle Shiny"
             className={cn(styles.toggle)}
             value={filters.shinyMode}
             onToggle={(active) => {
@@ -123,6 +128,7 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
           <span>Toggle forms</span>
           <ToggleBtn
             name="toggle-forms"
+            title="Toggle Forms"
             className={cn(styles.toggle)}
             value={filters.hideForms}
             inverted
@@ -139,6 +145,8 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
           <DownloadTextButton
             filename="super-pokedex-tracker-data.json"
             content={jsonState}
+            name="download-data"
+            title="Download data"
             contentType="application/json"
             variant="yellow"
           >
@@ -151,6 +159,7 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
           variant="yellow"
           label={<span>Upload data</span>}
           accepts=".json"
+          name="upload-data"
           onUpload={handleJsonUpload}
         >
           <UploadIcon data-nofill />

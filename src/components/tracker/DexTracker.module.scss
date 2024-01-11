@@ -33,17 +33,23 @@
   color: var(--blue-10);
   padding-bottom: 1rem;
 
+  h2,
   h3,
   h4 {
     margin: 0;
   }
 
-  h3 {
+  h2 {
     font-size: 1.4rem;
   }
 
-  h4 {
+  h3 {
     font-size: 1.2rem;
+    font-weight: normal;
+  }
+
+  h4 {
+    font-size: 1.1rem;
     font-weight: normal;
   }
 }

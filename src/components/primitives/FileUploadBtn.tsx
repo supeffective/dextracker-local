@@ -5,10 +5,20 @@ type FileUploadBtnProps = {
   label?: React.ReactNode
   accepts?: string
   variant?: 'default' | 'yellow'
+  name?: string
   onUpload?: (fileContents: string) => void
 } & React.ComponentPropsWithoutRef<'label'>
 
-function FileUploadBtn({ label, children, variant, accepts = '.json', onUpload, ...props }: FileUploadBtnProps) {
+function FileUploadBtn({
+  label,
+  children,
+  variant,
+  name = 'upload-data',
+  accepts = '.json',
+  onUpload,
+  title,
+  ...props
+}: FileUploadBtnProps) {
   const fileInputRef = React.useRef<HTMLInputElement>(null)
 
   const handleFileSelectAndUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +48,7 @@ function FileUploadBtn({ label, children, variant, accepts = '.json', onUpload, 
     <label {...props}>
       {label}
       <input ref={fileInputRef} hidden type="file" onChange={handleFileSelectAndUpload} accept={accepts} />
-      <Btn type="button" onClick={triggerFileInput} variant={variant}>
+      <Btn title={title} type="button" name={name} onClick={triggerFileInput} variant={variant}>
         {children}
       </Btn>
     </label>

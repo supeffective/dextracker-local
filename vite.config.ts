@@ -1,6 +1,7 @@
 import path from 'node:path'
 import react from '@vitejs/plugin-react-swc'
 import { PluginOption, defineConfig } from 'vite'
+import { viteSingleFile } from 'vite-plugin-singlefile'
 // @ts-ignore
 import data from './src/data'
 
@@ -18,10 +19,19 @@ const htmlTransformPlugin: PluginOption = {
 
     return transformedHtml
   },
+  buildEnd() {
+    console.log('Build complete')
+  },
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: Needed to avoid TS error "Excessive stack depth comparing types"
-const plugins: PluginOption[] = [react() as any, htmlTransformPlugin]
+const plugins: PluginOption[] = [
+  // biome-ignore lint/suspicious/noExplicitAny: Needed to avoid TS error "Excessive stack depth comparing types"
+  react() as any,
+  htmlTransformPlugin,
+  viteSingleFile({
+    inlinePattern: [],
+  }),
+]
 
 // https://vitejs.dev/config/
 export default defineConfig({

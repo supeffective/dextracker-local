@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, useId } from 'react'
 import styles from './SelectField.module.scss'
 
 export type SelectFieldOption = { value: string; label?: string }
@@ -20,7 +20,8 @@ export const OPTIONS_ERROR: SelectFieldOption[] = [{ value: '', label: '~Loading
 export const OPTIONS_DATA_NOT_LOADED: SelectFieldOption[] = [{ value: '', label: '~Data not Loaded~' }]
 export const OPTIONS_NO_DATA: SelectFieldOption[] = [{ value: '', label: '~No Data~' }]
 
-export default function SelectField({ className, options, value, ...props }: SelectFieldProps) {
+export default function SelectField({ className, options, value, label, ...props }: SelectFieldProps) {
+  const fieldId = useId()
   const strValue = value === undefined ? '' : String(value)
   const optionsToRender = options?.map((option) => (
     <option key={option.value} value={option.value}>
@@ -28,13 +29,17 @@ export default function SelectField({ className, options, value, ...props }: Sel
     </option>
   ))
 
-  const labelElement = props.label ? <label className={styles.label}>{props.label}</label> : null
+  const labelElement = label ? (
+    <label htmlFor={fieldId} className={styles.label}>
+      {label}
+    </label>
+  ) : null
   const selectedOption = options?.find((option) => option.value === strValue)
 
   return (
     <div className={cn(styles.box, className)} title={selectedOption?.label}>
       {labelElement}
-      <select className={styles.field} value={strValue} {...props}>
+      <select id={fieldId} className={styles.field} value={strValue} {...props}>
         {optionsToRender}
       </select>
     </div>

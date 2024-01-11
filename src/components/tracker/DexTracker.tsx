@@ -116,8 +116,8 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
   return (
     <div className={classes} {...props}>
       <div className={styles.dexTitle}>
-        <h3>Pokémon {currentGame.name}</h3>
-        <h4>{currentDex.name}</h4>
+        <h2>Pokémon {currentGame.name}</h2>
+        <h3>{currentDex.name}</h3>
       </div>
       <div className={styles.resultPanel}>
         Listing {!isFiltered && ' all '} {dexResults.length} Pokémon ({speciesCount} species
