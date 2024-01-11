@@ -8,6 +8,7 @@ import data from './src/data'
 const htmlTransformPlugin: PluginOption = {
   name: 'html-replace-vars',
   transformIndexHtml(html) {
+    data.APP_BASE_URL = process.env.NODE_ENV === 'production' ? '/pokedex-tracker/' : '/'
     const dataVars = Object.entries(data)
 
     let transformedHtml = html

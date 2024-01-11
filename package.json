@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc && vite build",
-    "build:production": "vite build --base=/pokedex-tracker/ && rm -rf _site && mkdir -p _site && mv ./dist/* ./_site",
+    "build:production": "NODE_ENV=production && vite build --base=/pokedex-tracker/ && rm -rf _site && mkdir -p _site && mv ./dist/* ./_site",
     "codegen": "bun codegen:svg",
     "codegen:svg": "rm -rf src/lib/icons && svgr --no-prettier --out-dir='src/lib/icons' --typescript --icon=24 --ext=tsx ./src/assets/icons",
     "dev": "vite --port=4930 --host",
