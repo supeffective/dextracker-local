@@ -9,6 +9,7 @@ const data = {
   WEBAPP_DESCRIPTION:
     'Online Pokédex Tracker that saves your progress locally, without the need for an account. Developed by the creators of SuperEffective.gg.',
   // URLs:
+  APP_BASE_URL: import.meta.env.BASE_URL,
   cdn_dataset_url: 'https://cdn.supeffective.com/dataset',
   cdn_assets_url: 'https://cdn.supeffective.com/assets',
   github_url: 'https://github.com/itsjavi/pokedex-tracker',
