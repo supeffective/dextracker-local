@@ -1,3 +1,4 @@
+import useInfiniteScrollList from '@/hooks/useInfiniteScrollList'
 import { countSpeciesAndForms } from '@/lib/dex-utils'
 import { cn } from '@/lib/utils'
 import { createFilteredSearchIndex } from '@/stores/actions/filterActions'
@@ -5,18 +6,21 @@ import { getDexSourceCodeUrl, useCurrentPokedexData } from '@/stores/cdn'
 import { PokedexState } from '@/stores/state/types'
 import useDexTrackerStore, { useCurrentGameAndDex } from '@/stores/useDexTrackerStore'
 import usePokedexSearchStore from '@/stores/usePokedexSearchStore'
-import { ComponentPropsWithoutRef, useEffect, useState } from 'react'
+import { ComponentPropsWithoutRef, useEffect, useRef, useState } from 'react'
 import styles from './DexTracker.module.scss'
-import { DexTrackerEntry } from './DexTrackerEntry'
+import DexTrackerEntry from './DexTrackerEntry'
 
-type DexTrackerProps = {} & Omit<ComponentPropsWithoutRef<'div'>, 'children'>
+type DexTrackerProps = {
+  infiniteScrollSize?: number
+} & Omit<ComponentPropsWithoutRef<'div'>, 'children'>
 
-export default function DexTracker({ className, ...props }: DexTrackerProps) {
+export default function DexTracker({ className, infiniteScrollSize = 25, ...props }: DexTrackerProps) {
   const allDexesState = useDexTrackerStore((store) => store.dexes)
   const searchStore = usePokedexSearchStore((store) => store)
   const { currentGame, currentDex } = useCurrentGameAndDex()
   const fullDexFetch = useCurrentPokedexData()
-  const [currentDexState, setCurrentDexState] = useState<PokedexState | null>(null)
+  const [currentDexState, setCurrentDexState] = useState<PokedexState | undefined>(undefined)
+  const lastElementRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     if (fullDexFetch.isSuccess && fullDexFetch.data) {
@@ -32,6 +36,13 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
   const isLoading = fullDexFetch.isLoading
   const isError = fullDexFetch.isError
   const isSuccess = fullDexFetch.isSuccess
+
+  const dexId = fullDexFetch.data?.id
+  const dexRegion = fullDexFetch.data?.region
+  const fullDexEntries = fullDexFetch.data?.entries
+
+  const filteredDexResults = createFilteredSearchIndex(fullDexFetch.data, currentDexState, searchStore.filters)
+  const visibleDexResults = useInfiniteScrollList(filteredDexResults, { chunkSize: infiniteScrollSize, lastElementRef })
 
   const classes = cn(
     styles.tracker,
@@ -67,7 +78,7 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
     )
   }
 
-  if (!fullDexFetch.data) {
+  if (!fullDexFetch.data || !dexId || !dexRegion || !fullDexEntries) {
     return (
       <div className={cn(classes, styles.empty)} {...props}>
         <div className={styles.resultPanel}>No Pokédex is loaded...</div>
@@ -75,13 +86,7 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
     )
   }
 
-  const dexRegion = fullDexFetch.data.region
-  const dexId = fullDexFetch.data.id
-  const fullDexEntries = fullDexFetch.data.entries
-
-  const dexResults = createFilteredSearchIndex(fullDexFetch.data, currentDexState, searchStore.filters)
-
-  if (dexResults.length === 0) {
+  if (visibleDexResults.length === 0) {
     return (
       <div className={cn(classes, styles.empty)} {...props}>
         <div className={styles.resultPanel}>
@@ -101,9 +106,9 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
   }
 
   // const [speciesCountTotal, formCountTotal] = countSpeciesAndForms(entries)
-  const [speciesCount, formCount] = countSpeciesAndForms(dexResults)
+  const [speciesCount, formCount] = countSpeciesAndForms(filteredDexResults)
 
-  if (dexResults.length === 0) {
+  if (filteredDexResults.length === 0) {
     return (
       <div className={cn(classes, styles.empty)} {...props}>
         <div className={styles.resultPanel}>No results found</div>
@@ -111,7 +116,7 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
     )
   }
 
-  const isFiltered = dexResults.length !== fullDexEntries.length
+  const isFiltered = filteredDexResults.length !== fullDexEntries.length
 
   return (
     <div className={classes} {...props}>
@@ -120,14 +125,25 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
         <h3>{currentDex.name}</h3>
       </div>
       <div className={styles.resultPanel}>
-        Listing {!isFiltered && ' all '} {dexResults.length} Pokémon ({speciesCount} species
+        Listing {!isFiltered && ' all '} {filteredDexResults.length} Pokémon ({speciesCount} species
         {formCount > 0 && `, ${formCount} forms`})
         {isFiltered && <>, filtered out of {fullDexEntries.length} Pokémon & forms.</>}
       </div>
       <div className={styles.entries}>
-        {dexResults.map((entry, index) => (
-          <DexTrackerEntry index={index} total={dexResults.length} key={entry.id} dexId={dexId} data={entry} />
-        ))}
+        {visibleDexResults.map((entry, index) => {
+          const isLast = index === visibleDexResults.length - 1
+          const ref = isLast ? lastElementRef : null
+          return (
+            <DexTrackerEntry
+              ref={ref}
+              index={index}
+              total={visibleDexResults.length}
+              key={entry.id}
+              dexId={dexId}
+              data={entry}
+            />
+          )
+        })}
       </div>
     </div>
   )

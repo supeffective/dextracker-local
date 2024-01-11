@@ -7,12 +7,17 @@ import { PokedexSearchActions } from './types'
 // const dexSearchIndexMap = new Map<string, PokedexSearchIndex>()
 
 export function createFilteredSearchIndex(
-  dex: Pokedex,
-  dexState: PokedexState,
+  dex: Pokedex | undefined,
+  dexState: PokedexState | undefined,
   filters?: PokedexSearchStateFilter,
 ): PokedexSearchIndex {
+  if (!dex || !dexState) {
+    return []
+  }
+
   const entries = expandPokedexEntries(dex.entries, dexState)
 
+  // WARNING! THIS approach caused the entries not to be rerendered:
   // if (!dexSearchIndexMap.has(dex.id)) {
   //   dexSearchIndexMap.set(dex.id, createPokemonSearchIndex<ExpandedPokedexEntry>(entries, ['dexNum']))
   // }

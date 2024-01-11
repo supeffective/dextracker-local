@@ -4,16 +4,16 @@ import { PokedexSearchIndexItem } from '@/stores/dataset'
 import { PokedexEntryState } from '@/stores/state/types'
 import useDexTrackerStore from '@/stores/useDexTrackerStore'
 import usePokedexSearchStore from '@/stores/usePokedexSearchStore'
-import { useState } from 'react'
+import { ComponentPropsWithRef, forwardRef, useState } from 'react'
 import PokemonImg from '../PokemonImg'
 import styles from './DexTrackerEntry.module.scss'
 
-export function DexTrackerEntry({
-  index,
-  total,
-  dexId,
-  data,
-}: { index: number; total: number; dexId: string; data: PokedexSearchIndexItem }) {
+type DexTrackerEntryProps = { index: number; total: number; dexId: string; data: PokedexSearchIndexItem } & Omit<
+  ComponentPropsWithRef<'div'>,
+  'children'
+>
+
+function DexTrackerEntryNoRef({ index, total, dexId, data, ...props }: DexTrackerEntryProps) {
   const searchFilters = usePokedexSearchStore((store) => store.filters)
   const updatePokemonEntry = useDexTrackerStore((store) => store.updateDexPokemon)
   const zeroPadDexNum = data.dexNum?.toString().padStart(4, '0')
@@ -49,7 +49,7 @@ export function DexTrackerEntry({
   const layoutShiftVisibleItems = 20
   const shouldLazyLoad = index >= layoutShiftVisibleItems && total > layoutShiftVisibleItems
 
-  const entryElement = (
+  const entryChildren = (
     <>
       <div className={styles.entryInfo}>
         <div className={styles.entryHeader}>{`#${zeroPadDexNum ?? '--'}`}</div>
@@ -105,5 +105,19 @@ export function DexTrackerEntry({
     </>
   )
 
-  return <div className={cn(styles.entry, ...animationClasses)}>{entryElement}</div>
+  return (
+    <div className={cn(styles.entry, ...animationClasses)} {...props}>
+      {entryChildren}
+    </div>
+  )
 }
+
+const DexTrackerEntry = forwardRef<HTMLDivElement, DexTrackerEntryProps>((props, ref) => {
+  return (
+    <div className={cn(styles.entryWrapper)} ref={ref}>
+      <DexTrackerEntryNoRef {...props} />
+    </div>
+  )
+})
+
+export default DexTrackerEntry

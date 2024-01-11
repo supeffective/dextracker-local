@@ -1,5 +1,5 @@
-import react from '@vitejs/plugin-react-swc'
 import path from 'node:path'
+import react from '@vitejs/plugin-react-swc'
 import { PluginOption, defineConfig } from 'vite'
 import dataJson from './src/config.json'
 import htmlInlineAssets from './vite/vite-plugin-html-inline-assets'
