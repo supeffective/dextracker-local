@@ -1,8 +1,9 @@
+import useFetchCurrentPokedexData from '@/hooks/useCurrentPokedexData'
 import useInfiniteScrollList from '@/hooks/useInfiniteScrollList'
+import { getDexSourceCodeUrl } from '@/lib/cdn'
 import { countSpeciesAndForms } from '@/lib/dex-utils'
 import { cn } from '@/lib/utils'
 import { createFilteredSearchIndex } from '@/stores/actions/filterActions'
-import { getDexSourceCodeUrl, useCurrentPokedexData } from '@/stores/cdn'
 import { PokedexState } from '@/stores/state/types'
 import useDexTrackerStore, { useCurrentGameAndDex } from '@/stores/useDexTrackerStore'
 import usePokedexSearchStore from '@/stores/usePokedexSearchStore'
@@ -18,7 +19,7 @@ export default function DexTracker({ className, infiniteScrollSize = 25, ...prop
   const allDexesState = useDexTrackerStore((store) => store.dexes)
   const searchStore = usePokedexSearchStore((store) => store)
   const { currentGame, currentDex } = useCurrentGameAndDex()
-  const fullDexFetch = useCurrentPokedexData()
+  const fullDexFetch = useFetchCurrentPokedexData()
   const [currentDexState, setCurrentDexState] = useState<PokedexState | undefined>(undefined)
   const lastElementRef = useRef<HTMLDivElement | null>(null)
 
