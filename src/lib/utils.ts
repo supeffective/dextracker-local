@@ -1,5 +1,12 @@
 import clsx, { ClassValue } from 'clsx'
 
+export const APP_BASE_URL = import.meta.env.BASE_URL
+
+export function assetUrl(path: string): string {
+  const normalizedPath = path.replace(/^\//, '')
+  return `${APP_BASE_URL}${normalizedPath}`
+}
+
 export function cn(...args: ClassValue[]): string {
   return clsx(...cnSanitizedArgs(args))
 }
