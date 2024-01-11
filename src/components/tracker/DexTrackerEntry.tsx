@@ -8,18 +8,12 @@ import { useState } from 'react'
 import PokemonImg from '../PokemonImg'
 import styles from './DexTrackerEntry.module.scss'
 
-// const swirlOutAnimation = {
-//   visible: { opacity: 1, scale: 1, rotate: 0 },
-//   hidden: { opacity: 0, scale: 0, rotate: 180, transition: { duration: 0.5 } },
-// }
-
-// const bounceAnimation = {
-//   initial: { scale: 0.5, opacity: 0 },
-//   animate: { scale: 1, opacity: 1, transition: { type: 'spring', stiffness: 260, damping: 20 } },
-//   exit: { scale: 0.5, opacity: 0, transition: { duration: 0.3 } },
-// }
-
-export function DexTrackerEntry({ dexId, data }: { dexId: string; data: PokedexSearchIndexItem }) {
+export function DexTrackerEntry({
+  index,
+  total,
+  dexId,
+  data,
+}: { index: number; total: number; dexId: string; data: PokedexSearchIndexItem }) {
   const searchFilters = usePokedexSearchStore((store) => store.filters)
   const updatePokemonEntry = useDexTrackerStore((store) => store.updateDexPokemon)
   const zeroPadDexNum = data.dexNum?.toString().padStart(4, '0')
@@ -52,17 +46,19 @@ export function DexTrackerEntry({ dexId, data }: { dexId: string; data: PokedexS
     })
   }
 
-  // const handleAnimationComplete = () => {
-  //   // Update the other state here
-  //   // setOtherState(true)
-  // }
+  const layoutShiftVisibleItems = 20
+  const shouldLazyLoad = index >= layoutShiftVisibleItems && total > layoutShiftVisibleItems
 
   const entryElement = (
     <>
       <div className={styles.entryInfo}>
         <div className={styles.entryHeader}>{`#${zeroPadDexNum ?? '--'}`}</div>
         <div className={styles.sprite}>
-          <PokemonImg pokeNid={data.nid} shiny={pkmState.shiny || searchFilters?.shinyMode} />
+          <PokemonImg
+            loading={shouldLazyLoad ? 'lazy' : 'eager'}
+            pokeNid={data.nid}
+            shiny={pkmState.shiny || searchFilters?.shinyMode}
+          />
         </div>
       </div>
       <div className={styles.entryName}>{data.name ?? `"${data.id}"`}</div>

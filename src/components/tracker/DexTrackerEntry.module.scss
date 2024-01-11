@@ -66,10 +66,15 @@
   padding: 2px;
   border-radius: 3px;
   background-color: var(--blue-1);
+  width: 128px;
+  height: 128px;
+  aspect-ratio: 1;
+  max-width: 100%;
 
   img {
     width: 100%;
-    content-visibility: auto;
+    aspect-ratio: 1;
+    // content-visibility: auto;
     filter: drop-shadow(3px 3px 0px var(--blue-10));
   }
 }

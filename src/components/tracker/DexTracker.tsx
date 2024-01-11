@@ -125,8 +125,8 @@ export default function DexTracker({ className, ...props }: DexTrackerProps) {
         {isFiltered && <>, filtered out of {fullDexEntries.length} Pokémon & forms.</>}
       </div>
       <div className={styles.entries}>
-        {dexResults.map((entry) => (
-          <DexTrackerEntry key={entry.id} dexId={dexId} data={entry} />
+        {dexResults.map((entry, index) => (
+          <DexTrackerEntry index={index} total={dexResults.length} key={entry.id} dexId={dexId} data={entry} />
         ))}
       </div>
     </div>
