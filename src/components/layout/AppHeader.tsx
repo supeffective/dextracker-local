@@ -1,7 +1,7 @@
 import data from '@/data'
 import { HeartHandshakeIcon } from '@/lib/icons/actions'
 import { DiscordIcon, GithubIcon } from '@/lib/icons/brands'
-import { assetUrl, cn } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import { ComponentPropsWithoutRef } from 'react'
 import styles from './AppHeader.module.scss'
 
@@ -13,7 +13,7 @@ export default function AppHeader({ className, ...props }: AppHeaderProps) {
   return (
     <header className={cn(styles.header, className)} {...props}>
       <a className={styles.title} href={import.meta.env.BASE_URL}>
-        <img src={assetUrl('logo.png')} alt="" />
+        <img src="/pokedex-tracker/logo.png" alt="" />
         <h1>Super Pokédex Tracker</h1>
       </a>
       <div className={styles.links}>

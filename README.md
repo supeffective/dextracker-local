@@ -32,6 +32,13 @@ worry about your data being stored in an external server.
 This webapp is just a Pokédex tracker, not a Living Dex Box Organizer. If you're looking for a Living Dex Box Organizer
 check out our main, cloud based project: [supereffective.gg](https://supereffective.gg/).
 
+## TODO
+
+- [ ] Put filters back together with the main state, or export both stores in the JSON
+- [ ] Add a "Mark all as seen" toggle button
+- [ ] Add a "Mark all as caught" toggle button
+- [ ] Add a "Mark all as shiny" toggle button
+
 ## Tech Stack
 
 - Bun as a JS runtime, bundler and package manager
