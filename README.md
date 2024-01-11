@@ -34,6 +34,8 @@ check out our main, cloud based project: [supereffective.gg](https://supereffect
 
 ## TODO
 
+- [ ] Import all assets and data, host them in the final build (stop using the CDN), and optimize them (at 180px, webp)
+      to achieve a 100% Lighthouse score.
 - [ ] Add placeholders to avoid Cumulative Layout Shifts (CLS)
 - [ ] Add homepage dashboard
 - [ ] Add React router to navigate between dexes (hash router)
