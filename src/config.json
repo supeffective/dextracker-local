@@ -1,0 +1,20 @@
+{
+  "homepage": "https://itsjavi.com/pokedex-tracker",
+  "version": "1.0.0-RC.1",
+  "title": "Super Pokédex Tracker",
+
+  "window_title": "Super Pokédex Tracker - Track the progress of any Pokémon game",
+  "webapp_name": "Super Pokédex Tracker",
+  "webapp_short_name": "SuperPokédexTracker",
+  "webapp_theme_color": "#1C7ED6",
+  "meta_description": "Online Pokédex Tracker that saves your progress locally, without the need for an account. Developed by the creators of SuperEffective.gg.",
+
+  "cdn_dataset_url": "https://cdn.supeffective.com/dataset",
+  "cdn_assets_url": "https://cdn.supeffective.com/assets",
+  "github_url": "https://github.com/itsjavi/pokedex-tracker",
+  "patreon_url": "https://www.patreon.com/supereffective",
+  "discord_url": "https://discord.gg/3fRXQFtrkN",
+
+  "twitter_site": "supereffectiv",
+  "twitter_creator": "itsjavidotcom"
+}

@@ -1,4 +1,4 @@
-import data from '@/data'
+import config from '@/config'
 import { FileDownloadIcon, SettingsIcon, UploadIcon } from '@/lib/icons/actions'
 import { GithubIcon } from '@/lib/icons/brands'
 import { PokeballIcon, ShinyIcon } from '@/lib/icons/gamegui'
@@ -167,7 +167,7 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
         <hr />
         <div className={styles.appVersion}>
           <b>Super Pokédex Tracker </b>
-          <span>v{data.version}</span>
+          <span>v{config.version}</span>
         </div>
       </DrawerMenu>
     </div>

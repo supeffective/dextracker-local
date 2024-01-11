@@ -1,10 +1,10 @@
-import data from '@/data'
+import config from '@/config'
 import { Game, Pokedex, PokedexIndexItem, Pokemon, PokemonIndexItem } from '@supeffective/dataset'
 import { useQuery } from '@tanstack/react-query'
 import useDexTrackerStore from './useDexTrackerStore'
 
 export function useDatasetCdn<T>(filePath: string, enabled = true) {
-  const fullUrl = `${data.cdn_dataset_url}/${filePath}.min.json`
+  const fullUrl = `${config.cdn_dataset_url}/${filePath}.min.json`
 
   return useQuery<T>({
     queryKey: [`cdn-${filePath}`],

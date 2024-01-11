@@ -34,6 +34,9 @@ check out our main, cloud based project: [supereffective.gg](https://supereffect
 
 ## TODO
 
+- [ ] Add placeholders to avoid Cumulative Layout Shifts (CLS)
+- [ ] Add homepage dashboard
+- [ ] Add React router to navigate between dexes (hash router)
 - [ ] Put filters back together with the main state, or export both stores in the JSON
 - [ ] Add a "Mark all as seen" toggle button
 - [ ] Add a "Mark all as caught" toggle button

@@ -1,4 +1,4 @@
-import data from '@/data'
+import config from '@/config'
 import { cn } from '@/lib/utils'
 import { ComponentPropsWithoutRef } from 'react'
 import styles from './AppFooter.module.scss'
@@ -10,7 +10,7 @@ export default function AppFooter({ className, ...props }: AppFooterProps) {
     <footer data-noselect className={cn(styles.footer, className)} {...props}>
       <i>
         <b>Super Pokédex Tracker </b>
-        <span>v{data.version}</span>
+        <span>v{config.version}</span>
       </i>
       <span>&copy; 2024 Javier Aguilar, supereffective.gg</span>
     </footer>

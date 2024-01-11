@@ -1,37 +1,17 @@
 import path from 'node:path'
 import react from '@vitejs/plugin-react-swc'
 import { PluginOption, defineConfig } from 'vite'
-import { viteSingleFile } from 'vite-plugin-singlefile'
-// @ts-ignore
-import data from './src/data'
+import dataJson from './src/config.json'
+import htmlInlineAssets from './vite/vite-plugin-html-inline-assets'
+import htmlReplaceVars from './vite/vite-plugin-html-replace-vars'
 
-const htmlTransformPlugin: PluginOption = {
-  name: 'html-replace-vars',
-  transformIndexHtml(html) {
-    data.APP_BASE_URL = process.env.NODE_ENV === 'production' ? '/pokedex-tracker/' : '/'
-    const dataVars = Object.entries(data)
-
-    let transformedHtml = html
-    for (const [key, value] of dataVars) {
-      transformedHtml = transformedHtml
-        .replace(new RegExp(`%% ${key} %%`, 'g'), value)
-        .replace(new RegExp(`%%${key}%%`, 'g'), value)
-    }
-
-    return transformedHtml
-  },
-  buildEnd() {
-    console.log('Build complete')
-  },
-}
+// Casting needed to avoid TS error "Excessive stack depth comparing types". This might be some circular ref. issue.
+const reactPlugin = react() as PluginOption
 
 const plugins: PluginOption[] = [
-  // biome-ignore lint/suspicious/noExplicitAny: Needed to avoid TS error "Excessive stack depth comparing types"
-  react() as any,
-  htmlTransformPlugin,
-  viteSingleFile({
-    inlinePattern: [],
-  }),
+  reactPlugin,
+  htmlReplaceVars({ data: dataJson }),
+  htmlInlineAssets({ deleteInlinedFiles: true }),
 ]
 
 // https://vitejs.dev/config/

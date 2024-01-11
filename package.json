@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "rm -rf dist/* && vite build",
     "build:production": "NODE_ENV=production && vite build --base=/pokedex-tracker/ && rm -rf _site && mkdir -p _site && mv ./dist/* ./_site",
     "codegen": "bun codegen:svg",
     "codegen:svg": "rm -rf src/lib/icons && svgr --no-prettier --out-dir='src/lib/icons' --typescript --icon=24 --ext=tsx ./src/assets/icons",
@@ -52,10 +52,10 @@
     "postcss-import-ext-glob": "^2.0.1",
     "postcss-jit-props": "^1.0.4",
     "prettier": "^3.1.1",
+    "rollup": "^4.9.4",
     "sass": "^1.69.7",
     "sort-package-json": "^2.6.0",
     "typescript": "^5.3.3",
-    "vite": "^5.0.10",
-    "vite-plugin-singlefile": "^0.13.5"
+    "vite": "^5.0.10"
   }
 }
