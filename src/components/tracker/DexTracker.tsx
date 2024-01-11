@@ -1,4 +1,4 @@
-import useFetchCurrentPokedexData from '@/hooks/useCurrentPokedexData'
+import useFetchCurrentPokedexData from '@/hooks/useFetchCurrentPokedexData'
 import useInfiniteScrollList from '@/hooks/useInfiniteScrollList'
 import { getDexSourceCodeUrl } from '@/lib/cdn'
 import { countSpeciesAndForms } from '@/lib/dex-utils'
