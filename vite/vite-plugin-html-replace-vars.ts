@@ -1,4 +1,4 @@
-import { PluginOption } from 'vite'
+import { Plugin } from 'vite'
 // import dataJson from '../src/data.json'
 
 type HtmlReplaceVarsOptions = {
@@ -6,8 +6,8 @@ type HtmlReplaceVarsOptions = {
   delimiters?: [start: string, end: string]
 }
 
-export default function htmlReplaceVars({ data, delimiters = ['{{', '}}'] }: HtmlReplaceVarsOptions): PluginOption {
-  const htmlReplaceVarsPlugin: PluginOption = {
+export default function htmlReplaceVars({ data, delimiters = ['{{', '}}'] }: HtmlReplaceVarsOptions): Plugin {
+  const htmlReplaceVarsPlugin: Plugin = {
     name: 'vite:html-replace-vars',
     transformIndexHtml(html) {
       const dataVars = Object.entries(data)

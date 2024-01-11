@@ -7,20 +7,26 @@ export type HtmlInlineAssetsOptions = {
   // Optionally, delete inlined assets preventing them from being in the final dist output.
   //
   // @default true
-  deleteInlinedFiles?: boolean
+  cleanupInlineFiles?: boolean
+  /**
+   * The maximum size of an asset to inline, in bytes.
+   */
+  maxInlineAssetSize?: number
 }
 
-const defaultConfig: HtmlInlineAssetsOptions = {
-  deleteInlinedFiles: true,
+const defaultConfig: Required<HtmlInlineAssetsOptions> = {
+  cleanupInlineFiles: true,
+  maxInlineAssetSize: 2 * 1024 * 1024, // 2MB
 }
 
 export default function htmlInlineAssets({
-  deleteInlinedFiles = true,
+  cleanupInlineFiles = defaultConfig.cleanupInlineFiles,
+  maxInlineAssetSize = defaultConfig.maxInlineAssetSize, // 2MB
 }: HtmlInlineAssetsOptions = defaultConfig): Plugin {
   return {
     name: 'vite:html-inline-assets',
     enforce: 'post',
-    config: _prepareBuildConfig,
+    config: (config) => _prepareBuildConfig(config, maxInlineAssetSize),
     buildEnd() {
       console.log('[htmlInlineAssets] Build complete')
     },
@@ -70,7 +76,7 @@ export default function htmlInlineAssets({
         htmlChunk.source = replacedHtml
       }
 
-      if (deleteInlinedFiles) {
+      if (cleanupInlineFiles) {
         for (const filename of filesToDelete) {
           // avoids storing the file in the output directory
           delete outputBundle[filename]
@@ -128,16 +134,26 @@ function _warnNotInlined(filename: string, reason?: string) {
 }
 
 // Modifies the Vite build config to make this plugin work well.
-function _prepareBuildConfig(config: UserConfig) {
+function _prepareBuildConfig(config: UserConfig, maxInlineAssetSize: number) {
   if (!config.build) {
     config.build = {}
   }
 
+  if (!config.build.terserOptions) {
+    config.build.terserOptions = {}
+  }
+
+  if (!config.build.terserOptions.format) {
+    config.build.terserOptions.format = {}
+  }
+
+  config.build.terserOptions.format.comments = false
+
   // Ensures that even very large assets are inlined in your JavaScript.
-  config.build.assetsInlineLimit = 100000000
+  config.build.assetsInlineLimit = maxInlineAssetSize
 
   // Avoid warnings about large chunks.
-  config.build.chunkSizeWarningLimit = 100000000
+  config.build.chunkSizeWarningLimit = maxInlineAssetSize
 
   // Emit all CSS as a single file, which this plugin can then inline.
   config.build.cssCodeSplit = false
