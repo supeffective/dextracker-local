@@ -28,7 +28,7 @@ function AppMainText() {
         </button>
         Online Pokédex Tracker that saves your progress locally, without the need for an account.
         <p>
-          Developed by the creators of{' '}
+          Developed by the creator of{' '}
           <a href="https://supereffective.gg" target="_blank" rel="noreferrer">
             SuperEffective.gg
           </a>

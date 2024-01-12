@@ -4,11 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "rm -rf dist/* && vite build",
+    "build": "rm -rf dist/* && vite build --base=/pokedex-tracker/",
     "build:production": "NODE_ENV=production && vite build --base=/pokedex-tracker/ && rm -rf _site && mkdir -p _site && mv ./dist/* ./_site",
     "codegen": "bun codegen:svg",
     "codegen:svg": "rm -rf src/lib/icons && svgr --no-prettier --out-dir='src/lib/icons' --typescript --icon=24 --ext=tsx ./src/assets/icons",
-    "dev": "vite --port=4930 --host",
+    "dev": "vite --port=4930 --host --base=/pokedex-tracker/",
     "format": "bun lint:fix",
     "lint": "tsc --noEmit && bun lint-prettier && bun lint-biome",
     "lint-biome": "biome lint . --max-diagnostics 50",
@@ -26,8 +26,8 @@
     "make:optimized-data": "bun src/scripts/make-optimized-data.ts && bun lint:fix-prettier",
     "make:optimized-images": "bun src/scripts/make-optimized-images.ts",
     "precommit": "CI=true bun test && CI=true bun lint",
-    "preview": "vite preview",
-    "start": "vite preview",
+    "preview": "bun run start",
+    "start": "vite preview --base=/pokedex-tracker/",
     "test": "bun test --env=jsdom",
     "test:coverage": "bun test --coverage && open coverage/index.html"
   },
@@ -62,6 +62,7 @@
     "sharp": "^0.33.1",
     "sort-package-json": "^2.6.0",
     "typescript": "^5.3.3",
-    "vite": "^5.0.10"
+    "vite": "^5.0.10",
+    "vite-plugin-pwa": "^0.17.4"
   }
 }

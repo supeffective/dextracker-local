@@ -7,7 +7,7 @@
   "webapp_name": "Super Pokédex Tracker",
   "webapp_short_name": "SuperPokédexTracker",
   "webapp_theme_color": "#1C7ED6",
-  "meta_description": "Online Pokédex Tracker that saves your progress locally, without the need for an account. Developed by the creators of SuperEffective.gg.",
+  "meta_description": "Online Pokédex Tracker that saves your progress locally, without the need for an account. Developed by the creator of SuperEffective.gg.",
 
   "cdn_base_url": "https://cdn.supeffective.com",
   "cdn_dataset_url": "https://cdn.supeffective.com/dataset",
