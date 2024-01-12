@@ -1,26 +1,33 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import StickyToolbar from './components/StickyToolbar'
-import AppFooter from './components/layout/AppFooter'
-import AppHeader from './components/layout/AppHeader'
 import AppMainText from './components/layout/AppMainText'
+import AppSkeleton from './components/layout/AppSkeleton'
+import ErrorBoundary from './components/layout/ErrorBoundary'
 import DexTracker from './components/tracker/DexTracker'
 
 const queryClient = new QueryClient()
 
-function App() {
-  // TODO: if bundling pokemon.json data is too much, create a provider that loads it using fetch, asynchronously
+function AppErrorFallback() {
   return (
-    <div id="app">
-      <QueryClientProvider client={queryClient}>
-        <div>
-          <AppHeader />
+    <AppSkeleton>
+      <div className="error-panel">
+        <h1>Something went wrong. Check the console for more info.</h1>
+      </div>
+    </AppSkeleton>
+  )
+}
+
+function App() {
+  return (
+    <ErrorBoundary fallback={<AppErrorFallback />}>
+      <AppSkeleton>
+        <QueryClientProvider client={queryClient}>
           <StickyToolbar />
           <AppMainText />
           <DexTracker />
-        </div>
-        <AppFooter />
-      </QueryClientProvider>
-    </div>
+        </QueryClientProvider>
+      </AppSkeleton>
+    </ErrorBoundary>
   )
 }
 

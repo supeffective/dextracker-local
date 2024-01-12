@@ -4,14 +4,17 @@ import { PokeTypeId } from '@supeffective/dataset'
 
 export type TrGameType = 'game' | 'dlc' | 'set' | 'superset'
 
+export type TrPokedexBasicInfo = {
+  id: string
+  name: string
+  region: string | null
+}
+
 export type TrGame = {
   id: string
   name: string
   type: TrGameType | string
-  pokedexes: Array<{
-    id: string
-    name: string
-  }>
+  pokedexes: Array<TrPokedexBasicInfo>
 }
 
 export type TrPokedexEntry = {

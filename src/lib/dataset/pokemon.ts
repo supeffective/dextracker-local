@@ -88,7 +88,10 @@ function _generatePokemonSearchableText(pkm: TrPokemon): string {
     slug,
     `:region:${region}`,
     `:color:${color}`,
-    types.filter(Boolean).map((type) => `:type:${type}`),
+    types
+      .filter(Boolean)
+      .map((type) => `:type:${type}`)
+      .join(' '),
   ].join(' ')
 
   const conditionalTokens = [

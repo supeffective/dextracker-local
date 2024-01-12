@@ -47,6 +47,7 @@ const games: TrGame[] = gamesSrc.map((g) => {
       }
       return {
         id: dex.id,
+        region: dex.region,
         name: dex.name,
       }
     }),

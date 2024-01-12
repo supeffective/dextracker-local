@@ -37,71 +37,52 @@ function _generateDexSearchableEntries(dexEntries: TrPokedexEntry[], dexState: P
       flags: {
         ...pokemon.flags,
       },
-      searchText: '',
     } satisfies PokedexSearchableEntry
 
-    fullEntry.searchText = _generateEntrySearchableText(fullEntry)
+    fullEntry.searchText = _generateAdditionalEntrySearchableText(fullEntry)
+
+    // console.log(fullEntry.id, fullEntry.searchText)
 
     return fullEntry
   })
 }
 
-function _generateEntrySearchableText(entry: PokedexSearchableEntry): string {
-  const { num, name, slug, region, types, color, state } = entry
-  const {
-    isForm,
-    canBeShiny,
-    canBeMale,
-    canBeFemale,
-    isFemaleForm,
-    isCosmeticForm,
-    isRegional,
-    isUltraBeast,
-    isParadox,
-    isConvergent,
-    isLegendary,
-    isMythical,
-  } = entry.flags
+function _generateAdditionalEntrySearchableText(entry: PokedexSearchableEntry): string {
+  const bookmarkText = ' //PKM//.'
 
+  if (entry.searchText.includes(bookmarkText.trim())) {
+    throw new Error(`Entry ${entry.id} already has searchable text generated, we would add unnecessary text.`)
+  }
+
+  const { num, state } = entry
   const numPad3 = String(num).padStart(3, '0')
   const numPad4 = String(num).padStart(4, '0')
 
-  const normalTokens = [
-    `#${num}`,
-    `#${numPad3}`,
-    `#${numPad4}`,
-    name,
-    slug,
-    `:region:${region}`,
-    `:color:${color}`,
-    types.filter(Boolean).map((type) => `:type:${type}`),
-  ].join(' ')
+  const normalTokens = [`#${num}`, `#${numPad3}`, `#${numPad4}`].join(' ')
 
-  const conditionalTokens = [
-    isForm ? ':form' : '',
-    !canBeShiny ? ':shinylocked :noshiny' : '',
-    !canBeMale || isFemaleForm ? ':gender:femaleonly' : '',
-    !canBeFemale ? ':gender:maleonly' : '',
-    isCosmeticForm ? ':cosmeticform' : '',
-    isRegional ? ':regional' : '',
-    isUltraBeast ? ':ultrabeast' : '',
-    isParadox ? ':paradox' : '',
-    isConvergent ? ':convergent' : '',
-    isLegendary ? ':legendary' : '',
-    isMythical ? ':mythical' : '',
-    state?.caught ? ':caught' : ':uncaught :notcaught',
-  ].join(' ')
+  const conditionalTokens = [state?.caught ? ':caught' : ':uncaught :notcaught'].join(' ')
 
-  return `${normalTokens} ${conditionalTokens}`.toLowerCase()
+  return `${entry.searchText} ${normalTokens} ${conditionalTokens}`.toLowerCase() + bookmarkText
 }
 
 function _searchDexEntries(searchIndex: PokedexSearchIndex, query: string): PokedexSearchIndex {
-  const sanitizedQuery = query.trim().toLowerCase()
+  const sanitizedQuery = query.trim().toLowerCase().replace(/\s+/g, ' ')
   if (!sanitizedQuery) {
     return searchIndex
   }
 
-  return searchIndex.filter((pokemon) => pokemon.searchText?.includes(sanitizedQuery) === true)
+  const searchTokens = sanitizedQuery.split(' ')
+
+  // return searchIndex.filter((pokemon) => pokemon.searchText?.includes(sanitizedQuery) === true)
+
+  return searchIndex.filter((pokemon) => {
+    const searchText = pokemon.searchText
+    if (!searchText) {
+      return false
+    }
+
+    return searchTokens.some((token) => searchText.includes(token))
+  })
 }
 
 function _applyDexFilters(pokemon: PokedexSearchIndex, filter?: PokedexSearchStateFilter): PokedexSearchIndex {

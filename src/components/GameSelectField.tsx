@@ -8,5 +8,5 @@ export default function GameSelectField(props: SelectFieldPropsWithoutOptions) {
     return <SelectField {...props} options={OPTIONS_NO_DATA} disabled />
   }
 
-  return <SelectField {...props} options={[{ value: '', label: '---' }, ...options]} />
+  return <SelectField {...props} options={[...options]} />
 }

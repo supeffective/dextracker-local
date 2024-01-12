@@ -25,5 +25,5 @@ export default function PokedexSelectField({ gameId, ...props }: PokedexSelectFi
     return <SelectField {...props} options={OPTIONS_NO_DATA} disabled />
   }
 
-  return <SelectField {...props} options={[{ value: '', label: '---' }, ...options]} />
+  return <SelectField {...props} options={[...options]} />
 }

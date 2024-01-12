@@ -5,7 +5,7 @@ import { createDefaultState } from './actions/generalActions'
 import { PokedexSearchStore } from './types'
 import { PokedexSearchState } from './types/state'
 
-const STORE_ID = 'pokedex-search-store'
+const STORE_ID = 'pokedex-search-store-v2'
 
 const defaultDexTrackerState = createDefaultState()
 const defaultState: PokedexSearchState = {

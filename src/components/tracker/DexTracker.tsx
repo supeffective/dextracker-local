@@ -79,7 +79,12 @@ export default function DexTracker({ className, infiniteScrollSize = 25, ...prop
     )
   }
 
-  if (!fullDexFetch.data || !dexId || !dexRegion || !fullDexEntries) {
+  if (
+    fullDexFetch.data === undefined ||
+    fullDexEntries === undefined ||
+    dexId === undefined ||
+    dexRegion === undefined
+  ) {
     return (
       <div className={cn(classes, styles.empty)} {...props}>
         <div className={styles.resultPanel}>No Pokédex is loaded...</div>
