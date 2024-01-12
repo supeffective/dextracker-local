@@ -1,5 +1,5 @@
-import { DexTrackerActions, PokedexSearchActions } from './actions/types'
-import { DexTrackerState, PokedexSearchState } from './state/types'
+import { DexTrackerActions, PokedexSearchActions } from './actions'
+import { DexTrackerState, PokedexSearchState } from './state'
 
 export type DexTrackerStore = DexTrackerState & DexTrackerActions
 

@@ -1,10 +1,10 @@
 import useFetchCurrentPokedexData from '@/hooks/useFetchCurrentPokedexData'
 import useInfiniteScrollList from '@/hooks/useInfiniteScrollList'
-import { getDexSourceCodeUrl } from '@/lib/cdn'
-import { countSpeciesAndForms } from '@/lib/dex-utils'
+import { countSpeciesAndForms } from '@/lib/dataset/utils'
+import { getDexSourceCodeUrl } from '@/lib/urls'
 import { cn } from '@/lib/utils'
-import { createFilteredSearchIndex } from '@/stores/actions/filterActions'
-import { PokedexState } from '@/stores/state/types'
+import { generateDexFilteredEntries } from '@/stores/search'
+import { PokedexState } from '@/stores/types/state'
 import useDexTrackerStore, { useCurrentGameAndDex } from '@/stores/useDexTrackerStore'
 import usePokedexSearchStore from '@/stores/usePokedexSearchStore'
 import { ComponentPropsWithoutRef, useEffect, useRef, useState } from 'react'
@@ -40,9 +40,9 @@ export default function DexTracker({ className, infiniteScrollSize = 25, ...prop
 
   const dexId = fullDexFetch.data?.id
   const dexRegion = fullDexFetch.data?.region
-  const fullDexEntries = fullDexFetch.data?.entries
+  const fullDexEntries = fullDexFetch.data?.pokemon
 
-  const filteredDexResults = createFilteredSearchIndex(fullDexFetch.data, currentDexState, searchStore.filters)
+  const filteredDexResults = generateDexFilteredEntries(fullDexFetch.data, currentDexState, searchStore.filters)
   const visibleDexResults = useInfiniteScrollList(filteredDexResults, { chunkSize: infiniteScrollSize, lastElementRef })
 
   const classes = cn(

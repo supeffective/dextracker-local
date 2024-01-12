@@ -1,5 +1,5 @@
-import { readClientCookie, setClientCookie } from '@/lib/cookies'
 import { Close2Icon } from '@/lib/icons'
+import { readClientCookie, setClientCookie } from '@/lib/utils/cookies'
 import { useState } from 'react'
 import styles from './AppMainText.module.scss'
 

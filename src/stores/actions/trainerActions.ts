@@ -1,5 +1,5 @@
-import { TrainerInfoState } from '../state/types'
-import { DexTrackerActionFactory, DexTrackerTrainerActions } from './types'
+import { DexTrackerActionFactory, DexTrackerTrainerActions } from '../types/actions'
+import { TrainerInfoState } from '../types/state'
 
 const trainerActions: DexTrackerActionFactory<DexTrackerTrainerActions> = (setState, getState) => {
   return {

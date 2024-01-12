@@ -1,9 +1,9 @@
-import createPersistentStore from '../lib/createPersistentStore'
+import createPersistentStore from '../lib/storage/createPersistentStore'
 import filterActions from './actions/filterActions'
 import { createDefaultState } from './actions/generalActions'
 
-import { PokedexSearchState } from './state/types'
 import { PokedexSearchStore } from './types'
+import { PokedexSearchState } from './types/state'
 
 const STORE_ID = 'pokedex-search-store'
 
@@ -11,7 +11,6 @@ const defaultDexTrackerState = createDefaultState()
 const defaultState: PokedexSearchState = {
   dexId: defaultDexTrackerState.currentDexId,
   filters: undefined,
-  results: [],
   lastModified: undefined,
 }
 

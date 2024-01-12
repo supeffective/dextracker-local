@@ -1,10 +1,15 @@
-import { getDataCDNResourceUrl } from '@/lib/cdn'
-import { TrGame, TrPokedex, TrPokemon } from '@/lib/dataset/types'
-import { Game, Pokedex, Pokemon } from '@supeffective/dataset'
 import fs from 'node:fs'
 import path from 'node:path'
+import { TrGame, TrPokedex, TrPokedexEntry, TrSourcePokemon } from '@/lib/dataset/types'
+import { getDataCDNResourceUrl } from '@/lib/urls'
+import { Game, Pokedex, Pokemon } from '@supeffective/dataset'
 
-const DEST_DIR = `${process.cwd()}/public`
+const PUBLIC_DEST_DIR = `${process.cwd()}/public`
+const SRC_DEST_DIR = `${process.cwd()}/src/lib/dataset/data`
+
+if (!fs.existsSync(SRC_DEST_DIR)) {
+  fs.mkdirSync(SRC_DEST_DIR, { recursive: true })
+}
 
 // Generates public/data/*.min.json files
 
@@ -22,68 +27,103 @@ const gamesSrc = (await (await fetch(gamesDataUrl)).json()) as Game[]
 const pokedexesSrc = (await (await fetch(pokedexesDataUrl)).json()) as Pokedex[]
 const pokemonSrc = (await (await fetch(pokemonDataUrl)).json()) as Pokemon[]
 
-console.log({
-  games: gamesSrc.length,
-  pokedexes: pokedexesSrc.length,
-  pokemon: pokemonSrc.length,
-})
-
-type DataBundle = {
-  games: TrGame[]
-  // pokedexes: TrPokedex[]
-  pokedexProps: Array<keyof TrPokedex>
-  pokedexValues: TrPokedex[keyof TrPokedex][][]
-  pokemonIds: Record<string, number>
-  pokemonProps: Array<keyof TrPokemon>
-  pokemonValues: TrPokemon[keyof TrPokemon][][]
-}
+const pokedexesSrcMap: Record<string, Pokedex> = pokedexesSrc.reduce(
+  (acc, dex) => {
+    acc[dex.id] = dex
+    return acc
+  },
+  {} as Record<string, Pokedex>,
+)
 
 const games: TrGame[] = gamesSrc.map((g) => {
   return {
     id: g.id,
     name: g.name,
     type: g.type,
-    pokedexIds: g.pokedexes,
+    pokedexes: g.pokedexes.map((dexId) => {
+      const dex = pokedexesSrcMap[dexId]
+      if (!dex) {
+        throw new Error(`Pokedex ${dexId} not found in the pokedexesSrcMap object`)
+      }
+      return {
+        id: dex.id,
+        name: dex.name,
+      }
+    }),
   } satisfies TrGame
 })
+
+const gamesDataFile = path.join(SRC_DEST_DIR, 'games.min.json')
+fs.writeFileSync(gamesDataFile, JSON.stringify(games, null, 2))
+console.log(`  Wrote ${gamesDataFile}`)
 
 const pokemon = pokemonSrc.map((pkm) => {
   return {
     id: pkm.nid,
+    natNum: pkm.dexNum,
+    slug: pkm.id,
     name: pkm.name,
-    readableId: pkm.id,
-    natDexNum: pkm.dexNum,
     region: pkm.region,
-    type1: pkm.type1,
-    type2: pkm.type2,
+    types: [pkm.type1, pkm.type2],
     color: pkm.color,
-    canBeShiny: pkm.shinyReleased,
-    isForm: pkm.isForm,
-    isFemaleForm: pkm.isFemaleForm,
-    isCosmeticForm: pkm.isCosmeticForm,
-    canBeMale: pkm.maleRate > 0,
-    canBeFemale: pkm.femaleRate > 0,
-  } satisfies TrPokemon
+    stats: [
+      pkm.baseStats.hp,
+      pkm.baseStats.atk,
+      pkm.baseStats.def,
+      pkm.baseStats.spa,
+      pkm.baseStats.spd,
+      pkm.baseStats.spe,
+    ],
+    flags: [
+      pkm.isForm,
+      pkm.shinyReleased,
+      pkm.maleRate > 0,
+      pkm.femaleRate > 0,
+      pkm.isFemaleForm,
+      pkm.isCosmeticForm,
+      pkm.isRegional,
+      pkm.isUltraBeast,
+      pkm.paradoxSpecies ? pkm.paradoxSpecies?.length > 0 : false,
+      pkm.convergentSpecies ? pkm.convergentSpecies?.length > 0 : false,
+      pkm.isLegendary,
+      pkm.isMythical,
+    ],
+    forms: pkm.forms ?? [],
+  } satisfies TrSourcePokemon
 })
 
-const pokemonIds: Record<string, number> = pokemon.reduce(
-  (acc, pkm, i) => {
-    acc[pkm.readableId] = i + 1
+const pkmDataFile = path.join(SRC_DEST_DIR, 'pokemon.min.json')
+fs.writeFileSync(pkmDataFile, JSON.stringify(pokemon))
+console.log(`  Wrote ${pkmDataFile}`)
+
+const pokemonSlugMap: Record<string, TrSourcePokemon> = pokemon.reduce(
+  (acc, pkm) => {
+    acc[pkm.slug] = pkm
     return acc
   },
-  {} as Record<string, number>,
+  {} as Record<string, TrSourcePokemon>,
 )
 
 const pokedexes = pokedexesSrc.map((dex) => {
-  const dexEntries: [number, number][] = dex.entries.map((p) => {
-    const numericId = pokemonIds[p.id]
-    if (!numericId) {
-      throw new Error(`Pokemon ${p.id} not found in pokemonIds record`)
+  const dexEntries = dex.entries.map((p) => {
+    const fullPkm = pokemonSlugMap[p.id]
+    if (!fullPkm) {
+      throw new Error(`Pokemon ${p.id} not found in the pokemonIdMap object`)
     }
-    return [p.dexNum ?? 0, numericId]
+
+    if (typeof p.dexNum !== 'number') {
+      throw new Error(`No dexNum found for pokemon ${fullPkm.id} and dex ${dex.id}`)
+    }
+
+    return {
+      id: fullPkm.id,
+      num: p.dexNum ?? 0,
+      isBase: p.isForm,
+    } satisfies TrPokedexEntry
   })
-  const maxDexNum = dexEntries.reduce((max, p) => Math.max(max, p[0]), 0)
-  const gameIds = games.filter((g) => g.pokedexIds.includes(dex.id)).map((g) => g.id)
+
+  const maxDexNum = dexEntries.reduce((max, p) => Math.max(max, p.num), 0)
+  const gameIds = games.filter((g) => g.pokedexes.map((p) => p.id).includes(dex.id)).map((g) => g.id)
 
   return {
     id: dex.id,
@@ -95,46 +135,20 @@ const pokedexes = pokedexesSrc.map((dex) => {
   } satisfies TrPokedex
 })
 
-const dataBundle: DataBundle = {
-  games,
-  pokedexProps: ['id', 'name', 'region', 'gameIds', 'maxDexNum', 'pokemon'],
-  pokedexValues: pokedexes.map((dex) => [dex.id, dex.name, dex.region, dex.gameIds, dex.maxDexNum, dex.pokemon]),
-  pokemonIds,
-  pokemonProps: [
-    'id',
-    'name',
-    'readableId',
-    'natDexNum',
-    'region',
-    'type1',
-    'type2',
-    'color',
-    'canBeShiny',
-    'isForm',
-    'isFemaleForm',
-    'isCosmeticForm',
-    'canBeMale',
-    'canBeFemale',
-  ],
-  pokemonValues: pokemon.map((pkm) => [
-    pkm.id,
-    pkm.name,
-    pkm.readableId,
-    pkm.natDexNum,
-    pkm.region,
-    pkm.type1,
-    pkm.type2,
-    pkm.color,
-    pkm.canBeShiny,
-    pkm.isForm,
-    pkm.isFemaleForm,
-    pkm.isCosmeticForm,
-    pkm.canBeMale,
-    pkm.canBeFemale,
-  ]),
+for (const dex of pokedexes) {
+  const baseDir = path.join(PUBLIC_DEST_DIR, 'data/pokedexes')
+  if (!fs.existsSync(baseDir)) {
+    fs.mkdirSync(baseDir, { recursive: true })
+  }
+  const dexDataFile = path.join(PUBLIC_DEST_DIR, `data/pokedexes/${dex.id}.min.json`)
+  fs.writeFileSync(dexDataFile, JSON.stringify(dex))
+  console.log(`  Wrote ${dexDataFile}`)
 }
 
-// Save all to file
-fs.writeFileSync(path.join(DEST_DIR, 'data-bundle.min.json'), JSON.stringify(dataBundle))
+console.log({
+  games: gamesSrc.length,
+  pokedexes: pokedexesSrc.length,
+  pokemon: pokemonSrc.length,
+})
 
 console.log('> Done!')

@@ -1,6 +1,6 @@
 import { pokemonGamesMap } from '@supeffective/dataset'
+import { DexTrackerActionFactory, DexTrackerGameActions } from '../types/actions'
 import { DEFAULT_DEX_ID, DEFAULT_GAME_ID } from './generalActions'
-import { DexTrackerActionFactory, DexTrackerGameActions } from './types'
 
 const gameActions: DexTrackerActionFactory<DexTrackerGameActions> = (setState, getState) => {
   return {

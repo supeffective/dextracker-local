@@ -6,3 +6,7 @@ build
 dist
 node_modules
 src/icons/generated
+*.min.json
+*.min.css
+*.min.js
+*.min.*

@@ -15,3 +15,5 @@ runs:
       name: Install dependencies
       run: |
         bun install --frozen-lockfile
+        bun make:data
+        

@@ -1,5 +1,4 @@
-import { gamesWithPokedexes } from '@/stores/dataset'
-import { pokedexesIndexMap } from '@supeffective/dataset'
+import { gamesFilteredDataset } from '@/lib/dataset/games'
 import SelectField, {
   OPTIONS_NO_DATA,
   SelectFieldOption,
@@ -15,13 +14,9 @@ export default function PokedexSelectField({ gameId, ...props }: PokedexSelectFi
     return <SelectField {...props} options={[{ value: '', label: '---' }]} disabled />
   }
 
-  const gameDexIds = gamesWithPokedexes.find((game) => game.id === gameId)?.pokedexes ?? []
-  const options = gameDexIds
-    .map((dexId) => {
-      const dex = pokedexesIndexMap.get(dexId)
-      if (!dex) {
-        return
-      }
+  const gameDexes = gamesFilteredDataset.find((game) => game.id === gameId)?.pokedexes ?? []
+  const options = gameDexes
+    .map((dex) => {
       return { value: dex.id, label: dex.name }
     })
     .filter(Boolean) as SelectFieldOption[]

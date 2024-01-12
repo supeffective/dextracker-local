@@ -8,6 +8,7 @@ import DexTracker from './components/tracker/DexTracker'
 const queryClient = new QueryClient()
 
 function App() {
+  // TODO: if bundling pokemon.json data is too much, create a provider that loads it using fetch, asynchronously
   return (
     <div id="app">
       <QueryClientProvider client={queryClient}>

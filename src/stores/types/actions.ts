@@ -5,7 +5,7 @@ import {
   PokedexEntryState,
   PokedexState,
   TrainerInfoState,
-} from '../state/types'
+} from './state'
 
 export type DexTrackerGeneralActions = {
   resetData: () => void
@@ -27,7 +27,7 @@ export type DexTrackerDexActions = {
   updateDex: (dexId: string, data: Partial<PokedexState>) => void
   setCurrentDex: (dexId: string) => void
   removeDex: (dexId: string) => void
-  updateDexPokemon: (dexId: string, nid: string, data: Partial<PokedexEntryState>) => void
+  updateDexPokemon: (dexId: string, pokemonId: string, data: Partial<PokedexEntryState>) => void
 }
 
 export type DexTrackerSharedBoxActions = {

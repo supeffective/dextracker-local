@@ -18,6 +18,9 @@ Here are the basic commands you'll need to get started:
 # Install dependencies
 bun install
 
+# Import the necessary data from the CDN
+bun make:data
+
 # Start the dev server
 bun run dev
 

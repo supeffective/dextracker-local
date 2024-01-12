@@ -26,3 +26,9 @@ dist-ssr
 
 # Other
 *-legacy
+
+# Generated data at build time
+
+public/data/
+src/lib/dataset/data/
+

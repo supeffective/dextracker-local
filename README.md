@@ -65,6 +65,7 @@ you can run the following commands after cloning this repository, to get started
 
 ```bash
 bun install
+bun make:data
 bun run dev
 ```
 

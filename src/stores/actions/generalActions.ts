@@ -1,5 +1,5 @@
-import { DexTrackerState, dexTrackerStateSchema } from '../state/types'
-import { DexTrackerActionFactory, DexTrackerGeneralActions } from './types'
+import { DexTrackerActionFactory, DexTrackerGeneralActions } from '../types/actions'
+import { DexTrackerState, dexTrackerStateSchema } from '../types/state'
 
 export const DEFAULT_GAME_ID = 'sv-s'
 export const DEFAULT_DEX_ID = 'paldea'

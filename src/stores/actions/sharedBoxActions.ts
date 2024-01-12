@@ -1,4 +1,4 @@
-import { DexTrackerActionFactory, DexTrackerSharedBoxActions } from './types'
+import { DexTrackerActionFactory, DexTrackerSharedBoxActions } from '../types/actions'
 
 const DEFAULT_BOX_TITLE = 'Trade Box'
 
@@ -26,7 +26,7 @@ const sharedBoxActions: DexTrackerActionFactory<DexTrackerSharedBoxActions> = (s
         },
       })
     },
-    updateSharedBoxPokemon(index, data) {
+    updateSharedBoxPokemon(index, newPkmData) {
       const currentState = getState()
       const currentPokemonList = currentState.sharedBox?.pokemon ?? []
       const currentPokemon = currentPokemonList[index] ?? {}
@@ -34,7 +34,7 @@ const sharedBoxActions: DexTrackerActionFactory<DexTrackerSharedBoxActions> = (s
       const newPokemonList = [...currentPokemonList]
       newPokemonList[index] = {
         ...currentPokemon,
-        ...data,
+        ...newPkmData,
       }
 
       setState({

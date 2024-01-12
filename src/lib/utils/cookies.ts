@@ -1,4 +1,4 @@
-import { isClientSide } from './utils'
+import { isClientSide } from '.'
 
 export function parseClientCookies(): Map<string, string> {
   const cookieMap = new Map<string, string>()

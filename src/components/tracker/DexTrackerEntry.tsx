@@ -1,14 +1,14 @@
 import { PokeballIcon, PokeballOutlineIcon, ShinyIcon } from '@/lib/icons/gamegui'
 import { cn } from '@/lib/utils'
-import { PokedexSearchIndexItem } from '@/stores/dataset'
-import { PokedexEntryState } from '@/stores/state/types'
+import { PokedexSearchableEntry } from '@/stores/search'
+import { PokedexEntryState } from '@/stores/types/state'
 import useDexTrackerStore from '@/stores/useDexTrackerStore'
 import usePokedexSearchStore from '@/stores/usePokedexSearchStore'
 import { ComponentPropsWithRef, forwardRef, useState } from 'react'
 import PokemonImg from '../PokemonImg'
 import styles from './DexTrackerEntry.module.scss'
 
-type DexTrackerEntryProps = { index: number; total: number; dexId: string; data: PokedexSearchIndexItem } & Omit<
+type DexTrackerEntryProps = { index: number; total: number; dexId: string; data: PokedexSearchableEntry } & Omit<
   ComponentPropsWithRef<'div'>,
   'children'
 >
@@ -16,12 +16,12 @@ type DexTrackerEntryProps = { index: number; total: number; dexId: string; data:
 function DexTrackerEntryNoRef({ index, total, dexId, data, ...props }: DexTrackerEntryProps) {
   const searchFilters = usePokedexSearchStore((store) => store.filters)
   const updatePokemonEntry = useDexTrackerStore((store) => store.updateDexPokemon)
-  const zeroPadDexNum = data.dexNum?.toString().padStart(4, '0')
+  const zeroPadDexNum = data.num.toString().padStart(4, '0')
   const [animationClasses, setAnimationClasses] = useState<string[]>([])
 
   const pkmState: PokedexEntryState = {
     ...data.state,
-    nid: data.nid,
+    id: data.id,
   }
 
   const disappearsOnCatch = searchFilters?.hideCaught === true
@@ -30,18 +30,18 @@ function DexTrackerEntryNoRef({ index, total, dexId, data, ...props }: DexTracke
     bounce: 1000,
   }
 
-  if (pkmState.nid === undefined) {
-    throw new Error(`Missing nid for ${data.id}`)
+  if (pkmState.id === undefined) {
+    throw new Error(`Missing pokemon ID (in the state) for ${data.id}`)
   }
 
   const toggleCaught = (prevState: PokedexEntryState) => {
-    updatePokemonEntry(dexId, prevState.nid, {
+    updatePokemonEntry(dexId, prevState.id, {
       caught: !prevState.caught,
     })
   }
 
   const toggleShiny = (prevState: PokedexEntryState) => {
-    updatePokemonEntry(dexId, prevState.nid, {
+    updatePokemonEntry(dexId, prevState.id, {
       shiny: !prevState.shiny,
     })
   }
@@ -56,7 +56,7 @@ function DexTrackerEntryNoRef({ index, total, dexId, data, ...props }: DexTracke
         <div className={styles.sprite}>
           <PokemonImg
             loading={shouldLazyLoad ? 'lazy' : 'eager'}
-            pokeNid={data.nid}
+            pkmId={data.id}
             shiny={pkmState.shiny || searchFilters?.shinyMode}
           />
         </div>

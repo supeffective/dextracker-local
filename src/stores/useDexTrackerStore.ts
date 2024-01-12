@@ -1,13 +1,13 @@
 import { Game, PokedexIndexItem, pokedexesIndexMap, pokemonGamesMap } from '@supeffective/dataset'
-import createPersistentStore from '../lib/createPersistentStore'
+import createPersistentStore from '../lib/storage/createPersistentStore'
 import dexActions from './actions/dexActions'
 import gameActions from './actions/gameActions'
 import generalActions, { createDefaultState } from './actions/generalActions'
 import sharedBoxActions from './actions/sharedBoxActions'
 import trainerActions from './actions/trainerActions'
 
-import { DexTrackerState } from './state/types'
 import { DexTrackerStore } from './types'
+import { DexTrackerState } from './types/state'
 
 const STORE_ID = 'pokedex-tracker-store'
 

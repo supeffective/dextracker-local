@@ -1,5 +1,5 @@
-import { DexTrackerState } from '../state/types'
-import { DexTrackerActionFactory, DexTrackerDexActions } from './types'
+import { DexTrackerActionFactory, DexTrackerDexActions } from '../types/actions'
+import { DexTrackerState } from '../types/state'
 
 const dexActions: DexTrackerActionFactory<DexTrackerDexActions> = (setState, getState): DexTrackerDexActions => {
   return {
@@ -34,7 +34,7 @@ const dexActions: DexTrackerActionFactory<DexTrackerDexActions> = (setState, get
         currentDexId: dexId === '' ? undefined : dexId,
       })
     },
-    updateDexPokemon(dexId, nid, data) {
+    updateDexPokemon(dexId, pokemonId, data) {
       const currentDexes = getState().dexes
       const currentDex = currentDexes[dexId] ?? {}
       const currentPokemonTable = currentDex.pokemon ?? {}
@@ -45,10 +45,10 @@ const dexActions: DexTrackerActionFactory<DexTrackerDexActions> = (setState, get
           id: dexId,
           pokemon: {
             ...currentPokemonTable,
-            [nid]: {
-              ...currentPokemonTable[nid],
+            [pokemonId]: {
+              ...currentPokemonTable[pokemonId],
               ...data,
-              nid,
+              id: pokemonId,
             },
           },
         },

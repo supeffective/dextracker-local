@@ -1,5 +1,15 @@
 import config from '@/config'
 
+export const APP_BASE_URL = import.meta.env.BASE_URL
+
+export function localUrl(path?: string): string {
+  if (!path) {
+    return APP_BASE_URL
+  }
+  const normalizedPath = path.replace(/^\//, '')
+  return `${APP_BASE_URL}${normalizedPath}`
+}
+
 export function getDataCDNResourceUrl(filePath: string) {
   return `${config.cdn_dataset_url}/${filePath}`
 }
