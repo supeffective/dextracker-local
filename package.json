@@ -22,6 +22,7 @@
     "make": "bun make:component",
     "make:component": "bun src/scripts/make-component.ts",
     "make:data": "bun make:optimized-data",
+    "make:images": "bun make:optimized-images",
     "make:optimized-data": "bun src/scripts/make-optimized-data.ts && bun lint:fix-prettier",
     "make:optimized-images": "bun src/scripts/make-optimized-images.ts",
     "precommit": "CI=true bun test && CI=true bun lint",
@@ -58,6 +59,7 @@
     "prettier": "^3.1.1",
     "rollup": "^4.9.4",
     "sass": "^1.69.7",
+    "sharp": "^0.33.1",
     "sort-package-json": "^2.6.0",
     "typescript": "^5.3.3",
     "vite": "^5.0.10"
