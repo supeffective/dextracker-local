@@ -19,6 +19,7 @@ const plugins: PluginOption[] = [
     registerType: 'autoUpdate',
     manifest: webappManifest,
     includeAssets: ['logo.png', 'logo.svg', 'robots.txt'],
+    injectRegister: 'inline',
     devOptions: {
       enabled: false,
     },

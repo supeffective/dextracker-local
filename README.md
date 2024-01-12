@@ -4,20 +4,20 @@ A simple, lightweight, and client-based Pokédex Tracker.
 
 Brought to you by the [SuperEffective](https://supereffective.gg/) team.
 
-![Demo](public/twitter-card.png)
+![Demo](public/twitter-card.jpg)
 
 ## Features
 
-- [ ] National Pokédex mode as the default
+- [x] Last game's Pokédex as the default
 - [ ] Mark all games that you own
-- [ ] Track all regional Pokédexes, for all main series games
+- [x] Track all regional Pokédexes, for all main series games
 - [ ] Track all forms, genders and shiny variants
 - [ ] Editabe Pokémon data: seen/ready, caught, gender (m/f/-), shiny
-- [ ] Search for Pokémon by name, type, color, dex number, etc.
+- [x] Search for Pokémon by name, type, color, dex number, etc.
 - [ ] View Pokémon basic details such as location, stats, types, and abilities
 - [ ] Direct links to well-known Pokémon resource websites
 - [ ] The main page lists the current progress of all your stored dexes
-- [ ] JSON imports/exports for your data, to keep it safe wherever you want
+- [x] JSON imports/exports for your data, to keep it safe wherever you want
 - [ ] Random Shiny Hunting challenge: from all games that you own, this widget will challengee you to hunt a shiny
       Pokémon that you don't own yet.
 - [ ] Trade Box: A simple box with 30 slots to store Pokémon (incl. form. gender and shinyness). It is shareable via a

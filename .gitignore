@@ -24,11 +24,12 @@ dist-ssr
 *.sln
 *.sw?
 
-# Other
-*-legacy
-
 # Generated data at build time
 
 public/data/
+public/*.webmanifest
 src/lib/dataset/data/
 
+# Other
+*-legacy
+*.afphoto~*

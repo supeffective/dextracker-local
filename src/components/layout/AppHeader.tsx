@@ -17,6 +17,7 @@ export default function AppHeader({ className, ...props }: AppHeaderProps) {
         <img src={appLogo} alt="" />
         <h1>Super Pokédex Tracker</h1>
       </a>
+      <div className={styles.dragRegion}>&nbsp;</div>
       <div className={styles.links}>
         <a href={config.patreon_url} target="_blank" rel="noreferrer" title="Support this project on Patreon">
           <HeartHandshakeIcon style={{ strokeWidth: '3px' }} />

@@ -12,6 +12,16 @@
   // -webkit-backdrop-filter: blur(0.25rem);
 }
 
+@media (display-mode: window-controls-overlay) {
+  .toolbar {
+    padding-top: calc(env(titlebar-area-height, 0) + 1rem);
+  }
+
+  // :global(#app > div) {
+  //   padding-top: env(titlebar-area-height, 0);
+  // }
+}
+
 .searchBoxWrapper {
   flex: 1;
   display: flex;

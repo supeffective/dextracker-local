@@ -18,13 +18,19 @@ const webappManifest: Partial<ManifestOptions> = {
   categories: ['entertainment', 'games'],
   screenshots: [
     {
-      src: '/pokedex-tracker/twitter-card.png',
-      type: 'image/png',
-      sizes: '2400x1240',
+      src: '/pokedex-tracker/screenshot.jpg',
+      type: 'image/jpeg',
+      sizes: '640x320',
       form_factor: 'wide',
+      label: 'An example Scarlet Dex Tracker',
     },
   ],
   icons: [
+    {
+      src: '/pokedex-tracker/logo-2x.png',
+      type: 'image/png',
+      sizes: '512x512',
+    },
     {
       src: '/pokedex-tracker/logo.png',
       type: 'image/png',
