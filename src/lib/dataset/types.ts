@@ -1,7 +1,5 @@
 // Tr. stands for "Tracker" and "Transformed"
 
-import { PokeTypeId } from '@supeffective/dataset'
-
 export type TrGameType = 'game' | 'dlc' | 'set' | 'superset'
 
 export type TrPokedexBasicInfo = {
@@ -45,7 +43,28 @@ export type TrPokedex = {
   pokemon: TrPokedexEntry[]
 }
 
-export type TrPokeType = PokeTypeId | string
+export type TrPokeType =
+  | 'normal'
+  | 'fire'
+  | 'water'
+  | 'electric'
+  | 'grass'
+  | 'ice'
+  | 'fighting'
+  | 'poison'
+  | 'ground'
+  | 'flying'
+  | 'psychic'
+  | 'bug'
+  | 'rock'
+  | 'ghost'
+  | 'dragon'
+  | 'dark'
+  | 'steel'
+  | 'fairy'
+  | 'shadow' // non-canonical
+  | 'stellar' // non-canonical
+  | string
 
 export type TrPokemonFlags = {
   isForm: boolean

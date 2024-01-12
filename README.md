@@ -32,12 +32,10 @@ worry about your data being stored in an external server.
 This webapp is just a Pokédex tracker, not a Living Dex Box Organizer. If you're looking for a Living Dex Box Organizer
 check out our main, cloud based project: [supereffective.gg](https://supereffective.gg/).
 
-## TODO
+## TODO (dev)
 
-- [ ] Import all assets and data, host them in the final build (stop using the CDN), and optimize them (at 180px, webp)
-      to achieve a 100% Lighthouse score.
-- [ ] Add placeholders to avoid Cumulative Layout Shifts (CLS)
 - [ ] Add homepage dashboard
+- [ ] Add placeholders to avoid Cumulative Layout Shifts (CLS)
 - [ ] Add React router to navigate between dexes (hash router)
 - [ ] Put filters back together with the main state, or export both stores in the JSON
 - [ ] Add a "Mark all as seen" toggle button
@@ -51,7 +49,7 @@ check out our main, cloud based project: [supereffective.gg](https://supereffect
 - SCSS Modules + OpenProps for styling
 - TanStack Query + Zustand for state management
 - localStorage to persist state
-- SuperEffective's CDN for data and images (via https://github.com/supeffective)
+- SuperEffective's CDN for data and images (bundled from https://github.com/supeffective)
 - URL as the state for sharing functionality
 - Github Actions as CI/CD
 - Github Pages for deployments

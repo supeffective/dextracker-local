@@ -79,11 +79,15 @@
   aspect-ratio: 1;
   max-width: 100%;
 
+  picture,
   img {
     display: block;
     width: 100%;
     aspect-ratio: 1;
     // content-visibility: auto;
+  }
+
+  img {
     filter: drop-shadow(3px 3px 0px var(--blue-10));
   }
 }

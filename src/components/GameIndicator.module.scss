@@ -1,5 +1,11 @@
 .outer {
   display: block;
+
+  img {
+    display: block;
+    aspect-ratio: 1;
+    max-width: 100%;
+  }
 }
 
 .indicator {

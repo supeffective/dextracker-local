@@ -3,6 +3,18 @@
   word-break: break-word;
 }
 
+*[inert],
+*[data-inert],
+*[data-noninteractive] {
+  pointer-events: none !important;
+  cursor: default !important;
+  user-select: none !important;
+}
+
+*[data-noselect] {
+  user-select: none !important;
+}
+
 @media (max-width: 640px) {
   .sm-hidden {
     position: absolute !important;

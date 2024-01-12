@@ -1,11 +1,21 @@
-import config from '@/config'
+import { getGameCoverImageUrls } from '@/lib/urls'
 import { ComponentPropsWithoutRef } from 'react'
+import ImageSet from './primitives/ImageSet'
 
 type GameImgProps = {
   gameId: string
 } & ComponentPropsWithoutRef<'img'>
 
 export default function GameImg({ gameId, ...props }: GameImgProps) {
-  const url = `${config.cdn_assets_url}/images/games/tiles/${gameId}.jpg`
-  return <img loading="lazy" src={url} width={64} height={64} {...props} alt={props.alt ?? `Game: ${gameId}`} />
+  const urls = getGameCoverImageUrls(gameId)
+  return (
+    <ImageSet
+      sources={urls}
+      width={48}
+      height={48}
+      alt={props.alt ?? `Game: ${gameId}`}
+      data-noninteractive
+      {...props}
+    />
+  )
 }

@@ -20,6 +20,7 @@ const plugins: PluginOption[] = [
 export default defineConfig({
   plugins: plugins,
   esbuild: { legalComments: 'none' },
+  assetsInclude: ['**/*.avif', '**/*.webp'],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src/'),

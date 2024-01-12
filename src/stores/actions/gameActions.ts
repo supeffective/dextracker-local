@@ -1,4 +1,4 @@
-import { pokemonGamesMap } from '@supeffective/dataset'
+import { gamesDatasetMap } from '@/lib/dataset/games'
 import { DexTrackerActionFactory, DexTrackerGameActions } from '../types/actions'
 import { DEFAULT_DEX_ID, DEFAULT_GAME_ID } from './generalActions'
 
@@ -28,14 +28,18 @@ const gameActions: DexTrackerActionFactory<DexTrackerGameActions> = (setState, g
         return
       }
 
-      const game = pokemonGamesMap.get(gameId)
+      const game = gamesDatasetMap.get(gameId)
       if (!game) {
         throw new Error(`Game '${gameId}' does not exist`)
       }
 
+      if (game.pokedexes.length === 0) {
+        throw new Error(`Game '${gameId}' does not have any pokedexes`)
+      }
+
       setState({
         currentGameId: gameId,
-        currentDexId: game.pokedexes[0],
+        currentDexId: game.pokedexes[0].id,
       })
     },
   }
