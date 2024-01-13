@@ -1,5 +1,8 @@
-import { ManifestOptions } from 'vite-plugin-pwa'
+import { Plugin } from 'vite'
+import { ManifestOptions, VitePWA, VitePWAOptions } from 'vite-plugin-pwa'
 import dataJson from '../src/config.json'
+
+// https://vite-pwa-org.netlify.app/guide/
 
 const webappManifest: Partial<ManifestOptions> = {
   id: 'com.itsjavi.pokedex-tracker',
@@ -39,4 +42,16 @@ const webappManifest: Partial<ManifestOptions> = {
   ],
 }
 
-export default webappManifest
+const pwaPluginOptions: Partial<VitePWAOptions> = {
+  registerType: 'autoUpdate',
+  manifest: webappManifest,
+  includeAssets: ['logo.png', 'logo.svg', 'robots.txt'],
+  injectRegister: 'inline',
+  devOptions: {
+    enabled: false,
+  },
+}
+
+export default function pwaPlugin(): Plugin[] {
+  return VitePWA(pwaPluginOptions)
+}

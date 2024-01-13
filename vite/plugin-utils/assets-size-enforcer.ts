@@ -1,6 +1,5 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { Plugin } from 'vite'
 
 export type BundleSizeEnforcerOptions = {
   /**
@@ -25,7 +24,7 @@ const defaultOptions: BundleSizeEnforcerOptions = {
   failOnExceed: true,
 }
 
-function bundleSizeEnforcer(options?: BundleSizeEnforcerOptions): Plugin {
+export async function enforceAssetsSize(options?: BundleSizeEnforcerOptions): Promise<void> {
   const opts: BundleSizeEnforcerOptions = {
     ...defaultOptions,
     ...options,
@@ -33,18 +32,6 @@ function bundleSizeEnforcer(options?: BundleSizeEnforcerOptions): Plugin {
 
   opts.distPath = path.resolve(process.cwd(), opts.distPath)
 
-  return {
-    name: 'vite-plugin-bundle-size-enforcer',
-    apply: 'build',
-    enforce: 'post',
-
-    async closeBundle() {
-      await enforceAssetsSize(opts)
-    },
-  } satisfies Plugin
-}
-
-export async function enforceAssetsSize(opts: BundleSizeEnforcerOptions): Promise<void> {
   const assetLimits = opts.assetLimits
   const failOnExceed = opts.failOnExceed
   const distPath = opts.distPath
@@ -71,8 +58,6 @@ export async function enforceAssetsSize(opts: BundleSizeEnforcerOptions): Promis
     }
   }
 }
-
-export default bundleSizeEnforcer
 
 function getFileSize(file: string, distPath: string): Promise<number> {
   return new Promise((resolve, reject) => {

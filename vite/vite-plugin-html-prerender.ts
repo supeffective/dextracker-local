@@ -1,13 +1,13 @@
-import express, { Express } from 'express'
-import { Options as HTMLMinifierTerserOptions, minify } from 'html-minifier-terser'
 import fs from 'node:fs'
 import http from 'node:http'
 import { AddressInfo } from 'node:net'
 import path from 'node:path'
+import express, { Express } from 'express'
+import { Options as HTMLMinifierTerserOptions, minify } from 'html-minifier-terser'
 import puppeteer, { Browser, PuppeteerLaunchOptions } from 'puppeteer'
 import type { Plugin } from 'vite'
-import { BundleSizeEnforcerOptions, enforceAssetsSize } from './vite-plugin-bundle-size-enforcer'
-import { defaultMinifyOptions } from './vite-plugin-html-minify'
+import { BundleSizeEnforcerOptions, enforceAssetsSize } from './plugin-utils/assets-size-enforcer'
+import { defaultMinifyOptions } from './plugin-utils/minify-html'
 
 /*
  * Work adapted from https://github.com/saeedafzal/vite-plugin-html-prerender

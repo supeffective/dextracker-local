@@ -10,3 +10,5 @@ src/icons/generated
 *.min.css
 *.min.js
 *.min.*
+*.ts
+*.tsx
