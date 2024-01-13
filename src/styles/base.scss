@@ -1,9 +1,9 @@
 html {
-  background: var(--blue-7);
+  background: var(--blue-6);
 }
 
 body {
-  background: #fff;
+  background: var(--blue-6);
 }
 
 body,
@@ -11,6 +11,7 @@ body,
   width: 100%;
   min-width: 320px;
   min-height: 100vh;
+  // padding: 4px;
 }
 
 #app {
