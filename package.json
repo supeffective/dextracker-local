@@ -44,12 +44,14 @@
   "devDependencies": {
     "@biomejs/biome": "^1.5.1",
     "@svgr/cli": "^8.1.0",
+    "@types/express": "^4.17.21",
     "@types/html-minifier-terser": "^7.0.2",
     "@types/node": "^20.11.0",
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "cssnano": "^6.0.3",
+    "express": "^4.18.2",
     "html-minifier-terser": "^7.2.0",
     "postcss": "^8.4.33",
     "postcss-combine-duplicated-selectors": "^10.0.3",
@@ -57,12 +59,14 @@
     "postcss-import-ext-glob": "^2.1.1",
     "postcss-jit-props": "^1.0.14",
     "prettier": "^3.2.1",
+    "puppeteer": "^21.7.0",
     "rollup": "^4.9.5",
     "sass": "^1.69.7",
     "sharp": "^0.33.2",
     "sort-package-json": "^2.6.0",
     "typescript": "^5.3.3",
     "vite": "^5.0.11",
+    "vite-plugin-html-prerender": "^0.2.0",
     "vite-plugin-pwa": "^0.17.4"
   }
 }

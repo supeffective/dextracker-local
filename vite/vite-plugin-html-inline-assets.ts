@@ -24,7 +24,7 @@ export default function htmlInlineAssets({
   maxInlineAssetSize = defaultConfig.maxInlineAssetSize, // 2MB
 }: HtmlInlineAssetsOptions = defaultConfig): Plugin {
   return {
-    name: 'vite:html-inline-assets',
+    name: 'vite-plugin-html-inline-assets',
     enforce: 'post',
     config: (config) => _prepareBuildConfig(config, maxInlineAssetSize),
     buildEnd() {

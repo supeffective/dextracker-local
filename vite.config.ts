@@ -4,7 +4,7 @@ import { PluginOption, defineConfig } from 'vite'
 import { VitePWA as pwaPlugin } from 'vite-plugin-pwa'
 import dataJson from './src/config.json'
 import htmlInlineAssets from './vite/vite-plugin-html-inline-assets'
-import htmlMinify from './vite/vite-plugin-html-minify'
+import htmlPrerender from './vite/vite-plugin-html-prerender'
 import htmlReplaceVars from './vite/vite-plugin-html-replace-vars'
 import webappManifest from './vite/webapp-manifest'
 
@@ -16,6 +16,7 @@ const plugins: PluginOption[] = [
   htmlReplaceVars({ data: dataJson }),
   htmlInlineAssets({ cleanupInlineFiles: true }),
   pwaPlugin({
+    // https://vite-pwa-org.netlify.app/guide/
     registerType: 'autoUpdate',
     manifest: webappManifest,
     includeAssets: ['logo.png', 'logo.svg', 'robots.txt'],
@@ -23,8 +24,8 @@ const plugins: PluginOption[] = [
     devOptions: {
       enabled: false,
     },
-  }), // https://vite-pwa-org.netlify.app/guide/
-  htmlMinify(),
+  }),
+  htmlPrerender(),
 ]
 
 // https://vitejs.dev/config/

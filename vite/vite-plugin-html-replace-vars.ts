@@ -8,7 +8,7 @@ type HtmlReplaceVarsOptions = {
 
 export default function htmlReplaceVars({ data, delimiters = ['{{', '}}'] }: HtmlReplaceVarsOptions): Plugin {
   const htmlReplaceVarsPlugin: Plugin = {
-    name: 'vite:html-replace-vars',
+    name: 'vite-plugin-html-replace-vars',
     transformIndexHtml(html) {
       const dataVars = Object.entries(data)
       const [tstart, tend] = delimiters
