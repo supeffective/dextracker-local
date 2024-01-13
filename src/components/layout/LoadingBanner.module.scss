@@ -6,13 +6,13 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 1rem;
-  background-color: var(--blue-3);
-  border-radius: 0.5rem;
+  padding: 2.5rem;
+  // background-color: var(--blue-2);
   width: 100%;
   height: 100%;
 
   .spinning {
-    animation: var(--animation-spin) 1s linear infinite;
+    zoom: 2;
+    animation: var(--animation-spin);
   }
 }

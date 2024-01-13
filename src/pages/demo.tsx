@@ -1,6 +1,6 @@
 import { PageComponent } from '@/lib/router/types'
 
-const DemoPage: PageComponent<'id' | 'foo'> = ({ ...rest }) => {
+const DemoPage: PageComponent<'id' | 'foo'> = ({ routeParams: _, ...rest }) => {
   return (
     <article {...rest}>
       <h2>Demo Page</h2>
