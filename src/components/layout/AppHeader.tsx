@@ -3,8 +3,8 @@ import { HeartHandshakeIcon } from '@/lib/icons/actions'
 import { DiscordIcon, GithubIcon } from '@/lib/icons/brands'
 import { cn } from '@/lib/utils'
 import { ComponentPropsWithoutRef } from 'react'
-import appLogo from '/logo.png'
 import styles from './AppHeader.module.scss'
+import appLogo from '/images/logo/logo-60x60.jpg'
 
 type AppHeaderProps = {
   children?: never

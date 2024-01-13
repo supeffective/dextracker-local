@@ -29,12 +29,12 @@ const webappManifest: Partial<ManifestOptions> = {
   ],
   icons: [
     {
-      src: '/logo-2x.png',
+      src: '/images/logo/logo-2x.png',
       type: 'image/png',
       sizes: '512x512',
     },
     {
-      src: '/logo.png',
+      src: '/images/logo/logo.png',
       type: 'image/png',
       sizes: '256x256',
     },
@@ -44,7 +44,7 @@ const webappManifest: Partial<ManifestOptions> = {
 const pwaPluginOptions: Partial<VitePWAOptions> = {
   registerType: 'autoUpdate',
   manifest: webappManifest,
-  includeAssets: ['logo.png', 'logo.svg', 'robots.txt'],
+  includeAssets: ['images/logo/logo.png', 'images/logo/logo.svg', 'images/logo/apple-touch-icon.png', 'robots.txt'],
   injectRegister: 'inline',
   devOptions: {
     enabled: false,

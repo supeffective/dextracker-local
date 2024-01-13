@@ -4,7 +4,7 @@ A simple, lightweight, and client-based Pokédex Tracker.
 
 Brought to you by the [SuperEffective](https://supereffective.gg/) team.
 
-![Demo](public/twitter-card.jpg)
+![Demo](public/images/twitter-card.jpg)
 
 ## Features
 
