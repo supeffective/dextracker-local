@@ -143,7 +143,7 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
         <label className={styles.flexLabel}>
           <span>Download data</span>
           <DownloadTextButton
-            filename="super-pokedex-tracker-data.json"
+            filename="superpokedextracker-data.json"
             content={jsonState}
             name="download-data"
             title="Download data"

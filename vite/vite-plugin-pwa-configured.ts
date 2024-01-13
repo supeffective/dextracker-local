@@ -5,10 +5,9 @@ import dataJson from '../src/config.json'
 // https://vite-pwa-org.netlify.app/guide/
 
 const webappManifest: Partial<ManifestOptions> = {
-  id: 'com.itsjavi.pokedex-tracker',
+  id: 'com.supeffective.super-pokedex-tracker',
   lang: 'en',
-  scope: '/pokedex-tracker',
-  start_url: '/pokedex-tracker',
+  start_url: '/',
   name: dataJson.webapp_name,
   short_name: dataJson.webapp_short_name,
   description: dataJson.meta_description,
@@ -21,7 +20,7 @@ const webappManifest: Partial<ManifestOptions> = {
   categories: ['entertainment', 'games'],
   screenshots: [
     {
-      src: '/pokedex-tracker/screenshot.jpg',
+      src: '/screenshot.jpg',
       type: 'image/jpeg',
       sizes: '640x320',
       form_factor: 'wide',
@@ -30,12 +29,12 @@ const webappManifest: Partial<ManifestOptions> = {
   ],
   icons: [
     {
-      src: '/pokedex-tracker/logo-2x.png',
+      src: '/logo-2x.png',
       type: 'image/png',
       sizes: '512x512',
     },
     {
-      src: '/pokedex-tracker/logo.png',
+      src: '/logo.png',
       type: 'image/png',
       sizes: '256x256',
     },
