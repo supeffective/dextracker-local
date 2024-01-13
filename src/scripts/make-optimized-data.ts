@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { getDataCDNResourceUrl } from '@/kernel/urls'
 import { TrGame, TrPokedex, TrPokedexEntry, TrSourcePokemon } from '@/lib/dataset/types'
-import { getDataCDNResourceUrl } from '@/lib/urls'
 import { Game, Pokedex, Pokemon } from '@supeffective/dataset'
 
 const PUBLIC_DEST_DIR = `${process.cwd()}/public`

@@ -1,13 +1,8 @@
 import config from '@/config'
+import { MultiFormatImage } from '../lib/utils/types'
 
 export const APP_BASE_URL = import.meta.env.BASE_URL
 export const LOCAL_IMAGES_CDN_URL = `${APP_BASE_URL}images`
-
-export type MultiFormatImage = {
-  avifSrc: string
-  webpSrc: string
-  fallbackSrc: string
-}
 
 export function getGameCoverImageUrls(gameId: string): MultiFormatImage {
   const avifSrc = `${LOCAL_IMAGES_CDN_URL}/avif/games/${gameId}.avif`

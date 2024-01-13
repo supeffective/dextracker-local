@@ -1,5 +1,5 @@
 import { pokemonDatasetMap } from '@/lib/dataset/pokemon'
-import { PokedexEntryState, PokedexSearchStateFilter, PokedexState } from './types/state'
+import { PokedexEntryState, PokedexSearchStateFilter, PokedexState } from '../stores/types/state'
 
 import { TrPokedex, TrPokedexEntry, TrStatefulPokedexEntry } from '@/lib/dataset/types'
 
@@ -40,8 +40,6 @@ function _generateDexSearchableEntries(dexEntries: TrPokedexEntry[], dexState: P
     } satisfies PokedexSearchableEntry
 
     fullEntry.searchText = _generateAdditionalEntrySearchableText(fullEntry)
-
-    // console.log(fullEntry.id, fullEntry.searchText)
 
     return fullEntry
   })

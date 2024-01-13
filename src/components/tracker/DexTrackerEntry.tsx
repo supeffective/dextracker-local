@@ -1,6 +1,6 @@
+import { PokedexSearchableEntry } from '@/kernel/search'
 import { PokeballIcon, PokeballOutlineIcon, ShinyIcon } from '@/lib/icons/gamegui'
 import { cn } from '@/lib/utils'
-import { PokedexSearchableEntry } from '@/stores/search'
 import { PokedexEntryState } from '@/stores/types/state'
 import useDexTrackerStore from '@/stores/useDexTrackerStore'
 import usePokedexSearchStore from '@/stores/usePokedexSearchStore'

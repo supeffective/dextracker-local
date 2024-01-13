@@ -25,7 +25,7 @@ export type DexTrackerGameActions = {
 
 export type DexTrackerDexActions = {
   updateDex: (dexId: string, data: Partial<PokedexState>) => void
-  setCurrentDex: (dexId: string) => void
+  setCurrentDex: (dexId: string, gameId?: string) => void
   removeDex: (dexId: string) => void
   updateDexPokemon: (dexId: string, pokemonId: string, data: Partial<PokedexEntryState>) => void
 }

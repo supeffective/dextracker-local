@@ -1,5 +1,5 @@
+import { localUrl } from '@/kernel/urls'
 import { TrPokedex } from '@/lib/dataset/types'
-import { localUrl } from '@/lib/urls'
 import { useQuery } from '@tanstack/react-query'
 import useDexTrackerStore from '../stores/useDexTrackerStore'
 

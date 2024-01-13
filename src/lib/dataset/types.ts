@@ -8,6 +8,10 @@ export type TrPokedexBasicInfo = {
   region: string | null
 }
 
+export type TrPokedexBasicInfoWithGameIds = TrPokedexBasicInfo & {
+  gameIds: string[]
+}
+
 export type TrGame = {
   id: string
   name: string

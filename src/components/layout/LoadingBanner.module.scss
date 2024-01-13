@@ -1,0 +1,18 @@
+.loading {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-size: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--blue-3);
+  border-radius: 0.5rem;
+  width: 100%;
+  height: 100%;
+
+  .spinning {
+    animation: var(--animation-spin) 1s linear infinite;
+  }
+}

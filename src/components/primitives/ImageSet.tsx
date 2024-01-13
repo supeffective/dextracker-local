@@ -1,4 +1,4 @@
-import { MultiFormatImage } from '@/lib/urls'
+import { MultiFormatImage } from '@/lib/utils/types'
 import { ComponentPropsWithoutRef } from 'react'
 
 type ImageSetProps = {

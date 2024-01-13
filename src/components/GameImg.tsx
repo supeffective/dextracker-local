@@ -1,4 +1,4 @@
-import { getGameCoverImageUrls } from '@/lib/urls'
+import { getGameCoverImageUrls } from '@/kernel/urls'
 import { ComponentPropsWithoutRef } from 'react'
 import ImageSet from './primitives/ImageSet'
 

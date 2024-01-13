@@ -4,10 +4,9 @@ button {
   padding: 0 0.5rem;
   line-height: 1.5;
   min-height: 2em;
-  border: 1px solid var(--color-border-hard);
+  border: 1px solid var(--stone-8);
   border-radius: 3px;
-  background: var(--color-panel);
-  color: var(--color-text);
+  background: var(--stone-2);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -27,11 +26,11 @@ button {
   }
 
   &:where(:hover) {
-    background: var(--color-panel-hard);
+    background: var(--stone-3);
   }
 
   &:where(:active) {
-    background: var(--color-panel);
+    background: var(--stone-2);
   }
 }
 
@@ -46,10 +45,9 @@ input[type='url'] {
   padding: 0 0.5rem;
   line-height: 1.5;
   min-height: 2em;
-  border: 1px solid var(--color-border-hard);
+  border: 1px solid var(--stone-2);
   border-radius: 3px;
-  background: var(--color-panel);
-  color: var(--color-text);
+  background: var(--stone-2);
   cursor: text;
 
   &:disabled {
@@ -59,7 +57,7 @@ input[type='url'] {
   }
 
   &:hover {
-    background: var(--color-panel-hard);
+    background: var(--stone-3);
   }
 
   &:focus {

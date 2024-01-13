@@ -1,13 +1,15 @@
 import config from '@/config'
+import { routeFactory } from '@/kernel/routes'
+import { getDexSourceCodeUrl } from '@/kernel/urls'
 import { FileDownloadIcon, SettingsIcon, UploadIcon } from '@/lib/icons/actions'
 import { GithubIcon } from '@/lib/icons/brands'
 import { PokeballIcon, ShinyIcon } from '@/lib/icons/gamegui'
 import { ForkIcon } from '@/lib/icons/sections'
-import { getDexSourceCodeUrl } from '@/lib/urls'
 import { cn } from '@/lib/utils'
 import { PokedexSearchStateFilter } from '@/stores/types/state'
 import useDexTrackerStore, { useCurrentGameAndDex } from '@/stores/useDexTrackerStore'
 import usePokedexSearchStore from '@/stores/usePokedexSearchStore'
+import { useRouteNavigator } from '@/stores/useRouterStore'
 import { ComponentPropsWithoutRef } from 'react'
 import GameIndicator from './GameIndicator'
 import GameSelectField from './GameSelectField'
@@ -22,6 +24,7 @@ type StickyToolbarProps = {} & ComponentPropsWithoutRef<'div'>
 
 export default function StickyToolbar({ className, ...props }: StickyToolbarProps) {
   const { currentGame, currentDex } = useCurrentGameAndDex()
+  const navigate = useRouteNavigator()
   const state = useDexTrackerStore((store) => store)
   const searchState = usePokedexSearchStore((store) => store)
   const filters: PokedexSearchStateFilter = searchState.filters ?? {}
@@ -60,7 +63,8 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
           name="game-select"
           value={state.currentGameId}
           onChange={(e) => {
-            state.setCurrentGame(e.target.value)
+            // state.setCurrentGame(e.target.value)
+            navigate(routeFactory.pokedex(null, e.target.value))
           }}
         />
         <PokedexSelectField
@@ -70,7 +74,8 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
           gameId={state.currentGameId}
           value={state.currentDexId}
           onChange={(e) => {
-            state.setCurrentDex(e.target.value)
+            // state.setCurrentDex(e.target.value)
+            navigate(routeFactory.pokedex(e.target.value, state.currentGameId))
           }}
         />
         <hr />
