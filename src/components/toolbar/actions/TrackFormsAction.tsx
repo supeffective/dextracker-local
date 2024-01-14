@@ -1,7 +1,7 @@
 import { PawPrintIcon } from '@/lib/icons/sections'
 import useDexTrackerStore from '@/stores/useDexTrackerStore'
-import FlexLabel from '../primitives/FlexLabel'
-import ToggleBtn from '../primitives/ToggleBtn'
+import FlexLabel from '../../primitives/FlexLabel'
+import ToggleBtn from '../../primitives/ToggleBtn'
 
 export default function TrackFormsAction({ className }: { className?: string }) {
   const [value, setValue] = useDexTrackerStore((store) => [store.filters?.hideForms, store.setHideForms])

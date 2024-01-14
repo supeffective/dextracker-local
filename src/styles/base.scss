@@ -30,3 +30,14 @@ html,
 #app {
   overflow-x: clip; // Like overflow-x: hidden, but works well with position: sticky
 }
+
+.icon,
+svg.icon {
+  width: 1.4em;
+  height: 1.4em;
+  line-height: 1;
+  fill: currentColor;
+  vertical-align: middle;
+  text-decoration: none;
+  padding: 0;
+}

@@ -7,7 +7,8 @@ import FlexLabel from '../primitives/FlexLabel'
 import ToggleBtn from '../primitives/ToggleBtn'
 import styles from './DexSettingsDrawer.module.scss'
 import SettingsDrawer from './SettingsDrawer'
-import TrackFormsAction from './TrackFormsAction'
+import RemoveDexAction from './actions/RemoveDexAction'
+import TrackFormsAction from './actions/TrackFormsAction'
 
 export default function DexSettingsDrawer({ children, ...props }: DrawerMenuProps) {
   const store = useDexTrackerStore((store) => store)
@@ -15,7 +16,7 @@ export default function DexSettingsDrawer({ children, ...props }: DrawerMenuProp
 
   return (
     <SettingsDrawer {...props}>
-      <FlexLabel label={<span>Toggle Caught</span>}>
+      <FlexLabel label={<span>Show Caught</span>}>
         <ToggleBtn
           name="toggle-caught"
           title="Toggle Caught"
@@ -35,10 +36,10 @@ export default function DexSettingsDrawer({ children, ...props }: DrawerMenuProp
         </ToggleBtn>
       </FlexLabel>
 
+      <hr />
       <TrackFormsAction />
 
-      <hr />
-      <FlexLabel label={<span>Shiny sprites</span>}>
+      <FlexLabel label={<span>Track shinies</span>}>
         <ToggleBtn
           name="toggle-shiny"
           title="Toggle Shiny"
@@ -56,6 +57,8 @@ export default function DexSettingsDrawer({ children, ...props }: DrawerMenuProp
           />
         </ToggleBtn>
       </FlexLabel>
+      <hr />
+      <RemoveDexAction />
       {children}
     </SettingsDrawer>
   )

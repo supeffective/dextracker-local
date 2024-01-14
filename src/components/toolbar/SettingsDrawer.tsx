@@ -1,9 +1,9 @@
 import { SettingsIcon } from '@/lib/icons/actions'
 import { cn } from '@/lib/utils'
 import DrawerMenu, { DrawerMenuProps } from '../primitives/DrawerMenu'
-import AppVersionItem from './AppVersionItem'
-import DataDownloadJsonAction from './DataDownloadJsonAction'
-import DataUploadJsonAction from './DataUploadJsonAction'
+import AppVersionItem from './actions/AppVersionItem'
+import DataDownloadJsonAction from './actions/DataDownloadJsonAction'
+import DataUploadJsonAction from './actions/DataUploadJsonAction'
 
 export default function SettingsDrawer({ className, children, ...props }: DrawerMenuProps) {
   return (
@@ -16,7 +16,6 @@ export default function SettingsDrawer({ className, children, ...props }: Drawer
       {...props}
     >
       {children}
-      <hr />
       <DataDownloadJsonAction />
       <DataUploadJsonAction />
       <hr />
