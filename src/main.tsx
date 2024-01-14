@@ -5,7 +5,7 @@ import App from './components/layout/AppWithRouter'
 import AppLayout from './components/layout/AppLayout'
 import { appRoutes } from './kernel/routes'
 import { initializeAppRouter } from './lib/router/hooks'
-import * as ErrorPage404 from './pages/404'
+import * as ErrorPage404 from './pages/error'
 import './styles/index.scss'
 
 initializeAppRouter(appRoutes, ErrorPage404, AppLayout)

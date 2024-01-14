@@ -17,7 +17,7 @@ Brought to you by the [SuperEffective](https://supereffective.gg/) team.
 - [x] Search for Pokémon by name, type, color, dex number, etc.
 - [ ] View Pokémon basic details such as location, stats, types, and abilities
 - [ ] Direct links to well-known Pokémon resource websites
-- [ ] The main page lists the current progress of all your stored dexes
+- [x] The main page lists the current progress of all your stored dexes
 - [ ] Trainer Cards (Trainer Profiles): a simple page with your name, avatar, short bio, and a list of your favorite
       Pokemon and their Pokeball, and the games you own. Downloadable as image and shareable via link & QR.
 - [x] JSON imports/exports for your data, to keep it safe wherever you want
@@ -46,6 +46,7 @@ check out our main, cloud based project: [supereffective.gg](https://supereffect
 - [ ] Add a "Mark all as caught" toggle button
 - [ ] Add a "Mark all as shiny" toggle button
 - [ ] Better icon for Smartphone PWA homescreen
+- [ ] Better HTTP 404 page
 
 ## Tech Stack
 

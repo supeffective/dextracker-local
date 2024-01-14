@@ -31,7 +31,7 @@
     "precommit": "CI=true bun test && CI=true bun lint",
     "prepare": "husky install",
     "preview": "bun run start",
-    "start": "vite preview",
+    "start": "vite preview --host",
     "test": "bun test --env=jsdom",
     "test:coverage": "bun test --coverage && open coverage/index.html",
     "version:bump": "bun x changelogen --bump --release",

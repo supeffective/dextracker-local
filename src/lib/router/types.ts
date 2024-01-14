@@ -22,12 +22,14 @@ export type ParsedUri = {
 
 export type CurrentRoute<K extends string = string> = Route<K> & ParsedUri
 
-export type RouterPage<K extends string = string> = {
+export type RouterPageModule<K extends string = string> = {
   default?: PageComponent<K>
-  Layout?: PageComponent<K>
+  layout?: PageComponent<K>
 }
 
 export type RouterContextState<K extends string = string> = {
   router: AppRouter
   currentRoute?: CurrentRoute<K>
 }
+
+export type RouterPageModuleRouteMap<K extends string = string> = Record<string, RouterPageModule<K>>

@@ -1,7 +1,7 @@
 import { shallow } from 'zustand/shallow'
 import { createWithEqualityFn } from 'zustand/traditional'
 
-import type { CurrentRoute, PageComponent, RouterPage } from '@/lib/router/types'
+import type { CurrentRoute, PageComponent, RouterPageModule, RouterPageModuleRouteMap } from '@/lib/router/types'
 import { AppRouter } from './appRouterClass'
 import { initializeRouter } from './initializeRouter'
 
@@ -21,8 +21,8 @@ type Actions = {
 export const appRouter = new AppRouter()
 
 export function initializeAppRouter(
-  appRoutes: Record<string, RouterPage>,
-  errorPage: RouterPage,
+  appRoutes: RouterPageModuleRouteMap,
+  errorPage: RouterPageModule,
   defaultLayout: PageComponent,
 ): AppRouter {
   return initializeRouter(appRouter, appRoutes, errorPage, defaultLayout)

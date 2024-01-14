@@ -1,14 +1,14 @@
 import { AppRouter } from './appRouterClass'
-import type { PageComponent, PageComponentProps, RouterPage } from './types'
+import type { PageComponent, PageComponentProps, RouterPageModule, RouterPageModuleRouteMap } from './types'
 
 export function initializeRouter(
   router: AppRouter,
-  appRoutes: Record<string, RouterPage>,
-  errorPage: RouterPage,
+  appRoutes: RouterPageModuleRouteMap,
+  errorPage: RouterPageModule,
   defaultLayout: PageComponent,
 ): AppRouter {
   const DefaultLayout = defaultLayout
-  const Error404Layout = errorPage.Layout ?? defaultLayout
+  const Error404Layout = errorPage.layout ?? defaultLayout
   const Error404Fc = errorPage.default as React.FC
 
   router.setFallback((props: PageComponentProps) => {
@@ -20,13 +20,13 @@ export function initializeRouter(
   })
 
   for (const pattern of Object.keys(appRoutes)) {
-    const page = appRoutes[pattern]
-    if (!page || !page.default) {
+    const { default: page, layout } = appRoutes[pattern]
+    if (!page) {
       throw new Error(`Page with route '${pattern}' does not have a default JSX.Element export.`)
     }
 
-    const LayoutFc = page.Layout ?? DefaultLayout
-    const PageFc = page.default
+    const LayoutFc = layout ?? DefaultLayout
+    const PageFc = page
 
     router.add(pattern, (props: PageComponentProps) => {
       return (

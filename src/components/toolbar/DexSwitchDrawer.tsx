@@ -1,4 +1,4 @@
-import { routeFactory } from '@/kernel/routes'
+import { routeFactory } from '@/kernel/routeFactory'
 import { getDexSourceCodeUrl } from '@/kernel/urls'
 import { GithubIcon } from '@/lib/icons/brands'
 import { cn } from '@/lib/utils'

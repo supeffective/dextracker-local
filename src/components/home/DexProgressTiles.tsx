@@ -1,4 +1,4 @@
-import { routeFactory } from '@/kernel/routes'
+import { routeFactory } from '@/kernel/routeFactory'
 import { gamesDatasetMap } from '@/lib/dataset/games'
 import { pokedexBasicInfoMap } from '@/lib/dataset/pokedexes'
 import { pokemonDatasetMap } from '@/lib/dataset/pokemon'
