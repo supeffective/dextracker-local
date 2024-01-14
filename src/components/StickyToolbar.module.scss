@@ -33,6 +33,18 @@
   justify-content: space-between;
 }
 
+.vplaceTop {
+  align-items: flex-start;
+}
+
+.vplaceCenter {
+  align-items: center;
+}
+
+.vplaceBottom {
+  align-items: flex-end;
+}
+
 .fixed {
   position: fixed;
   top: 54px; // height of the main menu + margin

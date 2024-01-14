@@ -4,9 +4,10 @@ button {
   padding: 0 0.5rem;
   line-height: 1.5;
   min-height: 2em;
-  border: 1px solid var(--stone-8);
   border-radius: 3px;
+  border: 1px solid var(--stone-8);
   background: var(--stone-2);
+  color: inherit;
   cursor: pointer;
   display: flex;
   align-items: center;

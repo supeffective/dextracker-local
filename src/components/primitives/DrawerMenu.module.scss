@@ -18,9 +18,9 @@
     4px 4px 0 var(--yellow-7),
     -5px 4px 0 var(--yellow-7),
     inset 3px 3px 0 transparent;
+  color: var(--yellow-11);
   font-size: 24px;
   transition: box-shadow 0.15s ease-in-out;
-  color: var(--yellow-11);
 
   &:hover {
     background: var(--yellow-5);

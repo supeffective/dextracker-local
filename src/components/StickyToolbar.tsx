@@ -5,6 +5,7 @@ import styles from './StickyToolbar.module.scss'
 type StickyToolbarProps = {
   stickyness?: 'sticky' | 'fixed' | 'none'
   placement?: 'left' | 'center' | 'right' | 'distribute'
+  vplacement?: 'top' | 'bottom' | 'center'
 } & ComponentPropsWithoutRef<'div'>
 
 export default function StickyToolbar({
@@ -12,6 +13,7 @@ export default function StickyToolbar({
   children,
   stickyness = 'sticky',
   placement = 'distribute',
+  vplacement = 'top',
   ...props
 }: StickyToolbarProps) {
   return (
@@ -32,6 +34,9 @@ export default function StickyToolbar({
           [styles.placeCenter]: placement === 'center',
           [styles.placeRight]: placement === 'right',
           [styles.placeDistribute]: placement === 'distribute',
+          [styles.vplaceTop]: vplacement === 'top',
+          [styles.vplaceCenter]: vplacement === 'center',
+          [styles.vplaceBottom]: vplacement === 'bottom',
         })}
       >
         {children}
