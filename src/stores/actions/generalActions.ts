@@ -1,16 +1,14 @@
 import { DexTrackerActionFactory, DexTrackerGeneralActions } from '../types/actions'
 import { DexTrackerState, dexTrackerStateSchema } from '../types/state'
 
-export const DEFAULT_GAME_ID = 'sv-s'
-export const DEFAULT_DEX_ID = 'paldea'
+export const DEFAULT_FULL_DEX_ID = 'paldea_sv-s'
 export function createDefaultState(): DexTrackerState {
   const defaultState: DexTrackerState = {
     title: 'Dex Tracker',
     trainer: undefined,
     gameIds: [],
     dexes: {},
-    currentGameId: DEFAULT_GAME_ID,
-    currentDexId: DEFAULT_DEX_ID,
+    currentFullDexId: DEFAULT_FULL_DEX_ID,
     sharedBox: undefined,
     lastModified: undefined,
   }

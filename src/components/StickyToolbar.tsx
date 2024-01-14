@@ -4,11 +4,11 @@ import { getDexSourceCodeUrl } from '@/kernel/urls'
 import { FileDownloadIcon, SettingsIcon, UploadIcon } from '@/lib/icons/actions'
 import { GithubIcon } from '@/lib/icons/brands'
 import { PokeballIcon, ShinyIcon } from '@/lib/icons/gamegui'
-import { ForkIcon } from '@/lib/icons/sections'
+import { PawPrintIcon } from '@/lib/icons/sections'
 import { cn } from '@/lib/utils'
-import { PokedexSearchStateFilter } from '@/stores/types/state'
-import useDexTrackerStore, { useCurrentGameAndDex } from '@/stores/useDexTrackerStore'
-import usePokedexSearchStore from '@/stores/usePokedexSearchStore'
+import { DexTrackerFilterState } from '@/stores/types/state'
+import { useCurrentDexData } from '@/stores/useCurrentDexData'
+import useDexTrackerStore from '@/stores/useDexTrackerStore'
 import { useRouteNavigator } from '@/stores/useRouterStore'
 import { ComponentPropsWithoutRef } from 'react'
 import GameIndicator from './GameIndicator'
@@ -20,14 +20,16 @@ import FileUploadBtn from './primitives/FileUploadBtn'
 import ToggleBtn from './primitives/ToggleBtn'
 import { DownloadTextButton } from './primitives/text-download'
 
-type StickyToolbarProps = {} & ComponentPropsWithoutRef<'div'>
+type StickyToolbarProps = {
+  leftContent?: React.ReactNode
+  noSearch?: boolean
+} & ComponentPropsWithoutRef<'div'>
 
-export default function StickyToolbar({ className, ...props }: StickyToolbarProps) {
-  const { currentGame, currentDex } = useCurrentGameAndDex()
+export default function StickyToolbar({ className, noSearch, leftContent, ...props }: StickyToolbarProps) {
+  const { info: currentDex, state: currentDexState } = useCurrentDexData()
   const navigate = useRouteNavigator()
-  const state = useDexTrackerStore((store) => store)
-  const searchState = usePokedexSearchStore((store) => store)
-  const filters: PokedexSearchStateFilter = searchState.filters ?? {}
+  const store = useDexTrackerStore((store) => store)
+  const filters: DexTrackerFilterState = store.filters ?? {}
 
   let debounceSearchTimeout: NodeJS.Timeout | null = null
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,18 +37,18 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
       clearTimeout(debounceSearchTimeout)
     }
     debounceSearchTimeout = setTimeout(() => {
-      searchState.setSearchQuery(e.target.value)
+      store.setSearchQuery(e.target.value)
     }, 300)
   }
 
-  const gameIcon = <GameIndicator className={cn('avatar-raised')} gameId={currentGame.id} />
+  const gameIcon = <GameIndicator className={cn('avatar-raised')} gameId={currentDexState?.gameId ?? 'home'} />
   const settingsIcon = <SettingsIcon />
 
-  const jsonState = JSON.stringify(state, null, 2)
+  const jsonState = JSON.stringify(store, null, 2)
 
   const handleJsonUpload = (data: string) => {
     try {
-      state.loadFromJSON(data)
+      store.loadFromJSON(data)
     } catch (error) {
       alert(`${error}`)
     }
@@ -54,83 +56,99 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
     window.location.reload()
   }
 
+  const emptyDiv = <div>&nbsp;</div>
+
   return (
     <div className={cn(styles.toolbar, className)} {...props}>
-      <DrawerMenu placement="left" icon={gameIcon} buttonName="switch-pokedex" buttonTitle="Switch Pokédex">
-        <GameSelectField
-          className={styles.labelledSelect}
-          label="Game: "
-          name="game-select"
-          value={state.currentGameId}
-          onChange={(e) => {
-            // state.setCurrentGame(e.target.value)
-            navigate(routeFactory.pokedex(null, e.target.value))
-          }}
-        />
-        <PokedexSelectField
-          className={styles.labelledSelect}
-          label="Dex: "
-          name="dex-select"
-          gameId={state.currentGameId}
-          value={state.currentDexId}
-          onChange={(e) => {
-            // state.setCurrentDex(e.target.value)
-            navigate(routeFactory.pokedex(e.target.value, state.currentGameId))
-          }}
-        />
-        <hr />
-        <div className={styles.flexLinks}>
-          <a href={getDexSourceCodeUrl(currentDex.region, currentDex.id)} target="_blank" rel="noreferrer">
-            <GithubIcon />
-            <span>Edit source code</span>
-          </a>
-        </div>
-      </DrawerMenu>
-      <div className={styles.searchBoxWrapper}>
-        <div className={styles.searchBox}>
-          <input
-            // biome-ignore lint/a11y/noAutofocus: <explanation>
-            autoFocus
-            type="search"
-            name="pokemon-search"
-            placeholder="Search Pokémon..."
-            defaultValue={filters.searchQuery}
-            onChange={handleSearchChange}
+      {currentDexState && (
+        <DrawerMenu
+          className={cn(styles.drawer)}
+          placement="left"
+          icon={gameIcon}
+          buttonName="switch-pokedex"
+          buttonTitle="Switch Pokédex"
+        >
+          <GameSelectField
+            className={styles.labelledSelect}
+            label="Game: "
+            name="game-select"
+            value={currentDexState.gameId}
+            onChange={(e) => {
+              // state.setCurrentGame(e.target.value)
+              navigate(routeFactory.pokedex(null, e.target.value))
+            }}
           />
-        </div>
+          <PokedexSelectField
+            className={styles.labelledSelect}
+            label="Dex: "
+            name="dex-select"
+            gameId={currentDexState.gameId}
+            value={currentDexState.dexId}
+            onChange={(e) => {
+              // state.setCurrentDex(e.target.value)
+              navigate(routeFactory.pokedex(e.target.value, currentDexState.gameId))
+            }}
+          />
+          {currentDex && (
+            <>
+              <hr />
+              <div className={styles.flexLinks}>
+                <a href={getDexSourceCodeUrl(currentDex.region, currentDex.id)} target="_blank" rel="noreferrer">
+                  <GithubIcon />
+                  <span>Edit source code</span>
+                </a>
+              </div>
+            </>
+          )}
+        </DrawerMenu>
+      )}
+      {!currentDexState && !leftContent && emptyDiv}
+      {leftContent}
+      <div className={styles.searchBoxWrapper}>
+        {!noSearch && (
+          <div className={styles.searchBox}>
+            <input
+              type="search"
+              name="pokemon-search"
+              placeholder="Search Pokémon..."
+              defaultValue={filters.searchQuery}
+              onChange={handleSearchChange}
+            />
+          </div>
+        )}
+        {noSearch && emptyDiv}
       </div>
-      <DrawerMenu placement="right" icon={settingsIcon} buttonName="settings" buttonTitle="Settings">
+      <DrawerMenu
+        className={cn(styles.drawer)}
+        placement="right"
+        icon={settingsIcon}
+        buttonName="settings"
+        buttonTitle="Settings"
+      >
+        {currentDexState && (
+          <label className={styles.flexLabel}>
+            <span>Toggle Caught</span>
+            <ToggleBtn
+              name="toggle-caught"
+              title="Toggle Caught"
+              className={cn(styles.toggle, { [styles.disabledBall]: filters.hideCaught })}
+              value={filters.hideCaught}
+              inverted
+              onToggle={(active) => {
+                store.setHideCaught(active)
+              }}
+            >
+              <PokeballIcon
+                style={{
+                  // opacity: filters.hideCaught ? 0.75 : 1,
+                  transform: filters.hideCaught ? 'none' : 'rotate(25deg)',
+                }}
+              />
+            </ToggleBtn>
+          </label>
+        )}
         <label className={styles.flexLabel}>
-          <span>Toggle Caught</span>
-          <ToggleBtn
-            name="toggle-caught"
-            title="Toggle Caught"
-            className={cn(styles.toggle, { [styles.disabledBall]: filters.hideCaught })}
-            value={filters.hideCaught}
-            inverted
-            onToggle={(active) => {
-              searchState.setHideCaught(active)
-            }}
-          >
-            <PokeballIcon />
-          </ToggleBtn>
-        </label>
-        <label className={styles.flexLabel}>
-          <span>Shiny sprites</span>
-          <ToggleBtn
-            name="toggle-shiny"
-            title="Toggle Shiny"
-            className={cn(styles.toggle)}
-            value={filters.shinyMode}
-            onToggle={(active) => {
-              searchState.setShinyMode(active)
-            }}
-          >
-            <ShinyIcon />
-          </ToggleBtn>
-        </label>
-        <label className={styles.flexLabel}>
-          <span>Toggle forms</span>
+          <span>Track forms</span>
           <ToggleBtn
             name="toggle-forms"
             title="Toggle Forms"
@@ -138,12 +156,41 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
             value={filters.hideForms}
             inverted
             onToggle={(active) => {
-              searchState.setHideForms(active)
+              store.setHideForms(active)
             }}
           >
-            <ForkIcon data-nofill style={{ transform: 'rotate(-180deg)' }} />
+            <PawPrintIcon
+              style={{
+                // opacity: filters.hideForms ? 0.8 : 1,
+                transform: filters.hideForms ? 'rotate(-25deg) scale(1.1)' : 'rotate(0deg)',
+              }}
+            />
           </ToggleBtn>
         </label>
+        {currentDexState && (
+          <>
+            <hr />
+            <label className={styles.flexLabel}>
+              <span>Shiny sprites</span>
+              <ToggleBtn
+                name="toggle-shiny"
+                title="Toggle Shiny"
+                className={cn(styles.toggle)}
+                value={filters.shinyMode}
+                onToggle={(active) => {
+                  store.setShinyMode(active)
+                }}
+              >
+                <ShinyIcon
+                  style={{
+                    // opacity: filters.shinyMode ? 1 : 0.6,
+                    transform: filters.shinyMode ? 'scale(0.9)' : 'none',
+                  }}
+                />
+              </ToggleBtn>
+            </label>
+          </>
+        )}
         <hr />
         <label className={styles.flexLabel}>
           <span>Download data</span>
@@ -171,7 +218,7 @@ export default function StickyToolbar({ className, ...props }: StickyToolbarProp
         </FileUploadBtn>
         <hr />
         <div className={styles.appVersion}>
-          <b>Super Pokédex Tracker </b>
+          <b>{config.title}</b>
           <span>v{config.version}</span>
         </div>
       </DrawerMenu>

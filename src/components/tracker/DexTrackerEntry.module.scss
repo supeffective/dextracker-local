@@ -18,6 +18,13 @@
   height: 100%;
 }
 
+@media (max-width: 500px) {
+  .entry {
+    padding: 0;
+    border: 1px solid var(--blue-6);
+  }
+}
+
 .entryInfo {
   width: 100%;
   font-size: 0.8rem;

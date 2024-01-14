@@ -1,4 +1,6 @@
+import { TrGame, TrPokedex, TrPokedexBasicInfo } from '@/lib/dataset/types'
 import { SimplifyType as Simply } from '@/lib/utils/types'
+import { UseQueryResult } from '@tanstack/react-query'
 import { z } from 'zod'
 
 const trainerInfoStateSchema = z.object({
@@ -28,9 +30,22 @@ const boxStateSchema = z.object({
   gameIds: z.array(z.string()),
   pokemon: z.array(boxEntryStateSchema),
 })
-const pokedexStateSchema = z.object({
+
+export const pokedexStateSchema = z.object({
   id: z.string(),
+  dexId: z.string(),
+  gameId: z.string(),
   pokemon: z.record(dexEntrySchema),
+  createdAt: z.number(),
+  lastModified: z.number(),
+})
+
+const dexTrackerFilterSchema = z.object({
+  shinyMode: z.boolean().optional(),
+  searchQuery: z.string().optional(),
+  hideForms: z.boolean().optional(),
+  hideCosmeticForms: z.boolean().optional(),
+  hideCaught: z.boolean().optional(),
 })
 
 export const dexTrackerStateSchema = z.object({
@@ -38,13 +53,14 @@ export const dexTrackerStateSchema = z.object({
   trainer: trainerInfoStateSchema.optional(),
   gameIds: stringArrSchema,
   dexes: z.record(pokedexStateSchema),
-  currentGameId: z.string(),
-  currentDexId: z.string(),
+  filters: dexTrackerFilterSchema.optional(),
+  currentFullDexId: z.string().optional(),
   sharedBox: boxStateSchema.optional(),
   lastModified: z.number().optional(),
 })
 
 export type DexTrackerState = Simply<z.infer<typeof dexTrackerStateSchema>>
+export type DexTrackerFilterState = Simply<z.infer<typeof dexTrackerFilterSchema>>
 export type PokeboxState = Simply<z.infer<typeof boxStateSchema>>
 export type PokeboxEntryState = Simply<z.infer<typeof boxEntryStateSchema>>
 export type PokedexEntryState = Simply<z.infer<typeof dexEntrySchema>>
@@ -54,21 +70,18 @@ export type PokeGender = Simply<z.infer<typeof genderSchema>>
 export type PokeTradingStatus = Simply<z.infer<typeof tradingStatusSchema>>
 
 // -----------------------------------------------
-// SEARCH STORE:
+// CURRENT state:
 
-const pokedexSearchStateFilterSchema = z.object({
-  shinyMode: z.boolean().optional(),
-  searchQuery: z.string().optional(),
-  hideForms: z.boolean().optional(),
-  hideCosmeticForms: z.boolean().optional(),
-  hideCaught: z.boolean().optional(),
-})
-
-export const pokedexSearchStateSchema = z.object({
-  dexId: z.string(),
-  filters: pokedexSearchStateFilterSchema.optional(),
-  lastModified: z.number().optional(),
-})
-
-export type PokedexSearchState = Simply<z.infer<typeof pokedexSearchStateSchema>>
-export type PokedexSearchStateFilter = Simply<z.infer<typeof pokedexSearchStateFilterSchema>>
+export type CurrentDexState =
+  | {
+      game: TrGame
+      state: PokedexState
+      info: TrPokedexBasicInfo
+      fullInfoQuery: UseQueryResult<TrPokedex, Error>
+    }
+  | {
+      game?: TrGame
+      state?: PokedexState
+      info?: TrPokedexBasicInfo
+      fullInfoQuery?: UseQueryResult<TrPokedex, Error>
+    }

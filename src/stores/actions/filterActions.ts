@@ -1,10 +1,6 @@
-import { PokedexSearchActions } from '../types/actions'
-import { PokedexSearchState } from '../types/state'
+import { DexTrackerActionFactory, DexTrackerFilterActions } from '../types/actions'
 
-const filterActions = (
-  setState: (newState: Partial<PokedexSearchState>) => void,
-  getState: () => PokedexSearchState,
-): PokedexSearchActions => {
+const filterActions: DexTrackerActionFactory<DexTrackerFilterActions> = (setState, getState) => {
   return {
     setShinyMode(value) {
       const currentState = getState()

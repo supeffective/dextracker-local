@@ -4,7 +4,7 @@
   z-index: 1;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
   background: linear-gradient(to bottom, var(--blue-1), rgba(255, 255, 255, 0));
   padding: 1rem 0;
@@ -29,6 +29,7 @@
   gap: 0.5rem;
   max-width: 50vw;
   max-width: max(40vw, 200px);
+  padding: 0.5rem 0;
 }
 
 .searchBox {
@@ -101,6 +102,7 @@
   align-items: center;
   gap: 0.5rem;
   font-style: italic;
+  width: 100%;
 
   b,
   i {
@@ -144,4 +146,8 @@
   path:nth-of-type(2) {
     fill: var(--yellow-0) !important;
   }
+}
+
+.toggle svg {
+  transition: transform 0.1s ease-in-out;
 }

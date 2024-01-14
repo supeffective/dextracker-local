@@ -8,6 +8,7 @@ Brought to you by the [SuperEffective](https://supereffective.gg/) team.
 
 ## Features
 
+- [ ] Add a search guide modal, and (?) icon to the search bar
 - [x] Last game's Pokédex as the default
 - [ ] Mark all games that you own
 - [x] Track all regional Pokédexes, for all main series games
@@ -17,6 +18,8 @@ Brought to you by the [SuperEffective](https://supereffective.gg/) team.
 - [ ] View Pokémon basic details such as location, stats, types, and abilities
 - [ ] Direct links to well-known Pokémon resource websites
 - [ ] The main page lists the current progress of all your stored dexes
+- [ ] Trainer Cards (Trainer Profiles): a simple page with your name, avatar, short bio, and a list of your favorite
+      Pokemon and their Pokeball, and the games you own. Downloadable as image and shareable via link & QR.
 - [x] JSON imports/exports for your data, to keep it safe wherever you want
 - [ ] Random Shiny Hunting challenge: from all games that you own, this widget will challengee you to hunt a shiny
       Pokémon that you don't own yet.
@@ -36,8 +39,8 @@ check out our main, cloud based project: [supereffective.gg](https://supereffect
 
 - [ ] Add homepage dashboard
 - [ ] Add placeholders to avoid Cumulative Layout Shifts (CLS)
-- [ ] Add React router to navigate between dexes (hash router)
-- [ ] Put filters back together with the main state, or export both stores in the JSON
+- [x] Add React router to navigate between dexes (hash router)
+- [x] Put filters back together with the main state, or export both stores in the JSON
 - [ ] Add a "Mark all as seen" toggle button
 - [ ] Add a "Mark all as caught" toggle button
 - [ ] Add a "Mark all as shiny" toggle button

@@ -1,49 +1,47 @@
+import { z } from 'zod'
 import { DexTrackerActionFactory, DexTrackerDexActions } from '../types/actions'
-import { DexTrackerState } from '../types/state'
+import { DexTrackerState, pokedexStateSchema } from '../types/state'
+import { splitFullDexId } from '../utils'
 
 const dexActions: DexTrackerActionFactory<DexTrackerDexActions> = (setState, getState): DexTrackerDexActions => {
   return {
-    updateDex(dexId, dex) {
-      const currentDexes = getState().dexes
-      const currentDex = currentDexes[dexId] ?? {}
-      const newDexes: DexTrackerState['dexes'] = {
-        ...currentDexes,
-        [dexId]: {
-          id: dexId,
-          pokemon: {
-            ...currentDex.pokemon,
-            ...dex.pokemon,
-          },
-        },
-      }
+    unsetCurrentDex() {
       setState({
-        dexes: newDexes,
+        currentFullDexId: undefined,
       })
     },
-    removeDex(dexId) {
+    setCurrentDex(fullDexId) {
+      setState({
+        currentFullDexId: fullDexId === '' ? undefined : fullDexId,
+      })
+    },
+    removeDex(fullDexId) {
       const newDexes: DexTrackerState['dexes'] = {
         ...getState().dexes,
       }
-      delete newDexes[dexId]
+      delete newDexes[fullDexId]
       setState({
         dexes: newDexes,
       })
     },
-    setCurrentDex(dexId, gameId) {
-      setState({
-        currentDexId: dexId === '' ? undefined : dexId,
-        currentGameId: gameId ? gameId : getState().currentGameId,
-      })
-    },
-    updateDexPokemon(dexId, pokemonId, data) {
+    updateDexPokemon(fullDexId, pokemonId, data) {
+      const splitId = splitFullDexId(fullDexId)
       const currentDexes = getState().dexes
-      const currentDex = currentDexes[dexId] ?? {}
+      const currentDex = currentDexes[fullDexId] ?? {
+        id: fullDexId,
+        gameId: splitId.gameId,
+        dexId: splitId.dexId,
+        createdAt: Date.now(),
+        lastModified: Date.now(),
+      }
       const currentPokemonTable = currentDex.pokemon ?? {}
       const newDexes: DexTrackerState['dexes'] = {
         ...currentDexes,
-        [dexId]: {
+        [fullDexId]: {
           ...currentDex,
-          id: dexId,
+          id: fullDexId,
+          createdAt: currentDex.createdAt ?? Date.now(),
+          lastModified: Date.now(),
           pokemon: {
             ...currentPokemonTable,
             [pokemonId]: {
@@ -54,6 +52,17 @@ const dexActions: DexTrackerActionFactory<DexTrackerDexActions> = (setState, get
           },
         },
       }
+
+      try {
+        z.record(pokedexStateSchema).parse(newDexes)
+      } catch (error) {
+        const errMsg = 'updateDexPokemon action: Invalid dexes format'
+        console.error(errMsg, error)
+        //throw new Error(errMsg)
+      }
+
+      // console.log('updateDexPokemon action', newDexes[fullDexId])
+
       setState({
         dexes: newDexes,
       })

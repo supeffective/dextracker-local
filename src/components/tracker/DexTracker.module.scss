@@ -12,6 +12,20 @@
   gap: 1rem;
 }
 
+@media (max-width: 400px) {
+  .tracker {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.4rem;
+  }
+
+  .entries {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.4rem;
+  }
+}
+
 .resultPanel {
   text-align: center;
   display: flex;

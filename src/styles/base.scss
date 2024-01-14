@@ -1,9 +1,7 @@
-html {
-  background: var(--blue-6);
-}
-
+html,
 body {
-  background: var(--blue-6);
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 body,
@@ -22,7 +20,8 @@ body,
   flex-direction: column;
   justify-content: space-between;
   gap: 0.5rem;
-  background: var(--blue-0);
+  background: var(--blue-1);
+  color: var(--color-navy-12);
 }
 
 body,

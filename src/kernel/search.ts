@@ -1,5 +1,5 @@
 import { pokemonDatasetMap } from '@/lib/dataset/pokemon'
-import { PokedexEntryState, PokedexSearchStateFilter, PokedexState } from '../stores/types/state'
+import { DexTrackerFilterState, PokedexEntryState, PokedexState } from '../stores/types/state'
 
 import { TrPokedex, TrPokedexEntry, TrStatefulPokedexEntry } from '@/lib/dataset/types'
 
@@ -9,7 +9,7 @@ export type PokedexSearchIndex = PokedexSearchableEntry[]
 export function generateDexFilteredEntries(
   dex: TrPokedex | undefined,
   dexState: PokedexState | undefined,
-  filters?: PokedexSearchStateFilter,
+  filters?: DexTrackerFilterState,
 ): PokedexSearchIndex {
   if (!dex || !dexState) {
     return []
@@ -83,7 +83,7 @@ function _searchDexEntries(searchIndex: PokedexSearchIndex, query: string): Poke
   })
 }
 
-function _applyDexFilters(pokemon: PokedexSearchIndex, filter?: PokedexSearchStateFilter): PokedexSearchIndex {
+function _applyDexFilters(pokemon: PokedexSearchIndex, filter?: DexTrackerFilterState): PokedexSearchIndex {
   let results = pokemon
 
   if (!filter) {

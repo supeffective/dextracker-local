@@ -1,13 +1,11 @@
-import useFetchCurrentPokedexData from '@/hooks/useFetchCurrentPokedexData'
 import { generateDexFilteredEntries } from '@/kernel/search'
 import { getDexSourceCodeUrl } from '@/kernel/urls'
 import { countSpeciesAndForms } from '@/lib/dataset/utils'
 import useInfiniteScrollList from '@/lib/hooks/useInfiniteScrollList'
 import { cn } from '@/lib/utils'
-import { PokedexState } from '@/stores/types/state'
-import useDexTrackerStore, { useCurrentGameAndDex } from '@/stores/useDexTrackerStore'
-import usePokedexSearchStore from '@/stores/usePokedexSearchStore'
-import { ComponentPropsWithoutRef, useEffect, useRef, useState } from 'react'
+import { useCurrentDexData } from '@/stores/useCurrentDexData'
+import useDexTrackerStore from '@/stores/useDexTrackerStore'
+import { ComponentPropsWithoutRef, useRef } from 'react'
 import styles from './DexTracker.module.scss'
 import DexTrackerEntry from './DexTrackerEntry'
 
@@ -16,46 +14,43 @@ type DexTrackerProps = {
 } & Omit<ComponentPropsWithoutRef<'div'>, 'children'>
 
 export default function DexTracker({ className, infiniteScrollSize = 25, ...props }: DexTrackerProps) {
-  const allDexesState = useDexTrackerStore((store) => store.dexes)
-  const searchStore = usePokedexSearchStore((store) => store)
-  const { currentGame, currentDex } = useCurrentGameAndDex()
-  const fullDexFetch = useFetchCurrentPokedexData()
-  const [currentDexState, setCurrentDexState] = useState<PokedexState | undefined>(undefined)
   const lastElementRef = useRef<HTMLDivElement | null>(null)
 
-  useEffect(() => {
-    if (fullDexFetch.isSuccess && fullDexFetch.data) {
-      const fullDexData = fullDexFetch.data
-      const dexState: PokedexState = allDexesState[fullDexData.id] ?? {
-        id: fullDexData.id,
-        pokemon: {},
-      }
-      setCurrentDexState(dexState)
-    }
-  }, [fullDexFetch.isSuccess, fullDexFetch.data, allDexesState])
+  const currentDex = useCurrentDexData()
+  const currentFilters = useDexTrackerStore((store) => store.filters)
 
-  const isLoading = fullDexFetch.isLoading
-  const isError = fullDexFetch.isError
-  const isSuccess = fullDexFetch.isSuccess
-
-  const dexId = fullDexFetch.data?.id
-  const dexRegion = fullDexFetch.data?.region
-  const fullDexEntries = fullDexFetch.data?.pokemon
-
-  const filteredDexResults = generateDexFilteredEntries(fullDexFetch.data, currentDexState, searchStore.filters)
+  const fetchedDexInfo = currentDex.fullInfoQuery
+  const filteredDexResults = generateDexFilteredEntries(fetchedDexInfo?.data, currentDex.state, currentFilters)
   const visibleDexResults = useInfiniteScrollList(filteredDexResults, { chunkSize: infiniteScrollSize, lastElementRef })
+
+  if (!fetchedDexInfo) {
+    return (
+      <div
+        className={cn(
+          styles.tracker,
+          {
+            [styles.error]: true,
+          },
+          className,
+        )}
+        {...props}
+      >
+        <div className={styles.resultPanel}>Current Dex is not loaded or invalid</div>
+      </div>
+    )
+  }
 
   const classes = cn(
     styles.tracker,
     {
-      [styles.loading]: isLoading,
-      [styles.error]: isError,
-      [styles.loaded]: isSuccess,
+      [styles.loading]: fetchedDexInfo.isLoading,
+      [styles.error]: fetchedDexInfo.isError,
+      [styles.loaded]: fetchedDexInfo.isSuccess,
     },
     className,
   )
 
-  if (isLoading) {
+  if (fetchedDexInfo.isLoading) {
     return (
       <div className={classes} {...props}>
         <div className={styles.resultPanel}>Loading...</div>
@@ -63,7 +58,7 @@ export default function DexTracker({ className, infiniteScrollSize = 25, ...prop
     )
   }
 
-  if (isError) {
+  if (fetchedDexInfo.isError) {
     return (
       <div className={classes} {...props}>
         <div className={styles.resultPanel}>Error loading data from the dataset API...</div>
@@ -71,16 +66,12 @@ export default function DexTracker({ className, infiniteScrollSize = 25, ...prop
     )
   }
 
-  if (!currentDexState) {
-    return (
-      <div className={classes} {...props}>
-        <div className={styles.resultPanel}>Loading state...</div>
-      </div>
-    )
-  }
+  const dexId = fetchedDexInfo.data?.id
+  const dexRegion = fetchedDexInfo.data?.region
+  const fullDexEntries = fetchedDexInfo.data?.pokemon
 
   if (
-    fullDexFetch.data === undefined ||
+    fetchedDexInfo.data === undefined ||
     fullDexEntries === undefined ||
     dexId === undefined ||
     dexRegion === undefined
@@ -88,6 +79,14 @@ export default function DexTracker({ className, infiniteScrollSize = 25, ...prop
     return (
       <div className={cn(classes, styles.empty)} {...props}>
         <div className={styles.resultPanel}>No Pokédex is loaded...</div>
+      </div>
+    )
+  }
+
+  if (!currentDex.game || !currentDex.info || !currentDex.state) {
+    return (
+      <div className={cn(classes, styles.empty)} {...props}>
+        <div className={styles.resultPanel}>No game or dex selected</div>
       </div>
     )
   }
@@ -111,7 +110,6 @@ export default function DexTracker({ className, infiniteScrollSize = 25, ...prop
     )
   }
 
-  // const [speciesCountTotal, formCountTotal] = countSpeciesAndForms(entries)
   const [speciesCount, formCount] = countSpeciesAndForms(filteredDexResults)
 
   if (filteredDexResults.length === 0) {
@@ -123,12 +121,13 @@ export default function DexTracker({ className, infiniteScrollSize = 25, ...prop
   }
 
   const isFiltered = filteredDexResults.length !== fullDexEntries.length
+  const fullDexId = currentDex.state.id
 
   return (
     <div className={classes} {...props}>
       <div className={styles.dexTitle}>
-        <h2>Pokémon {currentGame.name}</h2>
-        <h3>{currentDex.name}</h3>
+        <h2>Pokémon {currentDex.game.name}</h2>
+        <h3>{currentDex.info.name}</h3>
       </div>
       <div className={styles.resultPanel}>
         Listing {!isFiltered && ' all '} {filteredDexResults.length} Pokémon ({speciesCount} species
@@ -145,7 +144,7 @@ export default function DexTracker({ className, infiniteScrollSize = 25, ...prop
               index={index}
               total={visibleDexResults.length}
               key={entry.id}
-              dexId={dexId}
+              fullDexId={fullDexId}
               data={entry}
             />
           )

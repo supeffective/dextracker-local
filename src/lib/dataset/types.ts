@@ -6,6 +6,8 @@ export type TrPokedexBasicInfo = {
   id: string
   name: string
   region: string | null
+  speciesCount: number
+  formsCount: number
 }
 
 export type TrPokedexBasicInfoWithGameIds = TrPokedexBasicInfo & {
@@ -45,6 +47,8 @@ export type TrPokedex = {
   gameIds: string[]
   maxDexNum: number
   pokemon: TrPokedexEntry[]
+  speciesCount: number
+  formsCount: number
 }
 
 export type TrPokeType =

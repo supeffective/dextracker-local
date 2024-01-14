@@ -3,18 +3,17 @@ import { PokeballIcon, PokeballOutlineIcon, ShinyIcon } from '@/lib/icons/gamegu
 import { cn } from '@/lib/utils'
 import { PokedexEntryState } from '@/stores/types/state'
 import useDexTrackerStore from '@/stores/useDexTrackerStore'
-import usePokedexSearchStore from '@/stores/usePokedexSearchStore'
 import { ComponentPropsWithRef, forwardRef, useState } from 'react'
 import PokemonImg from '../PokemonImg'
 import styles from './DexTrackerEntry.module.scss'
 
-type DexTrackerEntryProps = { index: number; total: number; dexId: string; data: PokedexSearchableEntry } & Omit<
+type DexTrackerEntryProps = { index: number; total: number; fullDexId: string; data: PokedexSearchableEntry } & Omit<
   ComponentPropsWithRef<'div'>,
   'children'
 >
 
-function DexTrackerEntryNoRef({ index, total, dexId, data, ...props }: DexTrackerEntryProps) {
-  const searchFilters = usePokedexSearchStore((store) => store.filters)
+function DexTrackerEntryNoRef({ index, total, fullDexId, data, ...props }: DexTrackerEntryProps) {
+  const searchFilters = useDexTrackerStore((store) => store.filters)
   const updatePokemonEntry = useDexTrackerStore((store) => store.updateDexPokemon)
   const zeroPadDexNum = data.num.toString().padStart(4, '0')
   const [animationClasses, setAnimationClasses] = useState<string[]>([])
@@ -25,9 +24,8 @@ function DexTrackerEntryNoRef({ index, total, dexId, data, ...props }: DexTracke
   }
 
   const disappearsOnCatch = searchFilters?.hideCaught === true
-  const animationClassesTimeouts: Record<string, number> = {
-    disappear: 500,
-    bounce: 1000,
+  const animationClassesTimeouts = {
+    disappear: 250,
   }
 
   if (pkmState.id === undefined) {
@@ -35,13 +33,13 @@ function DexTrackerEntryNoRef({ index, total, dexId, data, ...props }: DexTracke
   }
 
   const toggleCaught = (prevState: PokedexEntryState) => {
-    updatePokemonEntry(dexId, prevState.id, {
+    updatePokemonEntry(fullDexId, prevState.id, {
       caught: !prevState.caught,
     })
   }
 
   const toggleShiny = (prevState: PokedexEntryState) => {
-    updatePokemonEntry(dexId, prevState.id, {
+    updatePokemonEntry(fullDexId, prevState.id, {
       shiny: !prevState.shiny,
     })
   }

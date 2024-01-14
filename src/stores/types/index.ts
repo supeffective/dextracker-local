@@ -1,7 +1,4 @@
-import { DexTrackerActions, PokedexSearchActions } from './actions'
-import { DexTrackerState, PokedexSearchState } from './state'
+import { DexTrackerActions } from './actions'
+import { DexTrackerState } from './state'
 
 export type DexTrackerStore = DexTrackerState & DexTrackerActions
-
-// SEARCH STORE:
-export type PokedexSearchStore = PokedexSearchState & PokedexSearchActions

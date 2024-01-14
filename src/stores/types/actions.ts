@@ -1,11 +1,4 @@
-import {
-  DexTrackerState,
-  PokeboxEntryState,
-  PokeboxState,
-  PokedexEntryState,
-  PokedexState,
-  TrainerInfoState,
-} from './state'
+import { DexTrackerState, PokeboxEntryState, PokeboxState, PokedexEntryState, TrainerInfoState } from './state'
 
 export type DexTrackerGeneralActions = {
   resetData: () => void
@@ -20,14 +13,13 @@ export type DexTrackerTrainerActions = {
 export type DexTrackerGameActions = {
   registerGame: (gameId: string) => void
   unregisterGame: (gameId: string) => void
-  setCurrentGame: (gameId: string) => void
 }
 
 export type DexTrackerDexActions = {
-  updateDex: (dexId: string, data: Partial<PokedexState>) => void
   setCurrentDex: (dexId: string, gameId?: string) => void
-  removeDex: (dexId: string) => void
-  updateDexPokemon: (dexId: string, pokemonId: string, data: Partial<PokedexEntryState>) => void
+  unsetCurrentDex: () => void
+  removeDex: (fullDexId: string) => void
+  updateDexPokemon: (fullDexId: string, pokemonId: string, data: Partial<PokedexEntryState>) => void
 }
 
 export type DexTrackerSharedBoxActions = {
@@ -36,20 +28,7 @@ export type DexTrackerSharedBoxActions = {
   loadSharedBoxFromJSON: (json: string) => void
 }
 
-export type DexTrackerActions = DexTrackerGeneralActions &
-  DexTrackerTrainerActions &
-  DexTrackerGameActions &
-  DexTrackerDexActions &
-  DexTrackerSharedBoxActions
-
-export type DexTrackerStateGetter = () => DexTrackerState
-export type DexTrackerStateSetter = (state: Partial<DexTrackerState>) => void
-export type DexTrackerActionFactory<T> = (set: DexTrackerStateSetter, get: DexTrackerStateGetter) => T
-
-// -----------------------------------------------
-// SEARCH STORE:
-
-export type PokedexSearchActions = {
+export type DexTrackerFilterActions = {
   // applyFilters(dex: Pokedex, dexState: PokedexState, filter: DexTrackerFilter): PokedexSearchIndex
   setShinyMode: (value: boolean) => void
   setHideForms: (value: boolean) => void
@@ -58,3 +37,14 @@ export type PokedexSearchActions = {
   setSearchQuery: (query: string | null) => void
   clearSearchQuery: () => void
 }
+
+export type DexTrackerActions = DexTrackerGeneralActions &
+  DexTrackerTrainerActions &
+  DexTrackerGameActions &
+  DexTrackerDexActions &
+  DexTrackerFilterActions &
+  DexTrackerSharedBoxActions
+
+export type DexTrackerStateGetter = () => DexTrackerState
+export type DexTrackerStateSetter = (state: Partial<DexTrackerState>) => void
+export type DexTrackerActionFactory<T> = (set: DexTrackerStateSetter, get: DexTrackerStateGetter) => T

@@ -2,7 +2,15 @@
   --color-navy-12: #0d1929;
   --color-navy-11: #152944;
   --color-navy-10: #164780;
-  --color-navy-10b: #004698;
+  --color-navy-10-bright: #004698;
+  --color-navy-9: #1e5a9f;
+  --color-navy-8: #3980d2;
+  --color-navy-7: #549cee;
+  --color-navy-6: #7cb8fc;
+  --color-navy-3: #90c1f9;
+  --color-navy-1: #add3ff;
+  --color-navy-0: #cfe5fd;
+  --color-white-88: hsla(0, 0%, 100%, 0.88);
 
   --color-sky-3: #87c5ff;
   --color-aqua-5: #16c2f0;
@@ -11,4 +19,11 @@
   --color-home-300: #008898;
   --color-home-200: #1ca0b0;
   --color-home-alt-200: #a9ebbb;
+
+  --shadow-raised-1: 0 0 10px rgba(0, 0, 0, 0.2);
+
+  //-------
+
+  --color-bg: var(--color-navy-11);
+  --color-text: var(--color-white-88);
 }

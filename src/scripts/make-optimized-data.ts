@@ -45,10 +45,15 @@ const games: TrGame[] = gamesSrc.map((g) => {
       if (!dex) {
         throw new Error(`Pokedex ${dexId} not found in the pokedexesSrcMap object`)
       }
+      const speciesCount = dex.entries.filter((p) => !p.isForm).length
+      const formsCount = dex.entries.filter((p) => p.isForm).length
+
       return {
         id: dex.id,
         region: dex.region,
         name: dex.name,
+        speciesCount,
+        formsCount,
       }
     }),
   } satisfies TrGame
@@ -126,6 +131,9 @@ const pokedexes = pokedexesSrc.map((dex) => {
   const maxDexNum = dexEntries.reduce((max, p) => Math.max(max, p.num), 0)
   const gameIds = games.filter((g) => g.pokedexes.map((p) => p.id).includes(dex.id)).map((g) => g.id)
 
+  const speciesCount = dex.entries.filter((p) => !p.isForm).length
+  const formsCount = dex.entries.filter((p) => p.isForm).length
+
   return {
     id: dex.id,
     name: dex.name,
@@ -133,6 +141,8 @@ const pokedexes = pokedexesSrc.map((dex) => {
     gameIds: gameIds,
     maxDexNum: maxDexNum,
     pokemon: dexEntries,
+    speciesCount,
+    formsCount,
   } satisfies TrPokedex
 })
 
