@@ -45,6 +45,7 @@ check out our main, cloud based project: [supereffective.gg](https://supereffect
 - [ ] Add a "Mark all as seen" toggle button
 - [ ] Add a "Mark all as caught" toggle button
 - [ ] Add a "Mark all as shiny" toggle button
+- [ ] Better icon for Smartphone PWA homescreen
 
 ## Tech Stack
 
