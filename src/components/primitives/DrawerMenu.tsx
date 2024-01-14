@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import { ComponentPropsWithoutRef, useState } from 'react'
 import styles from './DrawerMenu.module.scss'
 
-type DrawerMenuProps = {
+export type DrawerMenuProps = {
   icon?: React.ReactNode
   placement?: 'left' | 'right'
   buttonName?: string

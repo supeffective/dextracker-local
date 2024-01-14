@@ -1,5 +1,6 @@
 import React from 'react'
 import Btn from './Btn'
+import FlexLabel from './FlexLabel'
 
 type FileUploadBtnProps = {
   label?: React.ReactNode
@@ -31,10 +32,6 @@ function FileUploadBtn({
         }
       }
       reader.readAsText(file)
-      // setSelectedFile(null)
-      // if (fileInputRef.current) {
-      //   fileInputRef.current.value = ''
-      // }
     }
   }
 
@@ -45,13 +42,12 @@ function FileUploadBtn({
   }
 
   return (
-    <label {...props}>
-      {label}
+    <FlexLabel {...props} label={label}>
       <input ref={fileInputRef} hidden type="file" onChange={handleFileSelectAndUpload} accept={accepts} />
       <Btn title={title} type="button" name={name} onClick={triggerFileInput} variant={variant}>
         {children}
       </Btn>
-    </label>
+    </FlexLabel>
   )
 }
 

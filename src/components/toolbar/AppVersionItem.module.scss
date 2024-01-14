@@ -1,0 +1,16 @@
+.appVersion {
+  font-size: 0.75rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-style: italic;
+  width: 100%;
+
+  b,
+  i {
+    display: block;
+    line-height: 1;
+  }
+}

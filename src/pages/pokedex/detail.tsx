@@ -1,5 +1,8 @@
 import StickyToolbar from '@/components/StickyToolbar'
 import LoadingBanner from '@/components/layout/LoadingBanner'
+import DexPokemonSearchBox from '@/components/toolbar/DexPokemonSearchBox'
+import DexSettingsDrawer from '@/components/toolbar/DexSettingsDrawer'
+import DexSwitchDrawer from '@/components/toolbar/DexSwitchDrawer'
 import DexTracker from '@/components/tracker/DexTracker'
 import { DexTrackerRouteParams } from '@/hooks/useLoadDexTrackerDataFromUrl'
 import { PageComponent } from '@/lib/router'
@@ -11,7 +14,11 @@ const GamePokedexPage: PageComponent<keyof DexTrackerRouteParams> = ({ routePara
 
   return (
     <div {...rest}>
-      <StickyToolbar />
+      <StickyToolbar>
+        <DexSwitchDrawer />
+        <DexPokemonSearchBox />
+        <DexSettingsDrawer />
+      </StickyToolbar>
       <DexTracker />
     </div>
   )

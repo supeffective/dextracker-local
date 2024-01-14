@@ -1,0 +1,28 @@
+.flexLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  > span {
+    display: inline-flex;
+    width: 120px;
+    font-size: 0.875rem;
+  }
+}
+
+.flexLabel span:first-of-type {
+  flex: 1;
+  white-space: nowrap;
+}
+
+.disabledBall svg {
+  fill: var(--yellow-11);
+
+  path:nth-of-type(2) {
+    fill: var(--yellow-0) !important;
+  }
+}
+
+.toggle svg {
+  transition: transform 0.1s ease-in-out;
+}
