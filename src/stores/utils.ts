@@ -1,6 +1,22 @@
 import { gamesDatasetMap } from '@/lib/dataset/games'
 import { getFirstGameForDex, pokedexBasicInfoMap } from '@/lib/dataset/pokedexes'
 import { TrGame, TrPokedexBasicInfo } from '@/lib/dataset/types'
+import { DexTrackerState } from './types/state'
+
+export function summarizeDexTrackerData(state: DexTrackerState) {
+  const dexCount = Object.keys(state.dexes).length
+  const hasBoxes = state.sharedBox !== undefined
+  const hasTrainerData = state.trainer !== undefined
+  const hasDexes = dexCount > 0
+
+  return {
+    dexCount,
+    hasDexes,
+    hasBoxes,
+    hasTrainerData,
+    hasData: hasDexes || hasBoxes || hasTrainerData,
+  }
+}
 
 export function getFullDexId(gameId: string, dexId: string): string {
   return `${dexId}_${gameId}`

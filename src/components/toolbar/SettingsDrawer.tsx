@@ -7,13 +7,7 @@ import DataDownloadJsonAction from './actions/DataDownloadJsonAction'
 import DataUploadJsonAction from './actions/DataUploadJsonAction'
 
 export default function SettingsDrawer({ className, children, ...props }: DrawerMenuProps) {
-  const dexes = useDexTrackerStore((store) => store.dexes)
-
-  const hasSomeData = Object.keys(dexes).length > 0
-
-  if (!hasSomeData) {
-    return null
-  }
+  const lastModified = useDexTrackerStore((store) => store.lastModified)
 
   return (
     <DrawerMenu
@@ -25,7 +19,7 @@ export default function SettingsDrawer({ className, children, ...props }: Drawer
       {...props}
     >
       {children}
-      <DataDownloadJsonAction />
+      {lastModified && <DataDownloadJsonAction />}
       <DataUploadJsonAction />
       <hr />
       <AppVersionItem />

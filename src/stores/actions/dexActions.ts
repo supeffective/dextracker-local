@@ -6,6 +6,10 @@ import { splitFullDexId } from '../utils'
 const dexActions: DexTrackerActionFactory<DexTrackerDexActions> = (setState, getState): DexTrackerDexActions => {
   return {
     unsetCurrentDex() {
+      const current = getState().currentFullDexId
+      if (!current) {
+        return
+      }
       setState({
         currentFullDexId: undefined,
       })

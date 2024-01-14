@@ -8,7 +8,7 @@ export function createDefaultState(): DexTrackerState {
     trainer: undefined,
     gameIds: [],
     dexes: {},
-    currentFullDexId: DEFAULT_FULL_DEX_ID,
+    currentFullDexId: undefined,
     sharedBox: undefined,
     lastModified: undefined,
   }

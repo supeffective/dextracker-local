@@ -15,10 +15,10 @@ export default function useLoadDexTrackerDataFromUrl(): void {
   // biome-ignore lint/correctness/useExhaustiveDependencies: setGame, setDex should not be dependencies
   useEffect(() => {
     if (params.dexId && params.gameId) {
-      console.log('useLoadDexTrackerDataFromUrl: setting dex', params.gameId, params.dexId)
+      // console.log('useLoadDexTrackerDataFromUrl: setting dex', params.gameId, params.dexId)
       setDex(getFullDexId(params.gameId, params.dexId))
     } else {
-      console.log('useLoadDexTrackerDataFromUrl: unsetting dex')
+      // console.log('useLoadDexTrackerDataFromUrl: unsetting dex')
       unsetDex()
     }
   }, [params, route?.hashPath])

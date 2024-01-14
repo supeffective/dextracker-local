@@ -38,6 +38,7 @@ check out our main, cloud based project: [supereffective.gg](https://supereffect
 ## TODO (dev)
 
 - [ ] Add homepage dashboard
+- [ ] Track Forms/Shinies/Cosmetic Forms should be editable per dex, and also in general (as a default for new dexes)
 - [ ] Add placeholders to avoid Cumulative Layout Shifts (CLS)
 - [x] Add React router to navigate between dexes (hash router)
 - [x] Put filters back together with the main state, or export both stores in the JSON
