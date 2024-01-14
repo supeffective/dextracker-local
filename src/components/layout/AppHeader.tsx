@@ -1,6 +1,7 @@
 import config from '@/config'
 import { HeartHandshakeIcon } from '@/lib/icons/actions'
 import { DiscordIcon, GithubIcon } from '@/lib/icons/brands'
+import { RouterLink } from '@/lib/router'
 import { cn } from '@/lib/utils'
 import { ComponentPropsWithoutRef } from 'react'
 import appLogo from '/images/logo/logo-60x60.jpg'
@@ -13,10 +14,10 @@ type AppHeaderProps = {
 export default function AppHeader({ className, ...props }: AppHeaderProps) {
   return (
     <header className={cn(styles.header, className)} {...props}>
-      <a className={styles.title} href={import.meta.env.BASE_URL}>
+      <RouterLink className={styles.title} to={'/'}>
         <img src={appLogo} alt="" />
-        <h1>Super Pokédex Tracker</h1>
-      </a>
+        <h1>{config.title}</h1>
+      </RouterLink>
       <div className={styles.dragRegion}>&nbsp;</div>
       <div className={styles.links}>
         <a href={config.patreon_url} target="_blank" rel="noreferrer" title="Support this project on Patreon">

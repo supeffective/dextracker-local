@@ -3,9 +3,10 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.8rem 1.5rem;
-  border-bottom: 1px solid var(--blue-5);
-  background: var(--blue-3);
-  color: var(--blue-11);
+  // border-top: 4px solid var(--color-navy-10);
+  // border-bottom: 1px solid var(--color-navy-10);
+  background: var(--color-bg);
+  color: var(--color-text);
 
   // padding-left: calc(env(titlebar-area-x, 0) + 0.8rem);
   // padding-right: calc(env(titlebar-area-x, 0) + 2.8rem);
@@ -36,7 +37,7 @@
     width: 28px;
     height: 28px;
     display: block;
-    transform: scale(1.2);
+    transform: scale(1.4);
   }
 
   h1 {
@@ -97,15 +98,15 @@
   }
 }
 
-@media (display-mode: standalone) {
-  .header {
-    top: env(safe-area-inset-top);
-    width: env(safe-area-inset-left);
-    margin: env(safe-area-inset-right);
-    // you can also use fallback values
-    padding: env(safe-area-inset-bottom, 20px);
-  }
-}
+// @media (display-mode: standalone) {
+//   .header {
+//     top: env(safe-area-inset-top);
+//     width: env(safe-area-inset-left);
+//     margin: env(safe-area-inset-right);
+//     // you can also use fallback values
+//     padding: env(safe-area-inset-bottom, 20px);
+//   }
+// }
 
 @media (display-mode: window-controls-overlay) {
   .dragRegion {
@@ -115,8 +116,7 @@
 
   .header {
     position: fixed;
-    background: var(--blue-7);
-    color: var(--blue-2);
+    background: var(--color-bg);
     height: env(titlebar-area-height, auto);
     z-index: 10;
     left: env(titlebar-area-x, auto);

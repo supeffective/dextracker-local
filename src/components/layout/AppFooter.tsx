@@ -8,11 +8,16 @@ type AppFooterProps = {} & ComponentPropsWithoutRef<'div'>
 export default function AppFooter({ className, ...props }: AppFooterProps) {
   return (
     <footer data-noselect className={cn(styles.footer, className)} {...props}>
-      <i>
-        <b>Super Pokédex Tracker </b>
-        <span>v{config.version}</span>
-      </i>
-      <span>&copy; 2024 Javier Aguilar, supereffective.gg</span>
+      <p>
+        <i>
+          <b>{config.title} </b>
+          <span>v{config.version}</span>
+        </i>
+      </p>
+      <p>&copy; 2024 Javier Aguilar, supereffective.gg.</p>
+      <p>
+        <small>This is a fan site and is not affiliated with The Pokémon Company, Game Freak or © Nintendo.</small>
+      </p>
     </footer>
   )
 }

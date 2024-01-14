@@ -1,0 +1,15 @@
+.panel {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .title {
+    font-size: 1.75rem;
+    color: var(--color-navy-8);
+    padding: 0.5rem 0;
+    border-bottom: 2px solid var(--color-navy-8);
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+}

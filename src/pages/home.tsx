@@ -1,14 +1,15 @@
 import StickyToolbar from '@/components/StickyToolbar'
+import ChangelogEntries from '@/components/home/ChangelogEntries'
+import DexProgressTiles from '@/components/home/DexProgressTiles'
 import AppMainText from '@/components/layout/AppMainText'
-import DexTracker from '@/components/tracker/DexTracker'
 import { PageComponent } from '@/lib/router/types'
 
 const HomePage: PageComponent<'id' | 'foo'> = ({ routeParams: _, ...rest }) => {
   return (
     <div {...rest}>
-      <StickyToolbar />
-      <AppMainText />
-      <DexTracker />
+      <StickyToolbar noSearch leftContent={<AppMainText />} style={{ position: 'relative' }} />
+      <DexProgressTiles />
+      <ChangelogEntries />
     </div>
   )
 }

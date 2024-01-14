@@ -1,6 +1,6 @@
 {
   "name": "supereffective-lite",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "private": true,
   "license": "MIT",
   "type": "module",
@@ -21,6 +21,7 @@
     "lint:fix-package-json": "sort-package-json",
     "lint:fix-prettier": "prettier  --log-level warn --write \"src/**/*.{md,json,css,scss}\"",
     "make": "bun make:component",
+    "make:changelog": "bun src/scripts/make-changelog-entry.ts",
     "make:component": "bun src/scripts/make-component.ts",
     "make:data": "bun make:optimized-data",
     "make:images": "bun make:optimized-images",

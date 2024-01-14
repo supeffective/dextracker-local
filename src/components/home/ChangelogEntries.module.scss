@@ -1,0 +1,42 @@
+.versions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.versionPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.versionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.versionTitle {
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+  color: var(--color-navy-10);
+}
+
+.versionDate {
+  color: var(--gray-7);
+  font-size: 0.925rem;
+}
+
+.versionEntries {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  padding: 0 1rem;
+  margin: 0;
+
+  li {
+    margin: 0;
+    padding: 0;
+  }
+}

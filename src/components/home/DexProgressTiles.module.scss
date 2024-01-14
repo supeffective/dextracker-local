@@ -1,0 +1,78 @@
+.tiles {
+  display: grid;
+  // RAM
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 400px) {
+  .tiles {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 0.5rem;
+  }
+}
+
+.tile {
+  // border: 2px solid var(--blue-3);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: var(--shadow-raised-1);
+  overflow: hidden;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    transform: scale(1.05);
+    color: inherit;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.1;
+
+  img {
+    width: 100%;
+    aspect-ratio: 1/1;
+  }
+
+  .progress {
+    border: none;
+    border-radius: 0;
+  }
+
+  .progressText {
+    display: block;
+  }
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0 0.5rem;
+  font-size: 0.8rem;
+  padding-bottom: 0.5rem;
+}
+
+.dateModified {
+  padding-top: 0.5rem;
+  color: var(--gray-6);
+  font-size: 0.7rem;
+}
+
+.gameName {
+  font-weight: bold;
+}

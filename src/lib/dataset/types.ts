@@ -1,5 +1,11 @@
 // Tr. stands for "Tracker" and "Transformed"
 
+export type TrAppChangelogEntry = {
+  version: string
+  content: string
+  date: string
+}
+
 export type TrGameType = 'game' | 'dlc' | 'set' | 'superset'
 
 export type TrPokedexBasicInfo = {
