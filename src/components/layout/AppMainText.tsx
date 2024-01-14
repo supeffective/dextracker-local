@@ -18,7 +18,7 @@ function AppMainText() {
   }
 
   if (!showArticle) {
-    return null
+    return <div>&nbsp;</div>
   }
 
   return (
