@@ -3,13 +3,16 @@
   font-size: 1.1rem;
   background: var(--blue-0);
   border-radius: 0.5rem;
-  background: var(--color-bg) url('/images/gui/banner-home4.png') repeat;
+  background: var(--color-bg) url('/images/backgrounds/trainers1.webp') repeat;
   background-size: cover;
-  background-position: bottom left;
+  background-position: center;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   box-shadow: var(--shadow-raised-1);
+  transition:
+    padding 0.25s ease-in-out,
+    background-size 0.25s ease-in-out;
   padding: 1rem;
 }
 
@@ -21,9 +24,12 @@
   background: var(--blue-0);
   color: #000;
   border-radius: 0.35rem;
-  max-width: 66%;
-  opacity: 0.9;
+  max-width: 60%;
   box-shadow: var(--shadow-1);
+  transition:
+    max-width 0.25s ease-in-out,
+    opacity 0.25s ease-in-out;
+  background-color: rgba(213, 235, 255, 0.92);
   // text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
@@ -33,9 +39,46 @@
   margin: 0;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 800px) {
+  .info {
+  }
+
   .mainText {
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 800px) {
+  .info {
+    // border: 2px solid var(--color-bg);
+    // background: var(--blue-12);
+    padding: 6px;
+
+    // background-image: url('/images/backgrounds/trainers2.jpg');
+    background-size: auto 400px;
+    background-repeat: no-repeat;
+    background-position: top left;
+    padding-top: 407px;
+    align-items: flex-start;
+  }
+
+  .mainText {
+    opacity: 1;
     max-width: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .info {
+    background-size: auto 300px;
+    padding-top: 307px;
+  }
+}
+
+@media (max-width: 400px) {
+  .info {
+    background-size: auto 200px;
+    padding-top: 207px;
   }
 }
 

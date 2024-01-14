@@ -36,13 +36,43 @@ function AppMainText() {
           This site always saves your progress locally, without the need for an account. Completely control your data:
           backup and restore at any time.
         </p>
-        <p>
-          Developed by the creator of{' '}
-          <a href="https://supereffective.gg" target="_blank" rel="noreferrer">
-            SuperEffective.gg
-          </a>
-          , a twin site that offers Living Dex Box Organization features, stored in the cloud.
-        </p>
+        <article>
+          <p>
+            Developed by the creator of {/* biome-ignore lint/a11y/noBlankTarget: <explanation> */}
+            <a href="https://supereffective.gg" target="_blank">
+              SuperEffective.gg
+            </a>
+            , a twin site that offers Living Dex Box Organization features, stored in the cloud.
+          </p>
+        </article>
+        <article>
+          <p>
+            This website is mobile-first, meaning it is optimized for mobile devices, but it works on desktop too. You
+            can install it as a PWA (a Progressive Web App) on your mobile (or desktop) device, for a better experience.
+            In order to do that, you need to open this website in your browser, and then follow the instructions for
+            your specific device:{' '}
+            <a
+              href="https://support.google.com/chrome/answer/9658361?co=GENIE.Platform%3DAndroid&hl=en"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Android
+            </a>{' '}
+            /{' '}
+            <a
+              href="https://support.apple.com/guide/iphone/bookmark-favorite-webpages-iph42ab2f3a7/ios"
+              target="_blank"
+              rel="noreferrer"
+            >
+              iOS
+            </a>
+            .
+          </p>
+        </article>
+        <article>
+          For Windows, Mac and Linux, you can install it as a PWA by clicking on the install button in the address bar
+          of your browser.
+        </article>
       </div>
     </main>
   )
