@@ -2,7 +2,6 @@ import config from '@/config'
 import { Close2Icon } from '@/lib/icons'
 import { cn } from '@/lib/utils'
 import { readClientCookie, setClientCookie } from '@/lib/utils/cookies'
-import { calculateDaytimeTag } from '@/lib/utils/daytimeTag'
 import { useState } from 'react'
 import styles from './AppMainText.module.scss'
 
@@ -13,7 +12,6 @@ const dismissCookieMaxAge = process.env.NODE_ENV === 'development' ? 60 : 60 * 6
 function AppMainText() {
   const currentCookieValue = readClientCookie(dismissCookieName)
   const [showArticle, setShowArticle] = useState(currentCookieValue !== dismissCookieValue)
-  const daytimeTag = calculateDaytimeTag()
 
   const handleDismissArticle = () => {
     setShowArticle(false)
@@ -25,7 +23,7 @@ function AppMainText() {
   }
 
   return (
-    <main className={cn(styles.info, styles[`time_${daytimeTag}`])}>
+    <main className={cn(styles.info)}>
       <div className={styles.mainText}>
         <button className={styles.dismissTrigger} title="Close" type="button" onClick={handleDismissArticle}>
           <Close2Icon />
