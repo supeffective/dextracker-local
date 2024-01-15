@@ -126,7 +126,7 @@ export default function DexTracker({ className, infiniteScrollSize = 25, ...prop
   return (
     <div className={classes} {...props}>
       <div className={styles.dexTitle}>
-        <h2>Pokémon {currentDex.game.name}</h2>
+        <h2>Pokémon {currentDex.game.fullName}</h2>
         <h3>{currentDex.info.name}</h3>
       </div>
       <div className={styles.resultPanel}>

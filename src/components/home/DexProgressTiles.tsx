@@ -79,6 +79,8 @@ export default function DexProgressTiles({ className, ...props }: DexProgressTil
       <div className={styles.tiles}>
         {dexesData.map(({ dex, game, modifiedAt, progress }) => {
           const isCompleted = progress[0] === progress[1]
+
+          const hasDlcSubtitle = game.parentName && game.type === 'dlc'
           return (
             <RouterLink to={routeFactory.pokedex(dex.id, game.id)} key={dex.id} className={styles.tile}>
               <div className={styles.header}>
@@ -100,9 +102,22 @@ export default function DexProgressTiles({ className, ...props }: DexProgressTil
                 />
               </div>
               <div className={styles.text}>
-                <div className={styles.gameName}>Pokémon {game.name}</div>
-                <div className={styles.dexName}>{dex.name.replace(/Pok[é]dex/gi, '').trim()} Pokédex</div>
                 <div className={styles.dateModified}>{new Date(modifiedAt).toLocaleString()}</div>
+                <div className={styles.titles}>
+                  <div className={styles.dexName}>{dex.name.replace(/Pok[é]dex/gi, '').trim()} Pokédex</div>
+                  {hasDlcSubtitle && (
+                    <>
+                      <div className={styles.gameName}>
+                        Pokémon {game.parentName}: {game.name}
+                      </div>
+                    </>
+                  )}
+                  {!hasDlcSubtitle && (
+                    <>
+                      <div className={styles.gameName}>Pokémon {game.name}</div>
+                    </>
+                  )}
+                </div>
               </div>
             </RouterLink>
           )

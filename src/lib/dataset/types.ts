@@ -23,6 +23,8 @@ export type TrPokedexBasicInfoWithGameIds = TrPokedexBasicInfo & {
 export type TrGame = {
   id: string
   name: string
+  parentName?: string
+  fullName: string
   type: TrGameType | string
   pokedexes: Array<TrPokedexBasicInfo>
 }

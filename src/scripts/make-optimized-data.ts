@@ -35,10 +35,33 @@ const pokedexesSrcMap: Record<string, Pokedex> = pokedexesSrc.reduce(
   {} as Record<string, Pokedex>,
 )
 
+const gamesSrcMap: Record<string, Game> = gamesSrc.reduce(
+  (acc, game) => {
+    acc[game.id] = game
+    return acc
+  },
+  {} as Record<string, Game>,
+)
+
 const games: TrGame[] = gamesSrc.map((g) => {
+  let parentName: string | undefined = undefined
+  let fullName: string = g.fullName ?? g.name
+
+  if (g.gameSet && g.gameSet !== g.id) {
+    const gset = gamesSrcMap[g.gameSet]
+    parentName = gset.name
+  }
+
+  if (g.type === 'dlc' && g.gameSet && g.gameSet !== g.id) {
+    const gset = gamesSrcMap[g.gameSet]
+    fullName = `${gset.name} - ${g.name} DLC`
+  }
+
   return {
     id: g.id,
     name: g.name,
+    fullName,
+    parentName,
     type: g.type,
     pokedexes: g.pokedexes.map((dexId) => {
       const dex = pokedexesSrcMap[dexId]
