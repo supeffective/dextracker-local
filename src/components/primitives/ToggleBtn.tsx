@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import { ComponentPropsWithoutRef } from 'react'
+import Btn from './Btn'
 import styles from './ToggleBtn.module.scss'
 
 type ToggleBtnProps = {
@@ -16,7 +17,8 @@ export default function ToggleBtn({ className, value, inverted, children, ...pro
   const childToRender = Array.isArray(children) ? children[stylesValue ? 1 : 0] : children
 
   return (
-    <button
+    <Btn
+      variant="yellow"
       type="button"
       value={value ? '1' : '0'}
       className={cn(styles.btn, { [styles.active]: stylesValue }, className)}
@@ -26,6 +28,6 @@ export default function ToggleBtn({ className, value, inverted, children, ...pro
       }}
     >
       {childToRender}
-    </button>
+    </Btn>
   )
 }

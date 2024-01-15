@@ -8,6 +8,7 @@ export type DrawerMenuProps = {
   placement?: 'left' | 'right'
   buttonName?: string
   buttonTitle?: string
+  defaultOpen?: boolean
 } & ComponentPropsWithoutRef<'div'>
 
 export default function DrawerMenu({
@@ -17,9 +18,10 @@ export default function DrawerMenu({
   buttonTitle,
   icon,
   placement,
+  defaultOpen = false,
   ...props
 }: DrawerMenuProps) {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(defaultOpen === true)
 
   return (
     <div
