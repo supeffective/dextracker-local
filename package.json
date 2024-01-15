@@ -34,7 +34,7 @@
     "start": "vite preview --host",
     "test": "bun test --env=jsdom",
     "test:coverage": "bun test --coverage && open coverage/index.html",
-    "version:bump": "bun x changelogen --bump --release && git push",
+    "version:bump": "bun x changelogen --bump --release",
     "version:publish": "bun run version:release",
     "version:release": "git push && git push --tags"
   },
