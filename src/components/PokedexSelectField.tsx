@@ -7,9 +7,10 @@ import SelectField, {
 
 type PokedexSelectFieldProps = SelectFieldPropsWithoutOptions & {
   gameId?: string
+  nullable?: boolean
 }
 
-export default function PokedexSelectField({ gameId, ...props }: PokedexSelectFieldProps) {
+export default function PokedexSelectField({ gameId, nullable, ...props }: PokedexSelectFieldProps) {
   if (!gameId) {
     return <SelectField {...props} options={[{ value: '', label: '---' }]} disabled />
   }
@@ -23,6 +24,10 @@ export default function PokedexSelectField({ gameId, ...props }: PokedexSelectFi
 
   if (options.length === 0) {
     return <SelectField {...props} options={OPTIONS_NO_DATA} disabled />
+  }
+
+  if (nullable) {
+    options.unshift({ value: '', label: '---' })
   }
 
   return <SelectField {...props} options={[...options]} />
