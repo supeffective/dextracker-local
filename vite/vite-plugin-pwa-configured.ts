@@ -20,7 +20,7 @@ const webappManifest: Partial<ManifestOptions> = {
   categories: ['entertainment', 'games'],
   screenshots: [
     {
-      src: '/screenshot.jpg',
+      src: '/images/screenshot.jpg',
       type: 'image/jpeg',
       sizes: '640x320',
       form_factor: 'wide',
@@ -42,20 +42,21 @@ const webappManifest: Partial<ManifestOptions> = {
 }
 
 const pwaPluginOptions: Partial<VitePWAOptions> = {
-  registerType: 'autoUpdate',
+  registerType: 'prompt',
   manifest: webappManifest,
-  includeAssets: ['data/**/*.json', 'images/**/*.{jpg,png,avif}'],
+  includeAssets: ['favicon.ico', 'robots.txt', 'images/{logo,backgrounds,gui}/**/*.{jpg,ico,svg,png,avif}'],
+  // includeAssets: ['data/**/*.json', 'images/**/*.{jpg,png,avif}'],
   injectRegister: 'inline',
   // injectManifest: {},
   devOptions: {
     enabled: false,
   },
-  workbox: {
-    globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,json,avif}'],
-    // Don't fallback on document based (e.g. `/some-page`) requests
-    // Even though this says `null` by default, I had to set this specifically to `null` to make it work
-    // navigateFallback: null,
-  },
+  // workbox: {
+  //   globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,json,avif}'],
+  //   // Don't fallback on document based (e.g. `/some-page`) requests
+  //   // Even though this says `null` by default, I had to set this specifically to `null` to make it work
+  //   // navigateFallback: null,
+  // },
 }
 
 export default function pwaPlugin(): Plugin[] {
