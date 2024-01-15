@@ -44,10 +44,17 @@ const webappManifest: Partial<ManifestOptions> = {
 const pwaPluginOptions: Partial<VitePWAOptions> = {
   registerType: 'autoUpdate',
   manifest: webappManifest,
-  includeAssets: ['images/logo/logo.png', 'images/logo/logo.svg', 'images/logo/apple-touch-icon.png', 'robots.txt'],
+  includeAssets: ['data/**/*.json', 'images/**/*.{jpg,png,avif}'],
   injectRegister: 'inline',
+  // injectManifest: {},
   devOptions: {
     enabled: false,
+  },
+  workbox: {
+    globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,json,avif}'],
+    // Don't fallback on document based (e.g. `/some-page`) requests
+    // Even though this says `null` by default, I had to set this specifically to `null` to make it work
+    // navigateFallback: null,
   },
 }
 
