@@ -3,7 +3,9 @@ import { RouteRenderer } from '@/lib/router/components'
 import { useRouterStore } from '@/stores/useRouterStore'
 import { useEffect } from 'react'
 
-const AppWithRouter = () => {
+// This component is the entry point of the app, it will load the initial router state and render the current route
+// To configure the default layout that will be used for the pages, check src/kernel/routerConfig.ts
+const RouteLoader = () => {
   const [route, loadState, getFallbackComponent] = useRouterStore((state) => [
     state.route,
     state.loadState,
@@ -20,4 +22,4 @@ const AppWithRouter = () => {
   return <RouteRenderer fallback={getFallbackComponent()} route={route} />
 }
 
-export default AppWithRouter
+export default RouteLoader

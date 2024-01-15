@@ -1,5 +1,5 @@
 import StickyToolbar from '@/components/StickyToolbar'
-import LoadingBanner from '@/components/layout/LoadingBanner'
+import LoadingBanner from '@/components/primitives/LoadingBanner'
 import DexPokemonSearchBox from '@/components/toolbar/DexPokemonSearchBox'
 import DexSettingsDrawer from '@/components/toolbar/DexSettingsDrawer'
 import DexSwitchDrawer from '@/components/toolbar/DexSwitchDrawer'

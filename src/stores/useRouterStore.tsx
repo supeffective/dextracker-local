@@ -1,8 +1,8 @@
 import { shallow } from 'zustand/shallow'
 import { createWithEqualityFn } from 'zustand/traditional'
 
+import appRouter from '@/kernel/router'
 import type { CurrentRoute, PageComponent } from '@/lib/router/types'
-import appRouter from '../kernel/routes'
 
 type State = {
   route?: CurrentRoute

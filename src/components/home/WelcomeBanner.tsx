@@ -3,13 +3,13 @@ import { Close2Icon } from '@/lib/icons'
 import { cn } from '@/lib/utils'
 import { readClientCookie, setClientCookie } from '@/lib/utils/cookies'
 import { useState } from 'react'
-import styles from './AppMainText.module.scss'
+import styles from './WelcomeBanner.module.scss'
 
 const dismissCookieName = '_home_main_dismissed_v2'
 const dismissCookieValue = 'yes'
 const dismissCookieMaxAge = process.env.NODE_ENV === 'development' ? 60 : 60 * 60 * 24 * 3 // 3 days (prod) or 1 minute (dev)
 
-function AppMainText() {
+function WelcomeBanner() {
   const currentCookieValue = readClientCookie(dismissCookieName)
   const [showArticle, setShowArticle] = useState(currentCookieValue !== dismissCookieValue)
 
@@ -78,4 +78,4 @@ function AppMainText() {
   )
 }
 
-export default AppMainText
+export default WelcomeBanner

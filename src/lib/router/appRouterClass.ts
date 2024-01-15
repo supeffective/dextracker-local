@@ -161,4 +161,8 @@ export class AppRouter implements Iterable<Route> {
       return route.regex.test(path)
     })
   }
+
+  hasRoutes(): boolean {
+    return this.routes.length > 0
+  }
 }

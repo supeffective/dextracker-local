@@ -25,6 +25,10 @@ export function initializeAppRouter(
   errorPage: RouterPageModule,
   defaultLayout: PageComponent,
 ): AppRouter {
+  if (appRouter.hasRoutes()) {
+    throw new Error('App router already initialized')
+  }
+
   return initializeRouter(appRouter, appRoutes, errorPage, defaultLayout)
 }
 

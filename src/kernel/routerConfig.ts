@@ -1,6 +1,5 @@
-import AppLayout from '@/components/layout/AppLayout'
-import { initializeAppRouter } from '@/lib/router/hooks'
-import { RouterPageModule, RouterPageModuleRouteMap } from '@/lib/router/types'
+import StatefulAppLayout from '@/components/layout/StatefulAppLayout'
+import { PageComponent, RouterPageModule, RouterPageModuleRouteMap } from '@/lib/router/types'
 import * as ErrorPage from '@/pages/error'
 import * as HomePage from '@/pages/page'
 
@@ -9,7 +8,7 @@ const allPages: Record<string, RouterPageModule> = import.meta.glob('@/pages/**/
   eager: true,
 })
 
-export const appRoutes: RouterPageModuleRouteMap = {
+const appRoutes: RouterPageModuleRouteMap = {
   '/': HomePage,
 }
 
@@ -53,8 +52,14 @@ for (const [route, modules] of appRouteEntries) {
   appRoutes[route] = modules
 }
 
-console.log(appRouteEntries)
+const routerConfig: {
+  appRoutes: RouterPageModuleRouteMap
+  errorPage: RouterPageModule
+  defaultLayout: PageComponent
+} = {
+  appRoutes,
+  errorPage: ErrorPage,
+  defaultLayout: StatefulAppLayout,
+}
 
-const appRouter = initializeAppRouter(appRoutes, ErrorPage, AppLayout)
-
-export default appRouter
+export default routerConfig
