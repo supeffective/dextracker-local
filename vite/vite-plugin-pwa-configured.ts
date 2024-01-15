@@ -51,6 +51,7 @@ const pwaPluginOptions: Partial<VitePWAOptions> = {
   devOptions: {
     enabled: false,
   },
+  selfDestroying: true,
   // workbox: {
   //   globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,json,avif}'],
   //   // Don't fallback on document based (e.g. `/some-page`) requests
