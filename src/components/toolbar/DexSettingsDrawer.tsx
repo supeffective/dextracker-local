@@ -14,6 +14,10 @@ export default function DexSettingsDrawer({ children, ...props }: DrawerMenuProp
   const store = useDexTrackerStore((store) => store)
   const filters: DexTrackerFilterState = store.filters ?? {}
 
+  if (!store.currentFullDexId) {
+    return null
+  }
+
   return (
     <SettingsDrawer {...props}>
       <FlexLabel label={<span>Show Caught</span>}>

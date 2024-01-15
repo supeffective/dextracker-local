@@ -10,6 +10,10 @@ export default function DexPokemonSearchBox(props: DebouncedSearchBoxProps) {
     store.setSearchQuery(searchQuery)
   }
 
+  if (!store.currentFullDexId) {
+    return null
+  }
+
   return (
     <DebouncedSearchBox
       type="search"

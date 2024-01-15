@@ -18,7 +18,15 @@ export function summarizeDexTrackerData(state: DexTrackerState) {
   }
 }
 
-export function getFullDexId(gameId: string, dexId: string): string {
+export function getFullDexId(gameId: string, dexId: string): string | undefined {
+  const game = gamesDatasetMap.get(gameId)
+  const dex = pokedexBasicInfoMap.get(dexId)
+  if (!game || !dex) {
+    return undefined
+  }
+  if (!dex.gameIds.includes(gameId)) {
+    return undefined
+  }
   return `${dexId}_${gameId}`
 }
 

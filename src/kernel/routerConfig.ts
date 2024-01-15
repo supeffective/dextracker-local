@@ -45,10 +45,6 @@ appRouteEntries.sort((a, b) => {
 })
 
 for (const [route, modules] of appRouteEntries) {
-  if (route === '/') {
-    console.log('skipping /')
-    continue
-  }
   appRoutes[route] = modules
 }
 

@@ -35,7 +35,7 @@ export default function DexTracker({ className, infiniteScrollSize = 25, ...prop
         )}
         {...props}
       >
-        <div className={styles.resultPanel}>Current Dex is not loaded or invalid</div>
+        <div className={styles.resultPanel}>This Pokédex cannot be loaded or the ID given in the URL is invalid.</div>
       </div>
     )
   }

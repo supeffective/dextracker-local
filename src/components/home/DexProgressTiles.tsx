@@ -70,7 +70,7 @@ export default function DexProgressTiles({ className, ...props }: DexProgressTil
       return 0
     })
 
-  if (dexesData.length < 2) {
+  if (dexesData.length === 0) {
     return null
   }
 
