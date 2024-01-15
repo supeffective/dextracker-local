@@ -1,7 +1,7 @@
 import ErrorBoundary from '@/components/errors/ErrorBoundary'
 import StatelessAppLayout from '@/components/layout/StatelessAppLayout'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { AppErrorFallback } from '../errors/ErrorBoundaryFallback'
+import { ErrorBoundaryFallback } from '../errors/ErrorBoundaryFallback'
 
 const queryClient = new QueryClient()
 
@@ -10,7 +10,7 @@ const queryClient = new QueryClient()
 
 function StatefulAppLayout({ children }: { children?: React.ReactNode }) {
   return (
-    <ErrorBoundary fallback={(error) => <AppErrorFallback error={error} />}>
+    <ErrorBoundary fallback={(error) => <ErrorBoundaryFallback error={error} />}>
       <StatelessAppLayout>
         <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
       </StatelessAppLayout>

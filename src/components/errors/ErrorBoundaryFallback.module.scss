@@ -1,0 +1,33 @@
+.error,
+.notFoundError {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.3rem;
+  min-height: 60vh;
+  font-weight: 400;
+
+  small {
+    font-size: inherit;
+  }
+}
+
+.errorMsg {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: rgb(5, 89, 214);
+  color: #fff;
+  border-radius: 0.5rem;
+  border: 7px dashed #d0ad78;
+}
+
+.notFoundError .errorMsg {
+  display: block;
+  background: #d75a6f;
+  border: 6px dashed #57c2bf;
+}
