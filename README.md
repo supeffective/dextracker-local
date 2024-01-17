@@ -78,3 +78,7 @@ bun run dev
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
+
+- Lewtwo's Asset Archive, for collecting all imagery
+- PokeAPI, for providing all the missing pokedexes data
+- Serebii, Bulbapedia, for being such valuable resources to the community and this project (we use them to manually double check and verify data)
