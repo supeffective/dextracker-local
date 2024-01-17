@@ -46,7 +46,9 @@ check out our main, cloud based project: [supereffective.gg](https://supereffect
 - [ ] Add a "Mark all as caught" toggle button
 - [ ] Add a "Mark all as shiny" toggle button
 - [ ] Better icon for Smartphone PWA homescreen
-- [ ] Better HTTP 404 page
+- [x] Better HTTP 404 page
+- [ ] Home dex selector should prefill the selections with your latest edited dex
+- [ ] Add a "go back home" button to all left drawers that are not in the home page
 
 ## Tech Stack
 
