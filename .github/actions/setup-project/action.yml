@@ -6,10 +6,10 @@ runs:
     - uses: oven-sh/setup-bun@v1
       name: Setup Bun
 
-    # - uses: actions/setup-node@v3
-    #   name: Setup Node.js
-    #   with:
-    #     node-version: ${{ env.NODE_VERSION }}
+    - uses: actions/setup-node@latest
+      name: Setup Node.js
+      with:
+        node-version: 20
 
     - shell: bash
       name: Install dependencies
