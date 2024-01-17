@@ -44,7 +44,7 @@ jobs:
             exit 1
           fi
 
-          bun run build:production
+          pnpm run build:production
           ls -la ./_site
 
       - name: Upload artifact

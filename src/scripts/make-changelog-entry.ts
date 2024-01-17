@@ -29,7 +29,7 @@ function addChange(version: string, change: string) {
 const args = process.argv.slice(2)
 
 if (args.length === 0) {
-  console.log('Usage: bun make:changelog <change description>')
+  console.log('Usage: pnpm make:changelog <change description>')
   process.exit(1)
 }
 

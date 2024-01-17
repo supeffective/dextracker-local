@@ -3,17 +3,15 @@ description: "Sets up project and its dependencies"
 runs:
   using: "composite"
   steps:
-    - uses: oven-sh/setup-bun@v1
-      name: Setup Bun
-
     - uses: actions/setup-node@v3
       name: Setup Node.js
       with:
         node-version: 20
+        cache: "pnpm"
 
     - shell: bash
       name: Install dependencies
       run: |
-        bun install --frozen-lockfile
-        bun make:data
+        pnpm install --frozen-lockfile
+        pnpm make:data
         

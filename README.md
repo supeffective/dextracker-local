@@ -52,13 +52,17 @@ check out our main, cloud based project: [supereffective.gg](https://supereffect
 
 ## Tech Stack
 
-- Bun as a JS runtime, bundler and package manager
-- [Vite + React.js + SWC](https://github.com/vitejs/vite-plugin-react-swc)
+- Node as JS runtime
+- PNPM as package manager
+- [Vite](https://vite.dev) as dev server and bundler
+- `vite-node`` as JS/TS script runner (similar to `tsx`, but compatible with Vite's APIs like `import.meta.env`)
+- [React.js + SWC](https://github.com/vitejs/vite-plugin-react-swc) as frontend framework
 - SCSS Modules + OpenProps for styling
 - TanStack Query + Zustand for state management
 - localStorage to persist state
 - SuperEffective's CDN for data and images (bundled from https://github.com/supeffective)
 - URL as the state for sharing functionality
+- Tauri as the desktop app wrapper and build tool
 - Github Actions as CI/CD
 - Github Pages for deployments
 
@@ -66,13 +70,13 @@ SVG Icons are from lucide.dev and simpleicons.org
 
 ## Development
 
-To develop this project, first, you will need [Bun](https://bun.sh/) 1.0.20 or higher installed on your machine. Then,
-you can run the following commands after cloning this repository, to get started:
+To develop this project, first, you will need Node 20+ and PNPM 8+ or higher installed on your machine. Then, you can
+run the following commands after cloning this repository, to get started:
 
 ```bash
-bun install
-bun make:data
-bun run dev
+pnpm install
+pnpm make:data
+pnpm dev
 ```
 
 ## License
@@ -84,4 +88,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - SciresM, Kurt, Matt and Lewtwo's Asset Archive, for collecting all imagery
 - PokeAPI, for providing all the missing pokedexes data
 - The Showdown project, for being our main data source
-- Serebii, Bulbapedia, for being such valuable resources to the community and this project (we use them to manually double check and verify data)
+- Serebii, Bulbapedia, for being such valuable resources to the community and this project (we use them to manually
+  double check and verify data)

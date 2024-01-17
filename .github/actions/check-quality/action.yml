@@ -9,6 +9,6 @@ runs:
   steps:
     - shell: bash
       run: |
-        bun lint:ci
-        bun run build
-        bun test
+        pnpm lint:ci
+        pnpm run build
+        pnpm test

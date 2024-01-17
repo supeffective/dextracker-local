@@ -4,7 +4,7 @@ Thanks for your interest to contribute to this project. Please take a moment and
 
 ## Repository
 
-- We use Bun v1.0.20+ and both the JS runtime and the package manager.
+- We use Node JS 20+ LTS and PNPM 8+
 - We use [Convention Commits](https://www.conventionalcommits.org/en/v1.0.0/) for our commit messages.
 
 ## Developing
@@ -16,31 +16,31 @@ Here are the basic commands you'll need to get started:
 ```sh
 
 # Install dependencies
-bun install
+pnpm install
 
 # Import the necessary data from the CDN
-bun make:data
+pnpm make:data
 
 # Start the dev server
-bun run dev
+pnpm run dev
 
 # Build dist files
-bun build
+pnpm build
 
 # Run tests
-bun test
+pnpm test
 
 # Lint (formatter and linter)
-bun lint
+pnpm lint
 
 ```
 
 ## Testing
 
-We use `bun` to run tests. You can run all tests with:
+We use `jest` to run tests. You can run all tests with:
 
 ```sh
-bun test
+pnpm test
 ```
 
 - Tests ending with `*.test.tsx` are considered browser tests and will be run in a browser-like environment.

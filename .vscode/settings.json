@@ -53,8 +53,8 @@
   "html-css-class-completion.excludeGlobPattern": "*/dist/**/*",
   "html-css-class-completion.enableScssFindUsage": true,
   "html-css-class-completion.enableEmmetSupport": false,
-  "vite.buildCommand": "bun run build",
-  "vite.devCommand": "bun dev",
+  "vite.buildCommand": "pnpm run build",
+  "vite.devCommand": "pnpm dev",
   "vite.vitepress": false,
   "vite.port": 4000
 }
