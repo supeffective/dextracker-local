@@ -79,6 +79,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-- Lewtwo's Asset Archive, for collecting all imagery
+- SciresM, Kurt, Matt and Lewtwo's Asset Archive, for collecting all imagery
 - PokeAPI, for providing all the missing pokedexes data
+- The Showdown project, for being our main data source
 - Serebii, Bulbapedia, for being such valuable resources to the community and this project (we use them to manually double check and verify data)
