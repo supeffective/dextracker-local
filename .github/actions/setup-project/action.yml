@@ -6,7 +6,7 @@ runs:
     - uses: oven-sh/setup-bun@v1
       name: Setup Bun
 
-    - uses: actions/setup-node@latest
+    - uses: actions/setup-node@v3
       name: Setup Node.js
       with:
         node-version: 20
