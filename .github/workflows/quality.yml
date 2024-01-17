@@ -1,6 +1,7 @@
 name: Quality Checks
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - "main"
@@ -20,9 +21,9 @@ jobs:
     name: "Quality Checks"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: "Setup project"
+      - name: "Setup JS dependencies"
         uses: ./.github/actions/setup-project
 
       - name: "Check code quality"

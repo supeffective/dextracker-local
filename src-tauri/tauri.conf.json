@@ -1,0 +1,43 @@
+{
+  "build": {
+    "beforeDevCommand": "bun run dev",
+    "beforeBuildCommand": "bun run build",
+    "devPath": "http://localhost:1510",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "SuperEffective Dex Tracker",
+    "version": "../package.json"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "all": false,
+        "open": true
+      }
+    },
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.supeffective.app",
+      "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"]
+    },
+    "security": {
+      "csp": null
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "title": "SuperEffective Dex Tracker",
+        "width": 1024,
+        "height": 768,
+        "minWidth": 400,
+        "hiddenTitle": true,
+        "userAgent": "Tauri+Vite",
+        "tabbingIdentifier": "com.supeffective.app"
+      }
+    ]
+  }
+}

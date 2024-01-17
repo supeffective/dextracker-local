@@ -6,6 +6,8 @@
     "vunguyentuan.vscode-css-variables",
     "clinyong.vscode-css-modules",
     "pranaygp.vscode-css-peek",
-    "gencer.html-slim-scss-css-class-completion"
+    "gencer.html-slim-scss-css-class-completion",
+    "tauri-apps.tauri-vscode",
+    "rust-lang.rust-analyzer"
   ]
 }
