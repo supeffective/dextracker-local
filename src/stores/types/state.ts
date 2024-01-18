@@ -46,6 +46,7 @@ const dexTrackerFilterSchema = z.object({
   hideForms: z.boolean().optional(),
   hideCosmeticForms: z.boolean().optional(),
   hideCaught: z.boolean().optional(),
+  compactMode: z.boolean().optional(),
 })
 
 export const dexTrackerStateSchema = z.object({

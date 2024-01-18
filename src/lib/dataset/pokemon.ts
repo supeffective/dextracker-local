@@ -8,6 +8,7 @@ export const pokemonDataset: TrPokemon[] = pokemonListJson.map((pkm: TrSourcePok
 
   const expandedPkmData = {
     ...pkm,
+    speciesName: pkm.speciesName,
     types: [pkm.types[0], pkm.types[1] ?? null],
     flags: _getPokemonFlagsAsObject(pkm),
     stats: _getPokemonStatsAsObject(pkm),

@@ -14,7 +14,6 @@ export default function ToggleBtn({ className, value, inverted, children, ...pro
   // const [active, setActive] = useState(initialActive)
 
   const stylesValue = inverted ? !value : value
-  const childToRender = Array.isArray(children) ? children[stylesValue ? 1 : 0] : children
 
   return (
     <Btn
@@ -23,11 +22,12 @@ export default function ToggleBtn({ className, value, inverted, children, ...pro
       value={value ? '1' : '0'}
       className={cn(styles.btn, { [styles.active]: stylesValue }, className)}
       {...props}
-      onClick={() => {
+      onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         props.onToggle?.(!value)
+        e.stopPropagation()
       }}
     >
-      {childToRender}
+      {children}
     </Btn>
   )
 }

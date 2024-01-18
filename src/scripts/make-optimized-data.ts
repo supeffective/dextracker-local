@@ -27,6 +27,14 @@ const gamesSrc = (await (await fetch(gamesDataUrl)).json()) as Game[]
 const pokedexesSrc = (await (await fetch(pokedexesDataUrl)).json()) as Pokedex[]
 const pokemonSrc = (await (await fetch(pokemonDataUrl)).json()) as Pokemon[]
 
+const pokemonSrcMap: Record<string, Pokemon> = pokemonSrc.reduce(
+  (acc, pkm) => {
+    acc[pkm.id] = pkm
+    return acc
+  },
+  {} as Record<string, Pokemon>,
+)
+
 const pokedexesSrcMap: Record<string, Pokedex> = pokedexesSrc.reduce(
   (acc, dex) => {
     acc[dex.id] = dex
@@ -87,11 +95,14 @@ fs.writeFileSync(gamesDataFile, JSON.stringify(games, null, 2))
 console.log(`  Wrote ${gamesDataFile}`)
 
 const pokemon = pokemonSrc.map((pkm) => {
+  const speciesName = pokemonSrcMap[pkm.baseSpecies ?? pkm.id]?.name ?? pkm.name
+
   return {
     id: pkm.nid,
     natNum: pkm.dexNum,
     slug: pkm.id,
     name: pkm.name,
+    speciesName,
     region: pkm.region,
     types: [pkm.type1, pkm.type2],
     color: pkm.color,

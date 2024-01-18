@@ -112,6 +112,7 @@ export type TrSourcePokemon = {
   id: string // previously aka. NID, e.g. "0026-alola"
   slug: string // previously aka. ID, PID or SID, e.g. "raichu-alola"
   name: string
+  speciesName: string
   natNum: number
   types: [type1: TrPokeType, type2: TrPokeType | null] | Array<TrPokeType | null>
   region: string
@@ -140,6 +141,7 @@ export type TrPokemon = {
   id: string // previously aka. NID, e.g. "0026-alola"
   slug: string // previously aka. ID, PID or SID, e.g. "raichu-alola"
   name: string
+  speciesName: string
   natNum: number
   types: [TrPokeType, TrPokeType | null]
   region: string

@@ -47,9 +47,12 @@ function DexTrackerEntryNoRef({ index, total, fullDexId, data, ...props }: DexTr
   const layoutShiftVisibleItems = 20
   const shouldLazyLoad = index >= layoutShiftVisibleItems && total > layoutShiftVisibleItems
 
+  const isCompactMode = searchFilters?.compactMode === true
+  const compactName = isCompactMode ? data.speciesName : data.name
+
   const entryChildren = (
     <>
-      <div className={styles.entryInfo}>
+      <div className={styles.entryInfo} title={data.name}>
         <div className={styles.entryHeader}>{`#${zeroPadDexNum ?? '--'}`}</div>
         <div className={styles.sprite}>
           <PokemonImg
@@ -59,7 +62,7 @@ function DexTrackerEntryNoRef({ index, total, fullDexId, data, ...props }: DexTr
           />
         </div>
       </div>
-      <div className={styles.entryName}>{data.name ?? `"${data.id}"`}</div>
+      <div className={styles.entryName}>{compactName}</div>
       <div className={styles.entryActions}>
         <button
           tabIndex={0}
@@ -104,7 +107,16 @@ function DexTrackerEntryNoRef({ index, total, fullDexId, data, ...props }: DexTr
   )
 
   return (
-    <div className={cn(styles.entry, ...animationClasses)} {...props}>
+    <div
+      className={cn(
+        styles.entry,
+        {
+          [styles.compact]: searchFilters?.compactMode === true,
+        },
+        ...animationClasses,
+      )}
+      {...props}
+    >
       {entryChildren}
     </div>
   )

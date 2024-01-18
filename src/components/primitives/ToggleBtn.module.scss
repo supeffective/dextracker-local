@@ -16,6 +16,8 @@
     min-width: 24px;
     opacity: 1;
     fill: var(--yellow-11);
+    pointer-events: none;
+    user-select: none;
   }
 
   svg[data-nofill] {

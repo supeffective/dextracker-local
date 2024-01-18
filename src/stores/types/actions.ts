@@ -34,6 +34,7 @@ export type DexTrackerFilterActions = {
   setHideForms: (value: boolean) => void
   setHideCosmeticForms: (value: boolean) => void
   setHideCaught: (value: boolean) => void
+  setCompactMode: (value: boolean) => void
   setSearchQuery: (query: string | null) => void
   clearSearchQuery: () => void
 }

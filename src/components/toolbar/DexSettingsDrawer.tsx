@@ -8,6 +8,7 @@ import ToggleBtn from '../primitives/ToggleBtn'
 import styles from './DexSettingsDrawer.module.scss'
 import SettingsDrawer from './SettingsDrawer'
 import RemoveDexAction from './actions/RemoveDexAction'
+import ToggleCompactModeAction from './actions/ToggleCompactModeAction'
 import TrackFormsAction from './actions/TrackFormsAction'
 
 export default function DexSettingsDrawer({ children, ...props }: DrawerMenuProps) {
@@ -20,6 +21,7 @@ export default function DexSettingsDrawer({ children, ...props }: DrawerMenuProp
 
   return (
     <SettingsDrawer {...props}>
+      <ToggleCompactModeAction />
       <FlexLabel label={<span>Show Caught</span>}>
         <ToggleBtn
           name="toggle-caught"

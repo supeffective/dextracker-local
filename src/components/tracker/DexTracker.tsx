@@ -46,6 +46,7 @@ export default function DexTracker({ className, infiniteScrollSize = 25, ...prop
       [styles.loading]: fetchedDexInfo.isLoading,
       [styles.error]: fetchedDexInfo.isError,
       [styles.loaded]: fetchedDexInfo.isSuccess,
+      [styles.compact]: currentFilters?.compactMode === true,
     },
     className,
   )

@@ -29,6 +29,15 @@ const filterActions: DexTrackerActionFactory<DexTrackerFilterActions> = (setStat
         },
       })
     },
+    setCompactMode(value) {
+      const currentState = getState()
+      setState({
+        filters: {
+          ...currentState.filters,
+          compactMode: value,
+        },
+      })
+    },
     setHideCosmeticForms(value) {
       const currentState = getState()
       setState({
