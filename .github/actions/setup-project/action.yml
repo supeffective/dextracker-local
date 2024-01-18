@@ -3,15 +3,23 @@ description: "Sets up project and its dependencies"
 runs:
   using: "composite"
   steps:
-    - uses: actions/setup-node@v3
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 8
+        run_install: false
+
+    - uses: actions/setup-node@v4
       name: Setup Node.js
       with:
         node-version: 20
-        cache: "pnpm"
+        # registry-url: https://npm.pkg.github.com
+        cache: 'pnpm'
+        cache-dependency-path: './pnpm-lock.yaml'
 
     - shell: bash
       name: Install dependencies
       run: |
+        pnpm env use --global 20
         pnpm install --frozen-lockfile
         pnpm make:data
         
