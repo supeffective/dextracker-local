@@ -70,8 +70,11 @@ function WelcomeBanner() {
           </p>
         </article>
         <article>
-          For Windows, Mac and Linux, you can install it as a PWA by clicking on the install button in the address bar
-          of your browser.
+          For Windows, Mac and Linux, you can install our desktop app, which is a wrapper around this website, that can
+          be used totally offline! Download the exectuable file from{' '}
+          <a href={`${config.github_url}/releases`} target="_blank" rel="noreferrer">
+            GitHub
+          </a>
         </article>
       </div>
     </main>
