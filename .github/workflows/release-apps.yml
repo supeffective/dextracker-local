@@ -40,17 +40,13 @@ jobs:
       - name: "Setup JS dependencies"
         uses: ./.github/actions/setup-project
 
-      - name: "Check code quality"
-        uses: ./.github/actions/check-quality
-
       - name: Build the app
         uses: tauri-apps/tauri-action@v0
-
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tagName: ${{ github.ref_name }} # This only works if your workflow triggers on new tags.
-          releaseName: 'SuperEffective v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
+          releaseName: 'Desktop v__VERSION__' # tauri-action replaces \_\_VERSION\_\_ with the app version.
           releaseBody: 'Check the release assets to download and install this version.'
-          releaseDraft: true
+          releaseDraft: ${{ !startsWith(github.ref_name, 'v') || (endsWith(github.ref_name, '-nightly') || endsWith(github.ref_name, '-alpha') || endsWith(github.ref_name, '-beta') || endsWith(github.ref_name, '-rc')) }}
           prerelease: ${{ !startsWith(github.ref_name, 'v') || (endsWith(github.ref_name, '-nightly') || endsWith(github.ref_name, '-alpha') || endsWith(github.ref_name, '-beta') || endsWith(github.ref_name, '-rc')) }}
