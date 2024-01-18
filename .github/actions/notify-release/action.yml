@@ -1,0 +1,12 @@
+name: Discord - Styled Releases/Patch Notes
+description: Send automatic styled releases to Discord.
+inputs:
+  discord_webhook_url:
+    description: Discord's webhook URL. Use GH repo secrets.
+    required: true
+runs:
+  using: 'node20'
+  main: './index.js'
+branding:
+  color: orange
+  icon: radio
