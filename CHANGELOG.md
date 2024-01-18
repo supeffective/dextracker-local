@@ -1,5 +1,22 @@
 # Changelog
 
+## v1.3.1
+
+[compare changes](https://github.com/supeffective/supeffective.com/compare/v1.3.0...v1.3.1)
+
+### 🩹 Fixes
+
+- Discord release notification workflow ([33be923](https://github.com/supeffective/supeffective.com/commit/33be923))
+
+### 🏡 Chore
+
+- Add discord webhook to publish a message on release new version ([4fce945](https://github.com/supeffective/supeffective.com/commit/4fce945))
+- Upgrade deps ([fdc3fea](https://github.com/supeffective/supeffective.com/commit/fdc3fea))
+
+### ❤️ Contributors
+
+- Javi Aguilar
+
 ## v1.3.0
 
 [compare changes](https://github.com/supeffective/super-pokedex-tracker/compare/main...v1.3.0)
