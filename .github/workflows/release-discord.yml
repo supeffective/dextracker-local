@@ -1,0 +1,51 @@
+name: Deploy Desktop Apps
+on:
+  release:
+    types: [published, edited]
+    # types: [published, released, created, edited]
+  workflow_dispatch:
+jobs:
+  publish_discord_message:
+    if: startsWith(github.event.release.tag_name, 'v')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Generate the Discord message
+        id: generate_discord_message
+        env:
+          RELEASE_TITLE: ${{ github.event.release.name }}
+          RELEASE_TAG: ${{ github.event.release }}
+          RELEASE_URL: ${{ github.event.release.html_url }}
+          RELEASES_DISCORD_WEBHOOK: ${{ secrets.RELEASES_DISCORD_WEBHOOK }}
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          retries: 3
+          script: |
+            const { RELEASE_TITLE, RELEASE_TAG, RELEASE_URL, RELEASES_DISCORD_WEBHOOK } = process.env
+            const message = `**${RELEASE_TAG}** has been released.\n${RELEASE_URL}`
+            if (message.length === 0) {
+              return ''
+            }
+
+            const discord_webhook_url = String(RELEASES_DISCORD_WEBHOOK || '')
+
+            if (!discord_webhook_url || !discord_webhook_url.startsWith('http')) {
+              throw new Error('RELEASES_DISCORD_WEBHOOK is not set, or it is not a valid URL!')
+            }
+
+            const payload = JSON.stringify({
+              content: message
+            })
+
+            await fetch(discord_webhook_url, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: payload,
+            })
+
+            return "ok"
