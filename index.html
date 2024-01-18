@@ -31,6 +31,10 @@
   <meta name="application-name" content="{{webapp_short_name}}">
   <script defer data-domain="supeffective.com" src="https://plausible.io/js/script.hash.js"></script>
   <link rel="preconnect" href="{{cdn_base_url}}">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <script id="pwa-sw">
+    if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js') }) }
+  </script>
 </head>
 
 <body>

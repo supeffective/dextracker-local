@@ -27,7 +27,6 @@ dist-ssr
 # Generated data at build time
 
 public/data/pokedexes/
-public/*.webmanifest
 src/lib/dataset/data/
 
 # Other

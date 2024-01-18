@@ -1,0 +1,28 @@
+{
+  "id": "com.supeffective.dextracker",
+  "name": "SuperEffective",
+  "short_name": "SuperEffective",
+  "start_url": "/",
+  "lang": "en",
+  "display": "standalone",
+  "background_color": "#152944",
+  "description": "Online Pokédex Tracker that saves your progress locally, without the need for an account. Developed by the creator of SuperEffective.gg.",
+  "theme_color": "#152944",
+  "dir": "ltr",
+  "orientation": "any",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "categories": ["entertainment", "games"],
+  "screenshots": [
+    {
+      "src": "/images/screenshot.jpg",
+      "type": "image/jpeg",
+      "sizes": "640x320",
+      "form_factor": "wide",
+      "label": "An example Scarlet Dex Tracker"
+    }
+  ],
+  "icons": [
+    { "src": "/images/logo/logo-2x.png", "type": "image/png", "sizes": "512x512" },
+    { "src": "/images/logo/logo.png", "type": "image/png", "sizes": "256x256" }
+  ]
+}

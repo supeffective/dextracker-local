@@ -30,7 +30,7 @@ async function run() {
     const embedMsg = {
       color: 3447003,
       title: `${content.tag_name} has been released`,
-      description: content.body,
+      description: `Desktop apps are being built and will be attached shortly to this release\n\n${content.body}`,
       url: content.html_url,
     }
 

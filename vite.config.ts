@@ -6,7 +6,6 @@ import dataJson from './src/config.json'
 import htmlInlineAssets from './vite/vite-plugin-html-inline-assets'
 import htmlPrerender from './vite/vite-plugin-html-prerender'
 import htmlReplaceVars from './vite/vite-plugin-html-replace-vars'
-import pwaPlugin from './vite/vite-plugin-pwa-configured'
 
 // Casting needed to avoid TS error "Excessive stack depth comparing types". This might be some circular ref. issue.
 const reactPlugin = react() as PluginOption
@@ -15,7 +14,6 @@ const plugins: PluginOption[] = [
   reactPlugin,
   htmlReplaceVars({ data: { ...dataJson, ...pkgJson } }),
   htmlInlineAssets({ cleanupInlineFiles: true }),
-  pwaPlugin(),
   htmlPrerender(),
 ]
 
@@ -23,6 +21,12 @@ const plugins: PluginOption[] = [
 export default defineConfig({
   plugins: plugins,
   esbuild: { legalComments: 'none' },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src/'),
+    },
+  },
+  //-------------------------------------------------------------------------------------------------------
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
   //
   // 1. prevent vite from obscuring rust errors
@@ -34,11 +38,6 @@ export default defineConfig({
     watch: {
       // 3. tell vite to ignore watching `src-tauri`
       ignored: ['**/src-tauri/**'],
-    },
-  },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src/'),
     },
   },
   // to access the Tauri environment variables set by the CLI with information about the current target
