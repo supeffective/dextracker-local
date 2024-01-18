@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v1.3.0
+
+[compare changes](https://github.com/supeffective/super-pokedex-tracker/compare/main...v1.3.0)
+
+### 🚀 Enhancements
+
+- New compact layout mode ([7ffd76f](https://github.com/supeffective/super-pokedex-tracker/commit/7ffd76f))
+
+### 🩹 Fixes
+
+- Add node to github CI ([a851ddc](https://github.com/supeffective/super-pokedex-tracker/commit/a851ddc))
+
+### 💅 Refactors
+
+- Replace Bun with PNPM due to windows incompatibility ([13dccce](https://github.com/supeffective/super-pokedex-tracker/commit/13dccce))
+
+### ❤️ Contributors
+
+- Javi Aguilar
+
 ## v1.2.0
 
 [compare changes](https://github.com/supeffective/super-pokedex-tracker/compare/v1.0.0...v1.2.0)
