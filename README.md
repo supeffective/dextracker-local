@@ -1,4 +1,4 @@
-# Super Pokédex Tracker
+# SuperEffective Pokédex Tracker
 
 A simple, lightweight, and client-based Pokédex Tracker.
 
