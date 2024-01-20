@@ -21,8 +21,16 @@
     padding: 0.25rem;
     border-radius: 0;
     border: none;
-    border-right: 1px solid var(--blue-6);
-    border-bottom: 1px solid var(--blue-6);
+    border: 1px solid var(--blue-6);
+    border: 0.5px solid var(--blue-6);
+    // border-bottom: 1px solid var(--blue-6);
+  }
+
+  &.caught {
+    background-color: var(--yellow-3);
+    border-color: var(--yellow-7);
+    // box-shadow: 0 0 8px 1px var(--yellow-6);
+    color: var(--yellow-11);
   }
 }
 
@@ -68,6 +76,10 @@
   }
 }
 
+.caught svg {
+  fill: var(--yellow-9);
+}
+
 .entryHeader {
   font-size: 1rem;
 }
@@ -108,6 +120,10 @@
   img {
     filter: drop-shadow(1px 1px 0px var(--blue-12));
   }
+}
+
+.caught .sprite {
+  background-color: var(--yellow-1);
 }
 
 .entryActions {

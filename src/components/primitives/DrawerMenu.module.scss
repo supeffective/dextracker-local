@@ -68,6 +68,8 @@
   max-width: var(--max-inner-width);
   min-width: 120px;
   max-height: 90vh;
+  max-height: calc(90vh - 5rem);
+  overflow: auto;
   transition-property: opacity, transform;
   transition-duration: 0.25s;
   transition-timing-function: ease-in-out;

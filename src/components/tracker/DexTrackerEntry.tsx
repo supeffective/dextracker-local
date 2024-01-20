@@ -52,7 +52,7 @@ function DexTrackerEntryNoRef({ index, total, fullDexId, data, ...props }: DexTr
 
   const entryChildren = (
     <>
-      <div className={styles.entryInfo} title={data.name}>
+      <div className={cn(styles.entryInfo)} title={data.name}>
         <div className={styles.entryHeader}>{`#${zeroPadDexNum ?? '--'}`}</div>
         <div className={styles.sprite}>
           <PokemonImg loading={shouldLazyLoad ? 'lazy' : 'eager'} pkmId={data.id} shiny={pkmState.shiny} />
@@ -110,6 +110,7 @@ function DexTrackerEntryNoRef({ index, total, fullDexId, data, ...props }: DexTr
         styles.entry,
         {
           [styles.compact]: dexOptions?.compactMode === true,
+          [styles.caught]: pkmState.caught,
         },
         ...animationClasses,
       )}

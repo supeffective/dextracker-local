@@ -30,8 +30,9 @@
   padding: 0;
 
   .entries {
+    // border: 1px solid var(--blue-6);
     grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
-    gap: 1px;
+    gap: 0;
   }
 }
 
