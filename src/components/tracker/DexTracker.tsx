@@ -17,10 +17,10 @@ export default function DexTracker({ className, infiniteScrollSize = 25, ...prop
   const lastElementRef = useRef<HTMLDivElement | null>(null)
 
   const currentDex = useCurrentDexData()
-  const currentFilters = useDexTrackerStore((store) => store.filters)
+  const currentDexOptions = useDexTrackerStore((store) => store.options)
 
   const fetchedDexInfo = currentDex.fullInfoQuery
-  const filteredDexResults = generateDexFilteredEntries(fetchedDexInfo?.data, currentDex.state, currentFilters)
+  const filteredDexResults = generateDexFilteredEntries(fetchedDexInfo?.data, currentDex.state, currentDexOptions)
   const visibleDexResults = useInfiniteScrollList(filteredDexResults, { chunkSize: infiniteScrollSize, lastElementRef })
 
   if (!fetchedDexInfo) {
@@ -46,7 +46,7 @@ export default function DexTracker({ className, infiniteScrollSize = 25, ...prop
       [styles.loading]: fetchedDexInfo.isLoading,
       [styles.error]: fetchedDexInfo.isError,
       [styles.loaded]: fetchedDexInfo.isSuccess,
-      [styles.compact]: currentFilters?.compactMode === true,
+      [styles.compact]: currentDexOptions?.compactMode === true,
     },
     className,
   )

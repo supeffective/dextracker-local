@@ -4,7 +4,7 @@ import FlexLabel from '../../primitives/FlexLabel'
 import ToggleBtn from '../../primitives/ToggleBtn'
 
 export default function TrackFormsAction({ className }: { className?: string }) {
-  const [value, setValue] = useDexTrackerStore((store) => [store.filters?.hideForms, store.setHideForms])
+  const [value, setValue] = useDexTrackerStore((store) => [store.options?.hideForms, store.setHideForms])
 
   return (
     <>

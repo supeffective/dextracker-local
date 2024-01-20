@@ -13,7 +13,7 @@ type DexTrackerEntryProps = { index: number; total: number; fullDexId: string; d
 >
 
 function DexTrackerEntryNoRef({ index, total, fullDexId, data, ...props }: DexTrackerEntryProps) {
-  const searchFilters = useDexTrackerStore((store) => store.filters)
+  const dexOptions = useDexTrackerStore((store) => store.options)
   const updatePokemonEntry = useDexTrackerStore((store) => store.updateDexPokemon)
   const zeroPadDexNum = data.num.toString().padStart(4, '0')
   const [animationClasses, setAnimationClasses] = useState<string[]>([])
@@ -23,7 +23,7 @@ function DexTrackerEntryNoRef({ index, total, fullDexId, data, ...props }: DexTr
     id: data.id,
   }
 
-  const disappearsOnCatch = searchFilters?.hideCaught === true
+  const disappearsOnCatch = dexOptions?.hideCaught === true
   const animationClassesTimeouts = {
     disappear: 250,
   }
@@ -47,7 +47,7 @@ function DexTrackerEntryNoRef({ index, total, fullDexId, data, ...props }: DexTr
   const layoutShiftVisibleItems = 20
   const shouldLazyLoad = index >= layoutShiftVisibleItems && total > layoutShiftVisibleItems
 
-  const isCompactMode = searchFilters?.compactMode === true
+  const isCompactMode = dexOptions?.compactMode === true
   const compactName = isCompactMode ? data.speciesName : data.name
 
   const entryChildren = (
@@ -55,11 +55,7 @@ function DexTrackerEntryNoRef({ index, total, fullDexId, data, ...props }: DexTr
       <div className={styles.entryInfo} title={data.name}>
         <div className={styles.entryHeader}>{`#${zeroPadDexNum ?? '--'}`}</div>
         <div className={styles.sprite}>
-          <PokemonImg
-            loading={shouldLazyLoad ? 'lazy' : 'eager'}
-            pkmId={data.id}
-            shiny={pkmState.shiny || searchFilters?.shinyMode}
-          />
+          <PokemonImg loading={shouldLazyLoad ? 'lazy' : 'eager'} pkmId={data.id} shiny={pkmState.shiny} />
         </div>
       </div>
       <div className={styles.entryName}>{compactName}</div>
@@ -84,16 +80,18 @@ function DexTrackerEntryNoRef({ index, total, fullDexId, data, ...props }: DexTr
           {pkmState.caught && <PokeballIcon />}
           {!pkmState.caught && <PokeballOutlineIcon />}
         </button>
-        <button
-          tabIndex={0}
-          title="Shiny registered"
-          type="button"
-          className={styles.shinyButton}
-          onClick={() => toggleShiny(pkmState)}
-          data-active={pkmState.shiny ?? 0}
-        >
-          <ShinyIcon />
-        </button>
+        {dexOptions?.trackShinies && (
+          <button
+            tabIndex={0}
+            title="Shiny registered"
+            type="button"
+            className={styles.shinyButton}
+            onClick={() => toggleShiny(pkmState)}
+            data-active={pkmState.shiny ?? 0}
+          >
+            <ShinyIcon />
+          </button>
+        )}
         {/* 
         // TODO: add support when we have our custom data source
         <button tabIndex={0} type="button" data-active={pkmState.genders.includes('m')}>
@@ -111,7 +109,7 @@ function DexTrackerEntryNoRef({ index, total, fullDexId, data, ...props }: DexTr
       className={cn(
         styles.entry,
         {
-          [styles.compact]: searchFilters?.compactMode === true,
+          [styles.compact]: dexOptions?.compactMode === true,
         },
         ...animationClasses,
       )}

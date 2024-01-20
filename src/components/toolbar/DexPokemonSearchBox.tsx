@@ -1,10 +1,10 @@
-import { DexTrackerFilterState } from '@/stores/types/state'
+import { DexTrackerOptionsState } from '@/stores/types/state'
 import useDexTrackerStore from '@/stores/useDexTrackerStore'
 import DebouncedSearchBox, { DebouncedSearchBoxProps } from '../primitives/DebouncedSearchBox'
 
 export default function DexPokemonSearchBox(props: DebouncedSearchBoxProps) {
   const store = useDexTrackerStore((store) => store)
-  const filters: DexTrackerFilterState = store.filters ?? {}
+  const dexOptions: DexTrackerOptionsState = store.options ?? {}
 
   const handleSearchChange = (searchQuery: string) => {
     store.setSearchQuery(searchQuery)
@@ -20,7 +20,7 @@ export default function DexPokemonSearchBox(props: DebouncedSearchBoxProps) {
       name="pokemon-search"
       placeholder="Search Pokémon..."
       debounceDelay={300}
-      defaultValue={filters.searchQuery}
+      defaultValue={dexOptions.searchQuery}
       onDebouncedChange={handleSearchChange}
       {...props}
     />

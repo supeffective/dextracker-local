@@ -4,7 +4,7 @@ import { Grid2X2Icon, Grid3X3Icon } from '@/lib/icons'
 import useDexTrackerStore from '@/stores/useDexTrackerStore'
 
 export default function ToggleCompactModeAction({ className }: { className?: string }) {
-  const [value, setValue] = useDexTrackerStore((store) => [store.filters?.compactMode === true, store.setCompactMode])
+  const [value, setValue] = useDexTrackerStore((store) => [store.options?.compactMode === true, store.setCompactMode])
   const isCompact = value === true
   const compactIcon = <Grid3X3Icon data-nofill />
   const normalIcon = <Grid2X2Icon data-nofill />

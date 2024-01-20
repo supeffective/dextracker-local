@@ -30,7 +30,7 @@ export type DexTrackerSharedBoxActions = {
 
 export type DexTrackerFilterActions = {
   // applyFilters(dex: Pokedex, dexState: PokedexState, filter: DexTrackerFilter): PokedexSearchIndex
-  setShinyMode: (value: boolean) => void
+  setTrackShinies: (value: boolean) => void
   setHideForms: (value: boolean) => void
   setHideCosmeticForms: (value: boolean) => void
   setHideCaught: (value: boolean) => void

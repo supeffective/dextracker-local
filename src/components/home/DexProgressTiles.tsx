@@ -14,7 +14,7 @@ import styles from './DexProgressTiles.module.scss'
 type DexProgressTilesProps = {} & Omit<ComponentPropsWithoutRef<'section'>, 'children'>
 
 export default function DexProgressTiles({ className, ...props }: DexProgressTilesProps) {
-  const [dexesStateMap, dexFilters] = useDexTrackerStore((store) => [store.dexes, store.filters])
+  const [dexesStateMap, dexOptions] = useDexTrackerStore((store) => [store.dexes, store.options])
   const dexes = Object.values(dexesStateMap)
   const dexesData = dexes
     .map((dexState) => {
@@ -43,9 +43,9 @@ export default function DexProgressTiles({ className, ...props }: DexProgressTil
         })
         .filter((pokemon): pokemon is NonNullable<typeof pokemon> => Boolean(pokemon))
 
-      const dexTotal = dexFilters?.hideForms ? dex.speciesCount : dex.speciesCount + dex.formsCount
+      const dexTotal = dexOptions?.hideForms ? dex.speciesCount : dex.speciesCount + dex.formsCount
       const caught = pokemon.filter((pokemon) => {
-        if (dexFilters?.hideForms && pokemon.flags.isForm) {
+        if (dexOptions?.hideForms && pokemon.flags.isForm) {
           return false
         }
         return pokemon

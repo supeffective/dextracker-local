@@ -1,5 +1,5 @@
 import { pokemonDatasetMap } from '@/lib/dataset/pokemon'
-import { DexTrackerFilterState, PokedexEntryState, PokedexState } from '../stores/types/state'
+import { DexTrackerOptionsState, PokedexEntryState, PokedexState } from '../stores/types/state'
 
 import { TrPokedex, TrPokedexEntry, TrStatefulPokedexEntry } from '@/lib/dataset/types'
 
@@ -9,7 +9,7 @@ export type PokedexSearchIndex = PokedexSearchableEntry[]
 export function generateDexFilteredEntries(
   dex: TrPokedex | undefined,
   dexState: PokedexState | undefined,
-  filters?: DexTrackerFilterState,
+  dexOptions?: DexTrackerOptionsState,
 ): PokedexSearchIndex {
   if (!dex || !dexState) {
     return []
@@ -17,7 +17,7 @@ export function generateDexFilteredEntries(
 
   const searchIndex = _generateDexSearchableEntries(dex.pokemon, dexState)
 
-  return _applyDexFilters(searchIndex, filters)
+  return _applyDexFilters(searchIndex, dexOptions)
 }
 
 function _generateDexSearchableEntries(dexEntries: TrPokedexEntry[], dexState: PokedexState): PokedexSearchIndex {
@@ -83,18 +83,18 @@ function _searchDexEntries(searchIndex: PokedexSearchIndex, query: string): Poke
   })
 }
 
-function _applyDexFilters(pokemon: PokedexSearchIndex, filter?: DexTrackerFilterState): PokedexSearchIndex {
+function _applyDexFilters(pokemon: PokedexSearchIndex, dexOptions?: DexTrackerOptionsState): PokedexSearchIndex {
   let results = pokemon
 
-  if (!filter) {
+  if (!dexOptions) {
     return results
   }
 
-  if (filter.searchQuery) {
-    results = _searchDexEntries(results, filter.searchQuery)
+  if (dexOptions.searchQuery) {
+    results = _searchDexEntries(results, dexOptions.searchQuery)
   }
 
-  if (filter.hideCaught) {
+  if (dexOptions.hideCaught) {
     results = results.filter((pokemon) => {
       const state = pokemon.state
       if (!state) {
@@ -104,11 +104,11 @@ function _applyDexFilters(pokemon: PokedexSearchIndex, filter?: DexTrackerFilter
     })
   }
 
-  if (filter.hideForms) {
+  if (dexOptions.hideForms) {
     results = results.filter((pokemon) => !pokemon.flags.isForm)
   }
 
-  if (filter.hideCosmeticForms) {
+  if (dexOptions.hideCosmeticForms) {
     results = results.filter((pokemon) => !pokemon.flags.isCosmeticForm)
   }
 

@@ -40,13 +40,13 @@ export const pokedexStateSchema = z.object({
   lastModified: z.number(),
 })
 
-const dexTrackerFilterSchema = z.object({
-  shinyMode: z.boolean().optional(),
+const dexTrackerOptionsSchema = z.object({
   searchQuery: z.string().optional(),
+  compactMode: z.boolean().optional(),
+  trackShinies: z.boolean().optional(),
   hideForms: z.boolean().optional(),
   hideCosmeticForms: z.boolean().optional(),
   hideCaught: z.boolean().optional(),
-  compactMode: z.boolean().optional(),
 })
 
 export const dexTrackerStateSchema = z.object({
@@ -54,14 +54,14 @@ export const dexTrackerStateSchema = z.object({
   trainer: trainerInfoStateSchema.optional(),
   gameIds: stringArrSchema,
   dexes: z.record(pokedexStateSchema),
-  filters: dexTrackerFilterSchema.optional(),
+  options: dexTrackerOptionsSchema.optional(),
   currentFullDexId: z.string().optional(),
   sharedBox: boxStateSchema.optional(),
   lastModified: z.number().optional(),
 })
 
 export type DexTrackerState = Simply<z.infer<typeof dexTrackerStateSchema>>
-export type DexTrackerFilterState = Simply<z.infer<typeof dexTrackerFilterSchema>>
+export type DexTrackerOptionsState = Simply<z.infer<typeof dexTrackerOptionsSchema>>
 export type PokeboxState = Simply<z.infer<typeof boxStateSchema>>
 export type PokeboxEntryState = Simply<z.infer<typeof boxEntryStateSchema>>
 export type PokedexEntryState = Simply<z.infer<typeof dexEntrySchema>>

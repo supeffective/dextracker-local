@@ -2,20 +2,20 @@ import { DexTrackerActionFactory, DexTrackerFilterActions } from '../types/actio
 
 const filterActions: DexTrackerActionFactory<DexTrackerFilterActions> = (setState, getState) => {
   return {
-    setShinyMode(value) {
+    setTrackShinies(value) {
       const currentState = getState()
       setState({
-        filters: {
-          ...currentState.filters,
-          shinyMode: value,
+        options: {
+          ...currentState.options,
+          trackShinies: value,
         },
       })
     },
     setHideForms(value) {
       const currentState = getState()
       setState({
-        filters: {
-          ...currentState.filters,
+        options: {
+          ...currentState.options,
           hideForms: value,
         },
       })
@@ -23,8 +23,8 @@ const filterActions: DexTrackerActionFactory<DexTrackerFilterActions> = (setStat
     setHideCaught(value) {
       const currentState = getState()
       setState({
-        filters: {
-          ...currentState.filters,
+        options: {
+          ...currentState.options,
           hideCaught: value,
         },
       })
@@ -32,8 +32,8 @@ const filterActions: DexTrackerActionFactory<DexTrackerFilterActions> = (setStat
     setCompactMode(value) {
       const currentState = getState()
       setState({
-        filters: {
-          ...currentState.filters,
+        options: {
+          ...currentState.options,
           compactMode: value,
         },
       })
@@ -41,8 +41,8 @@ const filterActions: DexTrackerActionFactory<DexTrackerFilterActions> = (setStat
     setHideCosmeticForms(value) {
       const currentState = getState()
       setState({
-        filters: {
-          ...currentState.filters,
+        options: {
+          ...currentState.options,
           hideCosmeticForms: value,
         },
       })
@@ -50,8 +50,8 @@ const filterActions: DexTrackerActionFactory<DexTrackerFilterActions> = (setStat
     setSearchQuery(query) {
       const currentState = getState()
       setState({
-        filters: {
-          ...currentState.filters,
+        options: {
+          ...currentState.options,
           searchQuery: query ?? undefined,
         },
       })
@@ -59,8 +59,8 @@ const filterActions: DexTrackerActionFactory<DexTrackerFilterActions> = (setStat
     clearSearchQuery() {
       const currentState = getState()
       setState({
-        filters: {
-          ...currentState.filters,
+        options: {
+          ...currentState.options,
           searchQuery: undefined,
         },
       })

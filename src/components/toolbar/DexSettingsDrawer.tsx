@@ -1,6 +1,6 @@
 import { PokeballIcon, ShinyIcon } from '@/lib/icons/gamegui'
 import { cn } from '@/lib/utils'
-import { DexTrackerFilterState } from '@/stores/types/state'
+import { DexTrackerOptionsState } from '@/stores/types/state'
 import useDexTrackerStore from '@/stores/useDexTrackerStore'
 import { DrawerMenuProps } from '../primitives/DrawerMenu'
 import FlexLabel from '../primitives/FlexLabel'
@@ -13,7 +13,7 @@ import TrackFormsAction from './actions/TrackFormsAction'
 
 export default function DexSettingsDrawer({ children, ...props }: DrawerMenuProps) {
   const store = useDexTrackerStore((store) => store)
-  const filters: DexTrackerFilterState = store.filters ?? {}
+  const dexOptions: DexTrackerOptionsState = store.options ?? {}
 
   if (!store.currentFullDexId) {
     return null
@@ -26,8 +26,8 @@ export default function DexSettingsDrawer({ children, ...props }: DrawerMenuProp
         <ToggleBtn
           name="toggle-caught"
           title="Toggle Caught"
-          className={cn(styles.toggle, { [styles.disabledBall]: filters.hideCaught })}
-          value={filters.hideCaught}
+          className={cn(styles.toggle, { [styles.disabledBall]: dexOptions.hideCaught })}
+          value={dexOptions.hideCaught}
           inverted
           onToggle={(active) => {
             store.setHideCaught(active)
@@ -36,7 +36,7 @@ export default function DexSettingsDrawer({ children, ...props }: DrawerMenuProp
           <PokeballIcon
             style={{
               // opacity: filters.hideCaught ? 0.75 : 1,
-              transform: filters.hideCaught ? 'none' : 'rotate(25deg)',
+              transform: dexOptions.hideCaught ? 'none' : 'rotate(25deg)',
             }}
           />
         </ToggleBtn>
@@ -50,15 +50,15 @@ export default function DexSettingsDrawer({ children, ...props }: DrawerMenuProp
           name="toggle-shiny"
           title="Toggle Shiny"
           className={cn(styles.toggle)}
-          value={filters.shinyMode}
+          value={dexOptions.trackShinies}
           onToggle={(active) => {
-            store.setShinyMode(active)
+            store.setTrackShinies(active)
           }}
         >
           <ShinyIcon
             style={{
               // opacity: filters.shinyMode ? 1 : 0.6,
-              transform: filters.shinyMode ? 'scale(0.9)' : 'none',
+              transform: dexOptions.trackShinies ? 'scale(0.9)' : 'none',
             }}
           />
         </ToggleBtn>
