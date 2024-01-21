@@ -1,5 +1,27 @@
 # Changelog
 
+## v1.4.0
+
+[compare changes](https://github.com/supeffective/supeffective.com/compare/v1.3.1...v1.4.0)
+
+### 🚀 Enhancements
+
+- Added on/off toggle to track cosmetic forms ([05d93d2](https://github.com/supeffective/supeffective.com/commit/05d93d2))
+
+### 💅 Refactors
+
+- Simplify PWA setup ([4cd55aa](https://github.com/supeffective/supeffective.com/commit/4cd55aa))
+- **shiny-mode:** Now, when toggling 'Track Shinies', the shiny mark button will be toggled as well for every pokemon ([16572b0](https://github.com/supeffective/supeffective.com/commit/16572b0))
+- **ui:** Improved compact mode styles. caught pokemon are now more visible marked in yellow ([93d0bea](https://github.com/supeffective/supeffective.com/commit/93d0bea))
+
+### 🏡 Chore
+
+- Upgrade deps ([a546e0b](https://github.com/supeffective/supeffective.com/commit/a546e0b))
+
+### ❤️ Contributors
+
+- Javi Aguilar
+
 ## v1.3.1
 
 [compare changes](https://github.com/supeffective/supeffective.com/compare/v1.3.0...v1.3.1)
