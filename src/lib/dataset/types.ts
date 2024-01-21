@@ -12,8 +12,14 @@ export type TrPokedexBasicInfo = {
   id: string
   name: string
   region: string | null
-  speciesCount: number
-  formsCount: number
+  counters: {
+    species: number
+    shinySpecies: number
+    forms: number
+    shinyForms: number
+    cosmeticForms: number
+    shinyCosmeticForms: number
+  }
 }
 
 export type TrPokedexBasicInfoWithGameIds = TrPokedexBasicInfo & {
@@ -95,6 +101,7 @@ export type TrPokemonFlags = {
   isConvergent: boolean
   isLegendary: boolean
   isMythical: boolean
+  hasGenderDifferences: boolean
 }
 
 export type TrPokemonStats = {
@@ -133,6 +140,7 @@ export type TrSourcePokemon = {
         isConvergent: boolean,
         isLegendary: boolean,
         isMythical: boolean,
+        hasGenderDifferences: boolean,
       ]
     | Array<boolean>
 }

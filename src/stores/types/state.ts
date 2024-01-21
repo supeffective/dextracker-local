@@ -15,6 +15,8 @@ const dexEntrySchema = z.object({
   seen: z.boolean().optional(),
   caught: z.boolean().optional(),
   shiny: z.boolean().optional(),
+  male: z.boolean().optional(),
+  female: z.boolean().optional(),
   // genders: z.array(genderSchema).optional(),
 })
 const boxEntryStateSchema = z.object({

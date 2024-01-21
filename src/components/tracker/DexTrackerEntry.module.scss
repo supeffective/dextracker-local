@@ -54,7 +54,8 @@
   justify-items: flex-start;
 }
 
-.entryActions {
+.entryActions,
+.entryActionsGroup {
   font-size: 0.8rem;
   line-height: 1.2;
   display: flex;
@@ -69,11 +70,14 @@
     max-width: none;
     fill: var(--blue-7);
   }
+}
 
-  svg.small {
-    width: 1rem;
-    height: 1rem;
-  }
+.compact .entryActions {
+  flex-direction: column;
+}
+
+.compact .entryActionsGroup {
+  gap: 0.25rem;
 }
 
 .caught svg {
@@ -175,6 +179,42 @@
       fill: var(--yellow-11);
     }
   }
+
+  button.genderButton {
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  button.maleButton[data-active='true'] {
+    background: var(--indigo-10);
+    // padding: 0;
+    background: var(--indigo-3);
+    border: 2px solid var(--indigo-6);
+    // box-shadow: 2px 2px 0 var(--yellow-5);
+
+    svg {
+      width: 12px;
+      height: 12px;
+      fill: var(--indigo-11);
+    }
+  }
+
+  button.femaleButton[data-active='true'] {
+    padding: 2px;
+    background: var(--pink-10);
+    // padding: 0;
+    background: var(--pink-3);
+    border: 2px solid var(--pink-6);
+    // box-shadow: 2px 2px 0 var(--yellow-5);
+
+    svg {
+      width: 12px;
+      height: 12px;
+      fill: var(--pink-11);
+    }
+  }
 }
 
 .compact {
@@ -244,4 +284,24 @@
     transform: scale(1.075) rotate(0);
     opacity: 1;
   }
+}
+
+.sprite {
+  .genderIcon {
+    z-index: 1;
+    position: absolute;
+    bottom: 0.15rem;
+    right: 0.15rem;
+    color: black;
+    fill: var(--gray-12);
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.compact .sprite .genderIcon {
+  bottom: -0.3rem;
+  right: -0.15rem;
+  width: 0.75rem;
+  height: 0.75rem;
 }

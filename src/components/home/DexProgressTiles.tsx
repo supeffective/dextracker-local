@@ -1,7 +1,7 @@
 import { routeFactory } from '@/kernel/routeFactory'
 import { gamesDatasetMap } from '@/lib/dataset/games'
 import { pokedexBasicInfoMap } from '@/lib/dataset/pokedexes'
-import { pokemonDatasetMap } from '@/lib/dataset/pokemon'
+import { calculateDexProgress } from '@/lib/dataset/utils'
 import { RouterLink } from '@/lib/router'
 import { cn } from '@/lib/utils'
 import useDexTrackerStore from '@/stores/useDexTrackerStore'
@@ -29,27 +29,7 @@ export default function DexProgressTiles({ className, ...props }: DexProgressTil
         return
       }
 
-      const pokemon = Object.values(dexState.pokemon)
-        .map((pokemonState) => {
-          const pokemon = pokemonDatasetMap.get(pokemonState.id)
-          if (!pokemon) {
-            console.error(`PokemonId not found for dex GID: ${dexState.id}; PokemonId: ${pokemonState.id}`)
-            return
-          }
-          return {
-            ...pokemon,
-            ...pokemonState,
-          }
-        })
-        .filter((pokemon): pokemon is NonNullable<typeof pokemon> => Boolean(pokemon))
-
-      const dexTotal = dexOptions?.hideForms ? dex.speciesCount : dex.speciesCount + dex.formsCount
-      const caught = pokemon.filter((pokemon) => {
-        if (dexOptions?.hideForms && pokemon.flags.isForm) {
-          return false
-        }
-        return pokemon
-      }).length
+      const [caught, dexTotal] = calculateDexProgress(dex, dexState, dexOptions ?? {})
 
       return {
         dex: dex,

@@ -45,10 +45,11 @@ function _getPokemonStatsAsObject(pkm: TrSourcePokemon): TrPokemonStats {
 }
 
 function _getPokemonFlagsAsObject(pkm: TrSourcePokemon): TrPokemonFlags {
+  const expectedFlagsLength = 13
   const flags = pkm.flags
 
-  if (flags.length !== 12) {
-    throw new Error(`Pokemon ${pkm.id} has ${flags.length} flags instead of 12`)
+  if (flags.length !== expectedFlagsLength) {
+    throw new Error(`Pokemon ${pkm.id} has ${flags.length} flags instead of ${expectedFlagsLength}`)
   }
 
   return {
@@ -64,6 +65,7 @@ function _getPokemonFlagsAsObject(pkm: TrSourcePokemon): TrPokemonFlags {
     isConvergent: flags[9],
     isLegendary: flags[10],
     isMythical: flags[11],
+    hasGenderDifferences: flags[12],
   }
 }
 

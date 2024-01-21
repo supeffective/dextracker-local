@@ -1,5 +1,5 @@
 import { PokedexSearchableEntry } from '@/kernel/search'
-import { PokeballIcon, PokeballOutlineIcon, ShinyIcon } from '@/lib/icons/gamegui'
+import { FemaleIcon, MaleIcon, PokeballIcon, PokeballOutlineIcon, ShinyIcon } from '@/lib/icons/gamegui'
 import { cn } from '@/lib/utils'
 import { PokedexEntryState } from '@/stores/types/state'
 import useDexTrackerStore from '@/stores/useDexTrackerStore'
@@ -44,62 +44,77 @@ function DexTrackerEntryNoRef({ index, total, fullDexId, data, ...props }: DexTr
     })
   }
 
+  // const toggleMale = (prevState: PokedexEntryState) => {
+  //   updatePokemonEntry(fullDexId, prevState.id, {
+  //     male: !prevState.male,
+  //   })
+  // }
+
+  // const toggleFemale = (prevState: PokedexEntryState) => {
+  //   updatePokemonEntry(fullDexId, prevState.id, {
+  //     female: !prevState.female,
+  //   })
+  // }
+
   const layoutShiftVisibleItems = 20
   const shouldLazyLoad = index >= layoutShiftVisibleItems && total > layoutShiftVisibleItems
 
   const isCompactMode = dexOptions?.compactMode === true
   const compactName = isCompactMode ? data.speciesName : data.name
 
+  const isMaleForm = data.flags.hasGenderDifferences && !data.flags.isFemaleForm
+  const isFemaleForm = data.flags.isFemaleForm
+
   const entryChildren = (
     <>
       <div className={cn(styles.entryInfo)} title={data.name}>
         <div className={styles.entryHeader}>{`#${zeroPadDexNum ?? '--'}`}</div>
         <div className={styles.sprite}>
-          <PokemonImg loading={shouldLazyLoad ? 'lazy' : 'eager'} pkmId={data.id} shiny={pkmState.shiny} />
+          <PokemonImg
+            loading={shouldLazyLoad ? 'lazy' : 'eager'}
+            pkmId={data.id}
+            shiny={dexOptions?.trackShinies && pkmState.shiny}
+          />
+          {isMaleForm && <MaleIcon className={cn(styles.genderIcon, styles.maleIcon)} />}
+          {isFemaleForm && <FemaleIcon className={cn(styles.genderIcon, styles.femaleIcon)} />}
         </div>
       </div>
       <div className={styles.entryName}>{compactName}</div>
       <div className={styles.entryActions}>
-        <button
-          tabIndex={0}
-          title="Registered"
-          type="button"
-          className={styles.ballButton}
-          onClick={() => {
-            if (disappearsOnCatch) {
-              setAnimationClasses([styles.animJumpyWalk])
-              setTimeout(() => {
-                toggleCaught(pkmState)
-              }, animationClassesTimeouts.disappear)
-              return
-            }
-            toggleCaught(pkmState)
-          }}
-          data-active={pkmState.caught ?? 0}
-        >
-          {pkmState.caught && <PokeballIcon />}
-          {!pkmState.caught && <PokeballOutlineIcon />}
-        </button>
-        {dexOptions?.trackShinies && (
+        <div className={styles.entryActionsGroup}>
           <button
             tabIndex={0}
-            title="Shiny registered"
+            title="Registered"
             type="button"
-            className={styles.shinyButton}
-            onClick={() => toggleShiny(pkmState)}
-            data-active={pkmState.shiny ?? 0}
+            className={styles.ballButton}
+            onClick={() => {
+              if (disappearsOnCatch) {
+                setAnimationClasses([styles.animJumpyWalk])
+                setTimeout(() => {
+                  toggleCaught(pkmState)
+                }, animationClassesTimeouts.disappear)
+                return
+              }
+              toggleCaught(pkmState)
+            }}
+            data-active={pkmState.caught ?? 0}
           >
-            <ShinyIcon />
+            {pkmState.caught && <PokeballIcon />}
+            {!pkmState.caught && <PokeballOutlineIcon />}
           </button>
-        )}
-        {/* 
-        // TODO: add support when we have our custom data source
-        <button tabIndex={0} type="button" data-active={pkmState.genders.includes('m')}>
-                <MaleIcon className={styles.small} />
-              </button>
-              <button tabIndex={0} type="button" data-active={pkmState.genders.includes('f')}>
-                <FemaleIcon className={styles.small} />
-              </button> */}
+          {dexOptions?.trackShinies && (
+            <button
+              tabIndex={0}
+              title="Shiny registered"
+              type="button"
+              className={styles.shinyButton}
+              onClick={() => toggleShiny(pkmState)}
+              data-active={pkmState.shiny ?? 0}
+            >
+              <ShinyIcon />
+            </button>
+          )}
+        </div>
       </div>
     </>
   )

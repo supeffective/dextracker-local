@@ -12,8 +12,8 @@ Brought to you by the [SuperEffective](https://supereffective.gg/) team.
 - [x] Last game's Pokédex as the default
 - [ ] Mark all games that you own
 - [x] Track all regional Pokédexes, for all main series games
-- [ ] Track all forms, genders and shiny variants
-- [ ] Editabe Pokémon data: seen/ready, caught, gender (m/f/-), shiny
+- [x] Track all forms, genders and shiny variants
+- [x] Editabe Pokémon data: caught, form gender (m/f/-), shiny
 - [x] Search for Pokémon by name, type, color, dex number, etc.
 - [ ] View Pokémon basic details such as location, stats, types, and abilities
 - [ ] Direct links to well-known Pokémon resource websites
@@ -42,7 +42,6 @@ check out our main, cloud based project: [supereffective.gg](https://supereffect
 - [ ] Add placeholders to avoid Cumulative Layout Shifts (CLS)
 - [x] Add React router to navigate between dexes (hash router)
 - [x] Put filters back together with the main state, or export both stores in the JSON
-- [ ] Add a "Mark all as seen" toggle button
 - [ ] Add a "Mark all as caught" toggle button
 - [ ] Add a "Mark all as shiny" toggle button
 - [ ] Better icon for Smartphone PWA homescreen
@@ -77,6 +76,7 @@ run the following commands after cloning this repository, to get started:
 pnpm install
 pnpm make:data
 pnpm dev
+open http://localhost:1510/
 ```
 
 ## License

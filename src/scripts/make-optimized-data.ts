@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { getDataCDNResourceUrl } from '@/kernel/urls'
-import type { TrGame, TrPokedex, TrPokedexEntry, TrSourcePokemon } from '@/lib/dataset/types'
+import type { TrGame, TrPokedex, TrPokedexBasicInfo, TrPokedexEntry, TrSourcePokemon } from '@/lib/dataset/types'
 import type { Game, Pokedex, Pokemon } from '@supeffective/dataset'
 
 const PUBLIC_DEST_DIR = `${process.cwd()}/public`
@@ -76,16 +76,24 @@ const games: TrGame[] = gamesSrc.map((g) => {
       if (!dex) {
         throw new Error(`Pokedex ${dexId} not found in the pokedexesSrcMap object`)
       }
-      const speciesCount = dex.entries.filter((p) => !p.isForm).length
-      const formsCount = dex.entries.filter((p) => p.isForm).length
+      const dexPkms: Pokemon[] = dex.entries.map((p) => ({
+        ...pokemonSrcMap[p.id],
+        isForm: p.isForm,
+      }))
 
       return {
         id: dex.id,
         region: dex.region,
         name: dex.name,
-        speciesCount,
-        formsCount,
-      }
+        counters: {
+          species: dexPkms.filter((p) => !p.isForm).length,
+          forms: dexPkms.filter((p) => p.isForm).length,
+          cosmeticForms: dexPkms.filter((p) => p.isCosmeticForm).length,
+          shinySpecies: dexPkms.filter((p) => !p.isForm && p.shinyReleased).length,
+          shinyForms: dexPkms.filter((p) => p.isForm && p.shinyReleased).length,
+          shinyCosmeticForms: dexPkms.filter((p) => p.isCosmeticForm && p.shinyReleased).length,
+        },
+      } satisfies TrPokedexBasicInfo
     }),
   } satisfies TrGame
 })
@@ -127,6 +135,7 @@ const pokemon = pokemonSrc.map((pkm) => {
       pkm.convergentSpecies ? pkm.convergentSpecies?.length > 0 : false,
       pkm.isLegendary,
       pkm.isMythical,
+      pkm.hasGenderDifferences,
     ],
     forms: pkm.forms ?? [],
   } satisfies TrSourcePokemon

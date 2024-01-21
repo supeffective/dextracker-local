@@ -1,3 +1,4 @@
+import { FemaleIcon } from '@/lib/icons/gamegui'
 import { PawPrintIcon } from '@/lib/icons/sections'
 import useDexTrackerStore from '@/stores/useDexTrackerStore'
 import FlexLabel from '../../primitives/FlexLabel'
@@ -5,6 +6,10 @@ import ToggleBtn from '../../primitives/ToggleBtn'
 
 export default function TrackFormsAction({ className }: { className?: string }) {
   const [value, setValue] = useDexTrackerStore((store) => [store.options?.hideForms, store.setHideForms])
+  const [cosmeticValue, setCosmeticValue] = useDexTrackerStore((store) => [
+    store.options?.hideCosmeticForms,
+    store.setHideCosmeticForms,
+  ])
 
   return (
     <>
@@ -26,6 +31,26 @@ export default function TrackFormsAction({ className }: { className?: string }) 
           />
         </ToggleBtn>
       </FlexLabel>
+      {value === false && (
+        <FlexLabel style={{ marginLeft: '0.5rem' }} className={className} label={<span>Cosmetic forms</span>}>
+          <ToggleBtn
+            name="toggle-cosmetic-forms"
+            title="Toggle Cosmetic Forms"
+            value={cosmeticValue}
+            inverted
+            onToggle={(active) => {
+              setCosmeticValue(active)
+            }}
+          >
+            <FemaleIcon
+              style={{
+                // opacity: value ? 0.8 : 1,
+                transform: cosmeticValue ? 'rotate(0deg) scale(1)' : 'rotate(25deg)',
+              }}
+            />
+          </ToggleBtn>
+        </FlexLabel>
+      )}
     </>
   )
 }
