@@ -40,14 +40,14 @@
     "version:release": "git push && git push --tags"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.17.15",
+    "@tanstack/react-query": "^5.17.19",
     "@tauri-apps/api": "^1.5.3",
     "clsx": "^2.1.0",
     "open-props": "^1.6.17",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zod": "^3.22.4",
-    "zustand": "^4.4.7"
+    "zustand": "^4.5.0"
   },
   "devDependencies": {
     "@actions/core": "1.10.1",
@@ -55,8 +55,8 @@
     "@biomejs/biome": "^1.5.2",
     "@supeffective/dataset": "^2.2.2",
     "@svgr/cli": "^8.1.0",
-    "@swc/core": "^1.3.104",
-    "@swc/jest": "^0.2.30",
+    "@swc/core": "^1.3.105",
+    "@swc/jest": "^0.2.31",
     "@tauri-apps/cli": "^1.5.9",
     "@testing-library/jest-dom": "^6.2.0",
     "@testing-library/react": "^14.1.2",
@@ -81,7 +81,7 @@
     "postcss-jit-props": "^1.0.14",
     "prettier": "^3.2.4",
     "puppeteer": "^21.7.0",
-    "rollup": "^4.9.5",
+    "rollup": "^4.9.6",
     "sass": "^1.70.0",
     "sharp": "^0.33.2",
     "sort-package-json": "^2.6.0",
