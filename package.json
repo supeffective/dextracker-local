@@ -35,7 +35,7 @@
     "tauri": "tauri",
     "test": "jest --env=jsdom",
     "test:coverage": "jest --env=jsdom --coverage && open coverage/index.html",
-    "version:bump": "pnpm changelogen --bump --release",
+    "version:bump": "pnpm changelogen --bump --release --push",
     "version:publish": "pnpm version:release",
     "version:release": "git push && git push --tags"
   },
