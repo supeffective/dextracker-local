@@ -13,8 +13,8 @@ jobs:
       fail-fast: false
       matrix:
         platform:
-          - macos-12
-          - macos-14
+          - macos-12 # with Intel processor
+          - macos-14 # with M1 processor
           - ubuntu-20.04
           - windows-latest
     runs-on: ${{ matrix.platform }}
